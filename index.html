@@ -94,14 +94,14 @@
 <body>
     <img src="florm.png" alt="Decoración floral" class="corner-flower" id="top-left">
     <img src="florm.png" alt="Decoración floral" class="corner-flower" id="top-right">
-    <img src="flor.png" alt="Decoración floral" class="corner-flower" id="bottom-left">
-    <img src="froja.png" alt="Decoración floral" class="corner-flower" id="bottom-right">
+    <img src="florm.png" alt="Decoración floral" class="corner-flower" id="bottom-left">
+    <img src="florm.png" alt="Decoración floral" class="corner-flower" id="bottom-right">
 
     <div class="main-container">
         
-        <header>
+       <header>
             <nav class="flex justify-center mb-8">
-                <a href="#" class="uppercase">Ubicación</a>
+                <a href="#mapa-section" class="uppercase">Ubicación</a>
                 <a href="#" class="uppercase">Confirma tu Asistencia</a>
                 <a href="#" class="uppercase">Etiqueta</a>
             </nav>
@@ -111,26 +111,39 @@
             <p class="tracking-widest text-sm mb-4">LA BODA DE</p>
             <h1 class="font-script text-6xl md:text-8xl text-[#8C6B6B] mb-4">
                 Daniel & Pamela
-            </h1>
-            <p class="text-lg md:text-xl mb-2">Domingo, 15 de Marzo de 2026</p> <p class="text-md md:text-lg text-gray-600 mb-8">Ceremonia y Recepción<br>Salón "El Jardín" - Ixtapaluca</p> <nav class="flex justify-center items-center">
-                <a href="#">UBICACION</a>
+           </h1>
+            <p class="text-lg md:text-xl mb-2">Domingo, 15 de Marzo de 2026</p>
+            <p class="text-md md:text-lg text-gray-600 mb-8">Ceremonia y Recepción</p>
+            
+            <div id="mapa-section" class="border-t border-[#dcd0c0] pt-8 mt-8">
+                <p class="text-lg font-bold">Salón "El Jardín"</p>
+                <p class="text-md text-gray-600">Cjon. J. Ma. Morelos 1, Centro, 56530 Ixtapaluca, Méx., México</p>
+                <p class="text-md font-bold mt-2">1:00 pm</p>
+                
+                <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#dcd0c0] mt-4">
+                    <iframe
+                        src="https://maps.google.com/maps?q=Cjon.%20J.%20Ma.%20Morelos%201,%20Centro,%2056530%20Ixtapaluca,%20M%C3%A9x.,%20M%C3%A9xico&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+
+            <nav class="flex justify-center items-center mt-8">
+                <a href="#">NUESTRA HISTORIA</a>
                 <a href="#">
-                    <img src="anillop.png" alt="Icono de anillos">
+                    <img src="icono-anillos.png" alt="Icono de anillos">
                 </a>
-                <a href="#">CONFIRMA TU ASISTENCIA</a>
+                <a href="#">GALERÍA</a>
             </nav>
         </main>
 
         <footer class="mt-8 text-xs text-gray-500">
-            <p>&copy; 2025 Daniel & Pamela</p>
+            <p>© 2025 Daniel & Pamela</p>
         </footer>
-
     </div>
 </body>
-</html>
-
-
-
-
-
-
+</body>
