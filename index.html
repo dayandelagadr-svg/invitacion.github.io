@@ -176,9 +176,93 @@
 
     </div>
 </body>      
+<script type="module">
+        // Importar las funciones necesarias de Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 
+        // --- 1. CONFIGURACIÓN DE FIREBASE (CON TUS CREDENCIALES) ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEFg3H7spJXUBvjNRc-QRocIHk3Hd6dho",
+            authDomain: "lista-de-asistencia-8cfc5.firebaseapp.com",
+            projectId: "lista-de-asistencia-8cfc5",
+            storageBucket: "lista-de-asistencia-8cfc5.firebasestorage.app",
+            messagingSenderId: "276452664903",
+            appId: "1:276452664903:web:8b060bdeef2e70852bf362"
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // --- 2. LÓGICA DE LOS MODALES ---
+        const rsvpModal = document.getElementById('rsvpModal');
+        const thankYouModal = document.getElementById('thankYouModal');
+        const openRsvpModalBtn = document.getElementById('openRsvpModal');
+        const closeRsvpModalBtn = document.getElementById('closeRsvpModal');
+        const closeThankYouModalBtn = document.getElementById('closeThankYouModal');
+        const rsvpForm = document.getElementById('rsvpForm');
+        const submitRsvpBtn = document.getElementById('submitRsvpBtn');
+
+        const openModal = (modal) => {
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        };
+
+        const closeModal = (modal) => {
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        };
+
+        openRsvpModalBtn.addEventListener('click', () => openModal(rsvpModal));
+        closeRsvpModalBtn.addEventListener('click', () => closeModal(rsvpModal));
+        closeThankYouModalBtn.addEventListener('click', () => closeModal(thankYouModal));
+
+        // --- 3. LÓGICA DEL FORMULARIO Y BASE DE DATOS ---
+        rsvpForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitRsvpBtn.disabled = true;
+            submitRsvpBtn.innerText = "Confirmando...";
+
+            const guestName = document.getElementById('guestName').value;
+            const guestCount = document.getElementById('guestCount').value;
+
+            try {
+                // Guardar los datos en la base de datos de Firebase
+                await addDoc(collection(db, "invitados_confirmados"), {
+                    nombre: guestName,
+                    asistentes: Number(guestCount),
+                    fecha_confirmacion: serverTimestamp()
+                });
+
+                // Si se guarda correctamente, procede a descargar y agradecer
+                downloadTicket();
+                closeModal(rsvpModal);
+                openModal(thankYouModal);
+                rsvpForm.reset();
+
+            } catch (error) {
+                console.error("Error al guardar la confirmación: ", error);
+                alert("Hubo un error al confirmar. Por favor, inténtalo de nuevo.");
+            } finally {
+                submitRsvpBtn.disabled = false;
+                submitRsvpBtn.innerText = "Confirmar y Descargar Boleto";
+            }
+        });
+
+        // --- 4. FUNCIÓN PARA DESCARGAR EL BOLETO ---
+        function downloadTicket() {
+            const link = document.createElement('a');
+            link.href = 'boleto-boda.jpg'; // Asegúrate que tu boleto se llame así
+            link.download = `Boleto_Boda_Daniel_y_Pamela.jpg`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
 
 
 
 
                 
+
