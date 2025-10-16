@@ -57,20 +57,20 @@
                  <h2 class="font-script text-5xl text-[#8C6B6B] mb-4">Faltan</h2>
                  <div id="countdown" class="flex justify-center space-x-2 md:space-x-4">
                      <div class="text-center">
-                         <span id="days" class="text-3xl md:text-4xl font-bold text-[#8C6B6B]">0</span>
-                         <span class="block text-xs">Días</span>
+                         <span id="days" class="font-script text-5xl md:text-6xl text-[#8C6B6B]">0</span>
+                         <span class="block text-xs uppercase tracking-widest">Días</span>
                      </div>
                      <div class="text-center">
-                         <span id="hours" class="text-3xl md:text-4xl font-bold text-[#8C6B6B]">0</span>
-                         <span class="block text-xs">Horas</span>
+                         <span id="hours" class="font-script text-5xl md:text-6xl text-[#8C6B6B]">0</span>
+                         <span class="block text-xs uppercase tracking-widest">Horas</span>
                      </div>
                      <div class="text-center">
-                         <span id="minutes" class="text-3xl md:text-4xl font-bold text-[#8C6B6B]">0</span>
-                         <span class="block text-xs">Minutos</span>
+                         <span id="minutes" class="font-script text-5xl md:text-6xl text-[#8C6B6B]">0</span>
+                         <span class="block text-xs uppercase tracking-widest">Minutos</span>
                      </div>
                      <div class="text-center">
-                         <span id="seconds" class="text-3xl md:text-4xl font-bold text-[#8C6B6B]">0</span>
-                         <span class="block text-xs">Segundos</span>
+                         <span id="seconds" class="font-script text-5xl md:text-6xl text-[#8C6B6B]">0</span>
+                         <span class="block text-xs uppercase tracking-widest">Segundos</span>
                      </div>
                  </div>
             </div>
@@ -104,7 +104,6 @@
 
         const rsvpModal=document.getElementById("rsvpModal"),thankYouModal=document.getElementById("thankYouModal"),openRsvpModalBtn=document.getElementById("openRsvpModal"),closeRsvpModalBtn=document.getElementById("closeRsvpModal"),closeThankYouModalBtn=document.getElementById("closeThankYouModal"),rsvpForm=document.getElementById("rsvpForm"),submitRsvpBtn=document.getElementById("submitRsvpBtn");const openModal=e=>{e.classList.remove("hidden"),setTimeout(()=>{e.classList.remove("opacity-0")},10)},closeModal=e=>{e.classList.add("opacity-0"),setTimeout(()=>{e.classList.add("hidden")},300)};openRsvpModalBtn.addEventListener("click",()=>openModal(rsvpModal)),closeRsvpModalBtn.addEventListener("click",()=>closeModal(rsvpModal)),closeThankYouModalBtn.addEventListener("click",()=>closeModal(thankYouModal)),rsvpForm.addEventListener("submit",async e=>{e.preventDefault(),submitRsvpBtn.disabled=!0,submitRsvpBtn.innerText="Confirmando...";const t=document.getElementById("guestName").value,o=document.getElementById("guestCount").value;try{await addDoc(collection(db,"invitados_confirmados"),{nombre:t,asistentes:Number(o),fecha_confirmacion:serverTimestamp()}),generateAndDownloadTicket(t,o),closeModal(rsvpModal),openModal(thankYouModal),rsvpForm.reset()}catch(e){console.error("Error al guardar la confirmación: ",e),alert("Hubo un error al confirmar. Por favor, inténtalo de nuevo.")}finally{submitRsvpBtn.disabled=!1,submitRsvpBtn.innerText="Confirmar y Generar Pase"}});function generateAndDownloadTicket(e,t){const o=(new(window.jspdf.jsPDF)({orientation:"landscape",unit:"px",format:[600,300]}));o.addImage("boleto-boda.png","PNG",0,0,600,300);const n="BODA-DP-"+Date.now(),a=`Invitado: ${e}\nAsistentes: ${t}\nID: ${n}`,d=qrcode(0,"L");d.addData(a),d.make();const i=d.createDataURL(4);o.addImage(i,"PNG",480,20,100,100),o.setFont("Helvetica","Bold"),o.setFontSize(20),o.setTextColor("#333333"),o.text("Pase de Acceso",20,40),o.setFontSize(16),o.setFont("Helvetica","Normal"),o.text(e,20,80),o.text(`Válido para ${t} persona(s)`,20,100),o.save(`Pase_Boda_Daniel_y_Pamela_${e.replace(/ /g,"_")}.pdf`)}
 
-        // ===== AQUÍ ESTÁ EL SCRIPT DE LA CUENTA REGRESIVA QUE FALTABA =====
         const countdownDate = new Date("March 15, 2026 13:00:00").getTime();
         const countdownFunction = setInterval(() => {
             const now = new Date().getTime();
@@ -112,7 +111,7 @@
 
             if (distance < 0) {
                 clearInterval(countdownFunction);
-                document.getElementById("countdown").innerHTML = "<div class='text-center w-full'><p class='text-2xl font-bold text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>";
+                document.getElementById("countdown").innerHTML = "<div class='text-center w-full'><p class='font-script text-4xl text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>";
                 return;
             }
 
@@ -124,5 +123,6 @@
     </script>
 </body>
 </html>
+
 
 
