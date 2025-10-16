@@ -5,318 +5,125 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuestra Boda - Daniel y Pamela</title>
     
-    <!-- Tailwind CSS for responsive design -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
-    
-    <!-- PDF, Barcode, and QR Code Generation Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Parisienne&display=swap" rel="stylesheet">
 
     <style>
-        /* Custom styles to match the design */
         body {
             font-family: 'Cormorant Garamond', serif;
             background-color: #FBF9F7;
+            color: #5d5d5d;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative; 
         }
-        .font-great-vibes {
-            font-family: 'Great Vibes', cursive;
+
+        .corner-flower {
+            position: fixed;
+            width: 150px; 
+            height: auto;
+            z-index: 0;
         }
-        .custom-border {
-            border: 1px solid #D3B8B8;
-            padding: 1rem md:2rem; /* Responsive padding */
-            position: relative;
-        }
-        .countdown-box {
-            background-color: rgba(245, 233, 233, 0.5);
-            border-radius: 0.5rem;
-            padding: 0.5rem;
-            width: 65px; /* Smaller for mobile */
-            height: 65px; /* Smaller for mobile */
-        }
-        @media (min-width: 768px) { /* Medium screens and up */
-            .countdown-box {
-                width: 80px;
-                height: 80px;
+        
+        @media (min-width: 768px) {
+            .corner-flower {
+                width: 250px;
             }
         }
-        .btn-custom {
-            background-color: #C6A9A9;
-            transition: background-color 0.3s ease;
+
+        #top-left { top: 20px; left: 20px; }
+        #top-right { top: 20px; right: 20px; transform: scaleX(-1); }
+        #bottom-left { bottom: 20px; left: 20px; transform: scaleY(-1); }
+        #bottom-right { bottom: 20px; right: 20px; transform: scale(-1, -1); }
+
+        .main-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
         }
-        .btn-custom:hover {
-            background-color: #B08F8F;
+        
+        .content-box {
+            border: 1px solid #dcd0c0;
+            padding: 2rem 1rem;
         }
-        /* Style for the floral background */
-        .floral-background {
-            background-image: url('https://images.unsplash.com/photo-1565839095593-7e4811f427a1?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Parallax-like effect */
+
+        @media (min-width: 768px) {
+            .content-box {
+                padding: 4rem 2rem;
+            }
         }
-        /* Modal styles */
-        .modal {
-            transition: opacity 0.3s ease;
+        
+        .font-script {
+            font-family: 'Parisienne', cursive;
+        }
+        
+        nav a {
+            letter-spacing: 0.2em;
+            font-size: 0.75rem;
+            color: #8b7d7d;
+            margin: 0 1rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #333;
+        }
+        
+        .bottom-nav img {
+            width: 40px;
+            transition: transform 0.3s;
+        }
+
+        .bottom-nav img:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
-<body class="floral-background">
-    <div class="container mx-auto p-4 md:p-8 max-w-3xl">
-    <div class="bg-white/95 backdrop-blur-sm shadow-2xl rounded-lg p-4 md:p-12 text-center text-gray-700 space-y-8 relative">
 
-       <body>
-    <img src="flor-esquina.png" alt="Decoración floral" class="corner-flower" id="top-left">
-    <img src="flor-esquina.png" alt="Decoración floral" class="corner-flower" id="top-right">
-    <img src="flor-esquina.png" alt="Decoración floral" class="corner-flower" id="bottom-left">
-    <img src="flor-esquina.png" alt="Decoración floral" class="corner-flower" id="bottom-right">
+<body>
+    <img src="flor.png" alt="Decoración floral" class="corner-flower" id="top-left">
+    <img src="flor.png" alt="Decoración floral" class="corner-flower" id="top-right">
+    <img src="flor.png" alt="Decoración floral" class="corner-flower" id="bottom-left">
+    <img src="flor.png" alt="Decoración floral" class="corner-flower" id="bottom-right">
 
-    </body>
-                             
-            <!-- Main Announcement Box -->
-            <div class="custom-border">
-                <p class="text-xl md:text-2xl tracking-widest text-gray-600 mb-4">¡Nos casamos!</p>
-                <h1 class="font-great-vibes text-5xl sm:text-6xl md:text-8xl text-[#8C6B6B] mb-4">
-                    Daniel & Pamela
-                </h1>
-                <p class="text-base md:text-lg italic px-2 sm:px-4">
-                    "Ponme como un sello sobre tu corazón, como un sello sobre tu brazo, porque el amor es tan fuerte como la muerte, y la devoción total, tan exigente como la Tumba. Sus llamas son un fuego ardiente, la llama de Jah."
-                </p>
-                 <p class="text-sm mt-2 text-gray-500">Cantar de los Cantares 8:6</p>
-            </div>
+    <div class="main-container">
+        
+        <header>
+            <nav class="flex justify-center mb-8">
+                <a href="#">WISHES</a>
+                <a href="#">SELECTIONS</a>
+                <a href="#">RSVP</a>
+            </nav>
+        </header>
 
-            <!-- Countdown Box -->
-            <div class="custom-border">
-                 <h2 class="font-great-vibes text-4xl md:text-5xl text-[#8C6B6B] mb-4">Save the Date</h2>
-                 <p class="text-xl md:text-2xl font-bold tracking-wider mb-6">Domingo, 15 de Marzo de 2026</p>
-                <div id="countdown" class="flex justify-center space-x-2 md:space-x-4">
-                    <div class="countdown-box flex flex-col justify-center items-center">
-                        <span id="days" class="text-2xl md:text-3xl font-bold text-[#8C6B6B]">0</span>
-                        <span class="text-xs">Días</span>
-                    </div>
-                    <div class="countdown-box flex flex-col justify-center items-center">
-                        <span id="hours" class="text-2xl md:text-3xl font-bold text-[#8C6B6B]">0</span>
-                        <span class="text-xs">Horas</span>
-                    </div>
-                    <div class="countdown-box flex flex-col justify-center items-center">
-                        <span id="minutes" class="text-2xl md:text-3xl font-bold text-[#8C6B6B]">0</span>
-                        <span class="text-xs">Minutos</span>
-                    </div>
-                    <div class="countdown-box flex flex-col justify-center items-center">
-                        <span id="seconds" class="text-2xl md:text-3xl font-bold text-[#8C6B6B]">0</span>
-                        <span class="text-xs">Segundos</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Location Box -->
-            <div class="custom-border">
-                <h2 class="font-great-vibes text-4xl md:text-5xl text-[#8C6B6B] mb-4">La Ceremonia y Recepción</h2>
-                <p class="text-lg mb-2">Salón "El Jardín"</p>
-                <p class="text-md text-gray-600 mb-4">Cjon. J. Ma. Morelos 1, Centro, 56530 Ixtapaluca, Méx., México</p>
-                <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border-2 border-[#D3B8B8]">
-                    <!-- Google Maps Embed -->
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.8569477011986!2d-98.8872016850942!3d19.37525298691669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce1e5a5a1f6a2b%3A0x8f2d5a3b2b737d9!2sAv%20Jos%C3%A9%20Mar%C3%ADa%20Morelos%2C%20Ixtapaluca%2C%20M%C3%A9x.!5e0!3m2!1ses-419!2smx!4v1665440751333!5m2!1ses-419!2smx"
-                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </div>
+        <main class="content-box">
+            <p class="tracking-widest text-sm mb-4">THE WEDDING OF</p>
+            <h1 class="font-script text-6xl md:text-8xl text-[#8C6B6B] mb-4">
+                Daniel & Pame
+            </h1>
+            <p class="text-lg md:text-xl mb-2">Domingo, 15 de Marzo de 2026</p> <p class="text-md md:text-lg text-gray-600 mb-8">Ceremonia y Recepción<br>Salón "El Jardín" - Ixtapaluca</p> <nav class="flex justify-center items-center">
+                <a href="#">NUESTRA HISTORIA</a>
+                <a href="#">
+                    <img src="icono-anillos.png" alt="Icono de anillos">
+                </a>
+                <a href="#">GALERÍA</a>
+            </nav>
+        </main>
 
-            <!-- RSVP Box -->
-            <div class="custom-border">
-                <h2 class="font-great-vibes text-4xl md:text-5xl text-[#8C6B6B] mb-4">Confirma tu Asistencia</h2>
-                <p class="mb-6 text-gray-600 px-4">Nos encantaría que nos acompañes en este día tan especial.</p>
-                <button id="rsvpButton" class="btn-custom text-white font-bold py-3 px-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    Confirmar asistencia
-                </button>
-            </div>
-        </div>
+        <footer class="mt-8 text-xs text-gray-500">
+            <p>&copy; 2025 Daniel & Pamela</p>
+        </footer>
+
     </div>
-
-    <!-- RSVP Modal -->
-    <div id="rsvpModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50">
-        <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center relative">
-            <button id="closeModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">&times;</button>
-            <h3 class="font-great-vibes text-4xl text-[#8C6B6B] mb-4">Confirmar Asistencia</h3>
-            <p class="mb-6 text-gray-600">Ingresa tu nombre para generar tu pase de acceso personal.</p>
-            <form id="rsvpForm">
-                <input type="text" id="guestName" placeholder="Nombre(s) y Apellido(s)" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required>
-                <button type="submit" id="submitRsvpBtn" class="btn-custom w-full text-white font-bold py-2 px-4 rounded-lg">
-                    Generar y Guardar mi Pase
-                </button>
-            </form>
-             <p id="errorMessage" class="text-red-500 text-sm mt-2 hidden">Ocurrió un error. Inténtalo de nuevo.</p>
-        </div>
-    </div>
-    
-    <!-- Thank You Modal -->
-    <div id="thankYouModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50">
-        <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center">
-             <h3 class="font-great-vibes text-4xl text-[#8C6B6B] mb-4">¡Gracias!</h3>
-             <p class="mb-6 text-gray-600">Tu confirmación ha sido guardada y tu pase se ha descargado. ¡Nos vemos en la boda!</p>
-             <button id="closeThankYou" class="btn-custom text-white font-bold py-2 px-4 rounded-lg">Cerrar</button>
-        </div>
-    </div>
-    
-    <!-- Firebase SDK -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        let db, auth;
-
-        try {
-            // --- FIREBASE INITIALIZATION ---
-            const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            
-            const app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            auth = getAuth(app);
-
-            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                await signInWithCustomToken(auth, __initial_auth_token);
-            } else {
-                await signInAnonymously(auth);
-            }
-
-            // --- COUNTDOWN SCRIPT ---
-            const countdownDate = new Date("March 15, 2026 00:00:00").getTime();
-            const countdownFunction = setInterval(() => {
-                const now = new Date().getTime();
-                const distance = countdownDate - now;
-                if (distance < 0) {
-                    clearInterval(countdownFunction);
-                    document.getElementById("countdown").innerHTML = "<div class='text-center w-full'><p class='text-2xl font-bold text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>";
-                    return;
-                }
-                document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-                document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
-            }, 1000);
-
-            // --- MODAL AND PDF SCRIPT ---
-            const rsvpButton = document.getElementById('rsvpButton');
-            const rsvpModal = document.getElementById('rsvpModal');
-            const closeModal = document.getElementById('closeModal');
-            const rsvpForm = document.getElementById('rsvpForm');
-            const thankYouModal = document.getElementById('thankYouModal');
-            const closeThankYou = document.getElementById('closeThankYou');
-            const submitRsvpBtn = document.getElementById('submitRsvpBtn');
-            const errorMessage = document.getElementById('errorMessage');
-
-            const openModal = (modal) => {
-                modal.classList.remove('hidden');
-                setTimeout(() => modal.classList.remove('opacity-0'), 10);
-            };
-
-            const closeModalFunc = (modal) => {
-                modal.classList.add('opacity-0');
-                setTimeout(() => modal.classList.add('hidden'), 300);
-            };
-            
-            rsvpButton.addEventListener('click', () => openModal(rsvpModal));
-            closeModal.addEventListener('click', () => {
-                closeModalFunc(rsvpModal);
-                errorMessage.classList.add('hidden');
-            });
-            closeThankYou.addEventListener('click', () => closeModalFunc(thankYouModal));
-            
-            window.addEventListener('click', (event) => {
-                if (event.target === rsvpModal) closeModalFunc(rsvpModal);
-                if (event.target === thankYouModal) closeModalFunc(thankYouModal);
-            });
-            
-            rsvpForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                submitRsvpBtn.disabled = true;
-                submitRsvpBtn.innerText = "Guardando...";
-                errorMessage.classList.add('hidden');
-
-                const guestName = document.getElementById('guestName').value;
-                if (!guestName) {
-                    submitRsvpBtn.disabled = false;
-                    submitRsvpBtn.innerText = "Generar y Guardar mi Pase";
-                    return;
-                }
-
-                const uniqueId = 'BODA-DP-' + Date.now();
-                
-                try {
-                    // Save guest to Firestore
-                    const guestCollection = collection(db, `/artifacts/${appId}/public/data/confirmed_guests`);
-                    await addDoc(guestCollection, {
-                        guestName: guestName,
-                        uniqueId: uniqueId,
-                        confirmedAt: serverTimestamp()
-                    });
-
-                    // If save is successful, generate PDF
-                    generatePDF(guestName, uniqueId);
-                    
-                    closeModalFunc(rsvpModal);
-                    openModal(thankYouModal);
-                    rsvpForm.reset();
-
-                } catch (error) {
-                    console.error("Error adding document: ", error);
-                    errorMessage.classList.remove('hidden');
-                } finally {
-                    submitRsvpBtn.disabled = false;
-                    submitRsvpBtn.innerText = "Generar y Guardar mi Pase";
-                }
-            });
-
-            function generatePDF(guestName, uniqueId) {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF({ orientation: 'landscape', unit: 'px', format: [600, 225] });
-                const imageUrl = 'https://i.ibb.co/L5B7wz7/1000100761.jpg';
-                doc.addImage(imageUrl, 'JPEG', 0, 0, 600, 225);
-                
-                const barcodeCanvas = document.createElement('canvas');
-                JsBarcode(barcodeCanvas, uniqueId, { format: "CODE128", width: 1.5, height: 35, displayValue: false });
-                const barcodeDataUrl = barcodeCanvas.toDataURL('image/png');
-
-                const qr = qrcode(0, 'L');
-                const qrData = `Invitado: ${guestName}\nID: ${uniqueId}\nEvento: Boda D&P`;
-                qr.addData(qrData);
-                qr.make();
-                const qrCodeDataUrl = qr.createDataURL(4);
-
-                doc.setFont('times', 'bold');
-                doc.setFontSize(16);
-                doc.setTextColor('#7a5c5c');
-                doc.text(guestName.toUpperCase(), 300, 95, { align: 'center' });
-                
-                doc.addImage(barcodeDataUrl, 'PNG', 35, 185, 110, 20);
-                doc.addImage(qrCodeDataUrl, 'PNG', 278, 153, 45, 45);
-
-                doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
-            }
-        } catch (error) {
-            console.error("Firebase initialization failed:", error);
-            // Optionally, display a user-friendly error message on the page
-        }
-    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
