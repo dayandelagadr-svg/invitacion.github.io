@@ -171,4 +171,82 @@
 
                     <div class="flex items-center space-x-6">
                         <div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md">
-                            <i class="
+                            <i class="fas fa-user-tie fa-3x"></i> </div>
+                        <div class="text-left">
+                            <p class="text-2xl font-bold text-gray-800">Código de Vestimenta</p>
+                            <p class="text-lg text-gray-700">Agradecemos su presencia con atuendo **formal**.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-6">
+                        <div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md">
+                            <i class="fas fa-smoking-ban fa-3x"></i> </div>
+                        <div class="text-left">
+                            <p class="text-2xl font-bold text-gray-800">Espacio Libre de Humo</p>
+                            <p class="text-lg text-gray-700">Para la comodidad de todos, el evento es **libre de humo**.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-6">
+                        <div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md">
+                            <i class="fas fa-parking fa-3x"></i> </div>
+                        <div class="text-left">
+                            <p class="text-2xl font-bold text-gray-800">Estacionamiento</p>
+                            <p class="text-lg text-gray-700">Contamos con **estacionamiento gratuito** dentro del establecimiento.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="mapa-section" class="w-full max-w-3xl mt-8 text-center">
+            <div class="content-box">
+                <p class="text-lg font-bold">Salón "El Jardín"</p>
+                <p class="text-md text-gray-600">Prolongacion Jose Maria Morelos 1, Centro, 56530 Ixtapaluca, Méx., México</p>
+                <p class="text-md font-bold mt-2">1:00 pm</p>
+                <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#dcd0c0] mt-4">
+                    <iframe src="https://maps.google.com/maps?q=Cjon.%20J.%20Ma.%20Morelos%201,%20Centro,%2056530%20Ixtapaluca,%20M%C3%A9x.,%20M%C3%A9xico&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="mt-8 text-xs text-gray-500">
+            <p>© 2025 Daniel & Pamela</p>
+        </footer>
+    </div>
+    
+    <div id="rsvpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center relative"><button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button><h3 class="font-script text-4xl text-[#8C6B6B] mb-4">Confirmar Asistencia</h3><p class="mb-6 text-gray-600">Por favor, completa los siguientes datos para confirmar.</p><form id="rsvpForm" class="space-y-4"><input type="text" id="guestName" placeholder="Nombre completo del invitado principal" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required><input type="number" id="guestCount" placeholder="Número total de asistentes (incluyéndote)" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" min="1" required><button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">Confirmar y Generar Pase</button></form></div></div>
+    <div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center"><h3 class="font-script text-4xl text-[#8C6B6B] mb-4">¡Gracias!</h3><p class="mb-6 text-gray-600">Tu asistencia ha sido confirmada. Tu pase personal se está descargando. ¡Nos vemos en la boda!</p><button id="closeThankYouModal" class="bg-[#C6A9A9] text-white font-bold py-2 px-4 rounded-lg">Cerrar</button></div></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEFg3H7spJXUBvjNRc-QRocIHk3Hd6dho",
+            authDomain: "lista-de-asistencia-8cfc5.firebaseapp.com",
+            projectId: "lista-de-asistencia-8cfc5",
+            storageBucket: "lista-de-asistencia-8cfc5.firebasestorage.app",
+            messagingSenderId: "276452664903",
+            appId: "1:276452664903:web:8b060bdeef2e70852bf362"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const rsvpModal=document.getElementById("rsvpModal"),thankYouModal=document.getElementById("thankYouModal"),openRsvpModalBtn=document.getElementById("openRsvpModal"),closeRsvpModalBtn=document.getElementById("closeRsvpModal"),closeThankYouModalBtn=document.getElementById("closeThankYouModal"),rsvpForm=document.getElementById("rsvpForm"),submitRsvpBtn=document.getElementById("submitRsvpBtn");const openModal=e=>{e.classList.remove("hidden"),setTimeout(()=>{e.classList.remove("opacity-0")},10)},closeModal=e=>{e.classList.add("opacity-0"),setTimeout(()=>{e.classList.add("hidden")},300)};openRsvpModalBtn.addEventListener("click",()=>openModal(rsvpModal)),closeRsvpModalBtn.addEventListener("click",()=>closeModal(rsvpModal)),closeThankYouModalBtn.addEventListener("click",()=>closeModal(thankYouModal)),rsvpForm.addEventListener("submit",async e=>{e.preventDefault(),submitRsvpBtn.disabled=!0,submitRsvpBtn.innerText="Confirmando...";const t=document.getElementById("guestName").value,o=document.getElementById("guestCount").value;try{await addDoc(collection(db,"invitados_confirmados"),{nombre:t,asistentes:Number(o),fecha_confirmacion:serverTimestamp()}),generateAndDownloadTicket(t,o),closeModal(rsvpModal),openModal(thankYouModal),rsvpForm.reset()}catch(e){console.error("Error al guardar la confirmación: ",e),alert("Hubo un error al confirmar. Por favor, inténtalo de nuevo.")}finally{submitRsvpBtn.disabled=!1,submitRsvpBtn.innerText="Confirmar y Generar Pase"}});function generateAndDownloadTicket(e,t){const o=(new(window.jspdf.jsPDF)({orientation:"landscape",unit:"px",format:[600,300]}));o.addImage("boleto-boda.png","PNG",0,0,600,300);const n="BODA-DP-"+Date.now(),a=`Invitado: ${e}\nAsistentes: ${t}\nID: ${n}`,d=qrcode(0,"L");d.addData(a),d.make();const i=d.createDataURL(4);o.addImage(i,"PNG",480,20,100,100),o.setFont("Helvetica","Bold"),o.setFontSize(20),o.setTextColor("#333333"),o.text("Pase de Acceso",20,40),o.setFontSize(16),o.setFont("Helvetica","Normal"),o.text(e,20,80),o.text(`Válido para ${t} persona(s)`,20,100),o.save(`Pase_Boda_Daniel_y_Pamela_${e.replace(/ /g,"_")}.pdf`)}
+        const countdownDate = new Date("March 15, 2026 13:00:00").getTime();
+        const countdownFunction = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.getElementById("countdown").innerHTML = "<div class='text-center w-full'><p class='font-script text-4xl text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>";
+                return;
+            }
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+        }, 1000);
+    </script>
+</body>
