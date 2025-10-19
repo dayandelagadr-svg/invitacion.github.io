@@ -1,125 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestra Boda - Daniel y Pamela</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Parisienne&display=swap" rel="stylesheet">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-
-    <style>
-        body {
-            font-family: 'Cormorant Garamond', serif;
-            background-color: #FBF9F7;
-            color: #5d5d5d;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            position: relative;
-        }
-        .corner-flower {
-            position: fixed;
-            width: 150px;
-            height: auto;
-            z-index: 0;
-        }
-        @media (min-width: 768px) {
-            .corner-flower {
-                width: 200px;
-            }
-        }
-        #top-left { top: 20px; left: 20px; }
-        #top-right { top: 20px; right: 20px; transform: scaleX(-1); }
-        #bottom-left { bottom: 20px; left: 20px; transform: scaleY(-1); }
-        #bottom-right { bottom: 20px; right: 20px; transform: scale(-1,-1); }
-        .main-container {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 800px;
-            text-align: center;
-        }
-        .content-box {
-            border: 1px solid #dcd0c0;
-            padding: 2rem 1rem;
-            background-color: #FBF9F7;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Sombra suave */
-        }
-        @media (min-width: 768px) {
-            .content-box {
-                padding: 4rem 2rem;
-            }
-        }
-        .font-script {
-            font-family: 'Parisienne', cursive;
-        }
-        nav a, nav button {
-            letter-spacing: .2em;
-            font-size: .75rem;
-            color: #8b7d7d;
-            margin: 0 1rem;
-            text-decoration: none;
-            transition: color .3s;
-        }
-        nav a:hover, nav button:hover {
-            color: #333;
-        }
-
-        /* --- NUEVOS ESTILOS PARA LA CUENTA REGRESIVA --- */
-        .countdown-item {
-            background-color: #F8EDEB; /* Un tono más oscuro que el fondo para contraste */
-            border: 1px solid #dcd0c0;
-            border-radius: 8px;
-            padding: 1rem 0.5rem;
-            min-width: 80px; /* Asegura un ancho mínimo */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
-        }
-        @media (min-width: 768px) {
-            .countdown-item {
-                min-width: 100px;
-                padding: 1.5rem 1rem;
-            }
-        }
-        .countdown-number {
-            font-family: 'Parisienne', cursive; /* Fuente elegante */
-            font-size: 3rem; /* Tamaño de fuente grande */
-            color: #8C6B6B; /* Color principal */
-            line-height: 1; /* Para que no haya espacio extra */
-            margin-bottom: 0.25rem;
-        }
-        @media (min-width: 768px) {
-            .countdown-number {
-                font-size: 4.5rem; /* Más grande en desktop */
-            }
-        }
-        .countdown-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #5d5d5d;
-            font-weight: bold;
-        }
-        @media (min-width: 768px) {
-            .countdown-label {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
-</head>
-
-<!DOCTYPE html>
-<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -177,9 +57,9 @@
 <body>
     <div id="envelope-container">
         <div class="envelope-wrapper">
-            <img src="sobre.jpg" class="envelope-body" alt="Sobre">
-            <img src="sobre.jpg" class="envelope-flap" alt="Solapa del sobre">
-            <img src="novios.jpeg" class="envelope-seal" id="seal" alt="Abrir invitación">
+            <img src="sobreblanco.jpg" class="envelope-body" alt="Sobre">
+            <img src="logosobre.jpg" class="envelope-flap" alt="Solapa del sobre">
+            <img src="logosobre.jpg.png" class="envelope-seal" id="seal" alt="Abrir invitación">
         </div>
     </div>
 
