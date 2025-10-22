@@ -24,21 +24,21 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: center; /* Centra verticalmente si el contenido es corto */
+        justify-content: center;
         align-items: center;
-        padding-top: 5rem;    /* Espacio arriba para flores */
-        padding-bottom: 5rem; /* Espacio abajo para flores */
+        padding-top: 5rem;
+        padding-bottom: 5rem;
         padding-left: 1rem;
         padding-right: 1rem;
         position: relative;
-        overflow-x: hidden; /* Evita scroll horizontal */
-        overflow-y: hidden; /* Evita scroll mientras el sobre está visible */
+        overflow-x: hidden;
+        overflow-y: hidden;
     }
     .corner-flower {
-        position: fixed; /* Fijas en la ventana */
+        position: fixed;
         width: 150px;
         height: auto;
-        z-index: 5; /* Capa intermedia: Por encima del fondo, por debajo del contenido */
+        z-index: 5;
     }
     @media (min-width: 768px) {
         .corner-flower {
@@ -52,39 +52,53 @@
     
     .main-container {
         position: relative;
-        z-index: 10; /* Capa superior: Por encima de las flores */
+        z-index: 10;
         width: 100%;
         max-width: 800px;
         text-align: center;
         opacity: 0;
         transition: opacity 1s ease-in-out 1.5s;
         pointer-events: none;
-        /* Eliminamos los márgenes laterales grandes */
     }
-    /* Añadimos padding al body en pantallas pequeñas para asegurar espacio */
     @media (max-width: 767px) {
         body {
-             padding-top: 8rem; /* Más espacio vertical si las flores son grandes */
+             padding-top: 8rem;
              padding-bottom: 8rem;
         }
     }
 
     body.invitation-visible .main-container { opacity: 1; pointer-events: auto; }
-    body.invitation-visible { overflow-y: auto; /* Permite scroll vertical una vez abierta */ }
+    body.invitation-visible { overflow-y: auto; }
     
     .content-box {
         border: 1px solid #dcd0c0;
         padding: 2rem 1rem;
-        background-color: #FBF9F7; /* Fondo opaco para tapar las flores detrás */
+        background-color: #FBF9F7;
         box-shadow: 0 4px 8px rgba(0, 0, 0, .05);
-        position: relative; /* Asegura contexto de apilamiento */
-        z-index: 10; /* Mantiene el contenido por encima de las flores */
+        position: relative;
+        z-index: 10;
+        overflow: hidden; /* Importante para que la imagen de fondo no se salga */
     }
     @media (min-width: 768px) {
         .content-box {
             padding: 4rem 2rem;
         }
     }
+
+    /* Estilos para la nueva imagen de fondo */
+    .hero-image-overlay {
+        position: absolute;
+        top: 50%; /* Centrar verticalmente */
+        left: 50%; /* Centrar horizontalmente */
+        transform: translate(-50%, -50%); /* Ajuste fino para centrar */
+        width: 80%; /* Ajusta el tamaño de la imagen */
+        max-width: 600px; /* Tamaño máximo para que no sea demasiado grande */
+        height: auto;
+        opacity: 0.2; /* Opacidad para efecto de marca de agua */
+        z-index: 0; /* Asegura que esté detrás del texto del content-box */
+        pointer-events: none; /* No interactuable */
+    }
+
     .font-script { font-family: 'Parisienne', cursive; }
     nav a, nav button {
         letter-spacing: .2em;
@@ -113,7 +127,7 @@
     .envelope-wrapper.open .envelope-seal { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
 
     /* Modales y Reproductor */
-    #rsvpModal, #thankYouModal { z-index: 60; } /* Asegura que los modales estén sobre el contenido principal */
+    #rsvpModal, #thankYouModal { z-index: 60; }
     #youtube-player { position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; }
 </style>
 </head>
@@ -134,9 +148,8 @@
     <img src="florm.png" alt="Decoración floral" class="corner-flower" id="bottom-left">
     <img src="florm.png" alt="Decoración floral" class="corner-flower" id="bottom-right">
 
-    <div class="main-container">
-        <header></header>
-        <main class="content-box">
+    <main class="content-box">
+            <img src="boda-novios.png" alt="Novios Daniel y Pamela" class="hero-image-overlay">
             <p class="tracking-widest text-sm mb-4">LA BODA DE</p>
             <h1 class="font-script text-6xl md:text-8xl text-[#8C6B6B] mb-4">Daniel & Pamela</h1>
             <p class="text-lg md:text-xl mb-2">Domingo, 15 de Marzo de 2026</p>
@@ -219,6 +232,7 @@
         const countdownDate=new Date("March 15, 2026 13:00:00").getTime(),countdownFunction=setInterval(()=>{const e=(new Date).getTime(),t=countdownDate-e;if(t<0)return clearInterval(countdownFunction),void(document.getElementById("countdown").innerHTML="<div class='text-center w-full'><p class='font-script text-4xl text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>");document.getElementById("days").innerText=Math.floor(t/864e5),document.getElementById("hours").innerText=Math.floor(t%864e5/36e5),document.getElementById("minutes").innerText=Math.floor(t%36e5/6e4),document.getElementById("seconds").innerText=Math.floor(t%6e4/1e3)},1e3);
     </script>
 </body>
+
 
 
 
