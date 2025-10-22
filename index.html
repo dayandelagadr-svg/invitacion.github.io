@@ -94,7 +94,7 @@
         width: 80%; /* Ajusta el tamaño de la imagen */
         max-width: 600px; /* Tamaño máximo para que no sea demasiado grande */
         height: auto;
-        opacity: 0.4; /* Opacidad para efecto de marca de agua */
+        opacity: 0.3; /* Opacidad para efecto de marca de agua */
         z-index: 0; /* Asegura que esté detrás del texto del content-box */
         pointer-events: none; /* No interactuable */
     }
@@ -155,7 +155,10 @@
             <h1 class="font-script text-6xl md:text-8xl text-[#8C6B6B] mb-4">Daniel & Pamela</h1>
             
             <div class="my-6 italic text-gray-600 px-4 md:px-8"> 
-                <p>"Ponme como un sello sobre tu corazón..."</p>
+                <p>"Ponme como un sello sobre tu corazón, como un sello sobre tu brazo,
+                 porque el amor es tan fuerte como la muerte,
+                 y la devoción total, tan exigente como la Tumba.
+                 Sus llamas son un fuego ardiente, la llama de Jah."</p>
                 <p class="text-sm mt-2 text-gray-500">Cantar de los Cantares 8:6</p>
             </div>
 
@@ -240,6 +243,7 @@
         const countdownDate=new Date("March 15, 2026 13:00:00").getTime(),countdownFunction=setInterval(()=>{const e=(new Date).getTime(),t=countdownDate-e;if(t<0)return clearInterval(countdownFunction),void(document.getElementById("countdown").innerHTML="<div class='text-center w-full'><p class='font-script text-4xl text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>");document.getElementById("days").innerText=Math.floor(t/864e5),document.getElementById("hours").innerText=Math.floor(t%864e5/36e5),document.getElementById("minutes").innerText=Math.floor(t%36e5/6e4),document.getElementById("seconds").innerText=Math.floor(t%6e4/1e3)},1e3);
     </script>
 </body>
+
 
 
 
