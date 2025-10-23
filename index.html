@@ -135,8 +135,8 @@
 <body>
     <div id="envelope-container">
         <div class="envelope-wrapper">
-            <img src="sobre-con-sello.jpeg" class="envelope-body" alt="Sobre">
-            <img src="sobreabieto.jpg" class="envelope-flap" alt="Solapa del sobre">
+            <img src="sobre-con-sello.jpg" class="envelope-body" alt="Sobre">
+            <img src="sello.jpg" class="envelope-flap" alt="Solapa del sobre">
             <img src="sobreabierto.jpg" class="envelope-seal" id="seal" alt="Abrir invitación">
         </div>
     </div>
@@ -243,5 +243,6 @@
         const countdownDate=new Date("March 15, 2026 13:00:00").getTime(),countdownFunction=setInterval(()=>{const e=(new Date).getTime(),t=countdownDate-e;if(t<0)return clearInterval(countdownFunction),void(document.getElementById("countdown").innerHTML="<div class='text-center w-full'><p class='font-script text-4xl text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>");document.getElementById("days").innerText=Math.floor(t/864e5),document.getElementById("hours").innerText=Math.floor(t%864e5/36e5),document.getElementById("minutes").innerText=Math.floor(t%36e5/6e4),document.getElementById("seconds").innerText=Math.floor(t%6e4/1e3)},1e3);
     </script>
 </body>
+
 
 
