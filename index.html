@@ -16,156 +16,91 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-    /* Estilos generales */
-    body {
-        font-family: 'Cormorant Garamond', serif;
-        background-color: #FBF9F7;
-        color: #5d5d5d;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding-top: 5rem;
-        padding-bottom: 5rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        position: relative;
-        overflow-x: hidden;
-        overflow-y: hidden;
-    }
-    .corner-flower {
-        position: fixed;
-        width: 150px;
-        height: auto;
-        z-index: 5;
-    }
-    @media (min-width: 768px) {
-        .corner-flower {
-            width: 200px;
+        /* Estilos generales */
+        body { font-family: 'Cormorant Garamond', serif; background-color: #FBF9F7; color: #5d5d5d; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 5rem; padding-bottom: 5rem; padding-left: 1rem; padding-right: 1rem; position: relative; overflow-x: hidden; overflow-y: hidden; }
+        .corner-flower { position: fixed; width: 150px; height: auto; z-index: 5; }
+        @media (min-width: 768px) { .corner-flower { width: 200px; } }
+        #top-left { top: 20px; left: 20px; }
+        #top-right { top: 20px; right: 20px; transform: scaleX(-1); }
+        #bottom-left { bottom: 20px; left: 20px; transform: scaleY(-1); }
+        #bottom-right { bottom: 20px; right: 20px; transform: scale(-1,-1); }
+        .main-container { position: relative; z-index: 10; width: 100%; max-width: 800px; text-align: center; opacity: 0; transition: opacity 1s ease-in-out 1.5s; pointer-events: none; }
+        @media (max-width: 767px) { body { padding-top: 8rem; padding-bottom: 8rem; } }
+        body.invitation-visible .main-container { opacity: 1; pointer-events: auto; }
+        body.invitation-visible { overflow-y: auto; }
+        .content-box { border: 1px solid #dcd0c0; padding: 2rem 1rem; background-color: #FBF9F7; box-shadow: 0 4px 8px rgba(0, 0, 0, .05); position: relative; z-index: 10; overflow: hidden; }
+        @media (min-width: 768px) { .content-box { padding: 4rem 2rem; } }
+
+        /* Estilos imagen de novios */
+        .hero-image-overlay {
+            position: absolute;
+            top: 5%; 
+            right: 5%; 
+            width: 45%; 
+            max-width: 300px; 
+            height: auto;
+            opacity: 0.35; /* Ajusta visibilidad */
+            z-index: 0;
+            pointer-events: none;
         }
-    }
-    #top-left { top: 20px; left: 20px; }
-    #top-right { top: 20px; right: 20px; transform: scaleX(-1); }
-    #bottom-left { bottom: 20px; left: 20px; transform: scaleY(-1); }
-    #bottom-right { bottom: 20px; right: 20px; transform: scale(-1,-1); }
-    
-    .main-container {
-        position: relative;
-        z-index: 10;
-        width: 100%;
-        max-width: 800px;
-        text-align: center;
-        opacity: 0;
-        transition: opacity 1s ease-in-out 1.5s;
-        pointer-events: none;
-    }
-    @media (max-width: 767px) {
-        body {
-             padding-top: 8rem;
-             padding-bottom: 8rem;
-        }
-    }
 
-    body.invitation-visible .main-container { opacity: 1; pointer-events: auto; }
-    body.invitation-visible { overflow-y: auto; }
-    
-    .content-box {
-        border: 1px solid #dcd0c0;
-        padding: 2rem 1rem;
-        background-color: #FBF9F7;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, .05);
-        position: relative;
-        z-index: 10;
-        overflow: hidden; /* Importante para que la imagen de fondo no se salga */
-    }
-    @media (min-width: 768px) {
-        .content-box {
-            padding: 4rem 2rem;
-        }
-    }
-
-    /* Estilos para la nueva imagen de fondo */
-    .hero-image-overlay {
-        position: absolute;
-        top: 50%; /* Centrar verticalmente */
-        left: 50%; /* Centrar horizontalmente */
-        transform: translate(-50%, -50%); /* Ajuste fino para centrar */
-        width: 80%; /* Ajusta el tamaño de la imagen */
-        max-width: 600px; /* Tamaño máximo para que no sea demasiado grande */
-        height: auto;
-        opacity: 0.4; /* Opacidad para efecto de marca de agua */
-        z-index: 0; /* Asegura que esté detrás del texto del content-box */
-        pointer-events: none; /* No interactuable */
-    }
-
-    .font-script { font-family: 'Parisienne', cursive; }
-    nav a, nav button {
-        letter-spacing: .2em;
-        font-size: .75rem;
-        color: #8b7d7d;
-        margin: 0 .5rem;
-        text-decoration: none;
-        transition: color .3s;
-    }
-    @media (min-width: 768px) { nav a, nav button { margin: 0 1rem; } }
-    nav a:hover, nav button:hover { color: #333; }
-    .countdown-item { background-color: #F8EDEB; border: 1px solid #dcd0c0; border-radius: 8px; padding: .8rem .4rem; min-width: 70px; box-shadow: 0 2px 4px rgba(0, 0, 0, .03); }
-    @media (min-width: 768px) { .countdown-item { min-width: 100px; padding: 1.5rem 1rem; } }
-    .countdown-number { font-family: 'Parisienne', cursive; font-size: 2.5rem; color: #8C6B6B; line-height: 1; margin-bottom: .25rem; }
-    @media (min-width: 768px) { .countdown-number { font-size: 4.5rem; } }
-    .countdown-label { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: #5d5d5d; font-weight: 700; }
-    @media (min-width: 768px) { .countdown-label { font-size: .9rem; } }
-
-    /* Estilos del Sobre */
-    #envelope-container { position: fixed; inset: 0; background-color: #FBF9F7; z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease-in-out; }
-    .envelope-wrapper { position: relative; width: 90vw; max-width: 600px; aspect-ratio: 1.5 / 1; }
-    .envelope-body, .envelope-flap { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
-    .envelope-flap { transform-origin: top center; transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); z-index: 10;}
-    .envelope-wrapper.open .envelope-flap { transform: rotateX(180deg); }
-    .envelope-seal { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); width: 20%; max-width: 80px; cursor: pointer; z-index: 20; transition: transform 0.3s ease, opacity 0.5s ease; }
-    .envelope-wrapper.open .envelope-seal { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-
-    /* Modales y Reproductor */
-    #rsvpModal, #thankYouModal { z-index: 60; }
-    #youtube-player { position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; }
-</style>
+        .font-script { font-family: 'Parisienne', cursive; }
+        nav a, nav button { letter-spacing: .2em; font-size: .75rem; color: #8b7d7d; margin: 0 .5rem; text-decoration: none; transition: color .3s; }
+        @media (min-width: 768px) { nav a, nav button { margin: 0 1rem; } }
+        nav a:hover, nav button:hover { color: #333; }
+        .countdown-item { background-color: #F8EDEB; border: 1px solid #dcd0c0; border-radius: 8px; padding: .8rem .4rem; min-width: 70px; box-shadow: 0 2px 4px rgba(0, 0, 0, .03); }
+        @media (min-width: 768px) { .countdown-item { min-width: 100px; padding: 1.5rem 1rem; } }
+        .countdown-number { font-family: 'Parisienne', cursive; font-size: 2.5rem; color: #8C6B6B; line-height: 1; margin-bottom: .25rem; }
+        @media (min-width: 768px) { .countdown-number { font-size: 4.5rem; } }
+        .countdown-label { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: #5d5d5d; font-weight: 700; }
+        @media (min-width: 768px) { .countdown-label { font-size: .9rem; } }
+        #envelope-container { position: fixed; inset: 0; background-color: #FBF9F7; z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease-in-out; }
+        .envelope-wrapper { position: relative; width: 90vw; max-width: 600px; aspect-ratio: 1.5 / 1; }
+        .envelope-body, .envelope-flap { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+        .envelope-flap { transform-origin: top center; transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); z-index: 10;}
+        .envelope-wrapper.open .envelope-flap { transform: rotateX(180deg); }
+        .envelope-seal { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); width: 20%; max-width: 80px; cursor: pointer; z-index: 20; transition: transform 0.3s ease, opacity 0.5s ease; }
+        .envelope-wrapper.open .envelope-seal { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+        #rsvpModal, #thankYouModal { z-index: 60; }
+        #youtube-player { position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; }
+    </style>
 </head>
 
 <body>
     <div id="envelope-container">
         <div class="envelope-wrapper">
-            <img src="sobre-con-sello.jpg" class="envelope-body" alt="Sobre">
-            <img src="sello.jpg" class="envelope-flap" alt="Solapa del sobre">
-            <img src="sobreabierto.jpg" class="envelope-seal" id="seal" alt="Abrir invitación">
+            <img src="sobreblanco.png" class="envelope-body" alt="Sobre">
+            <img src="sobre-solapa.png" class="envelope-flap" alt="Solapa del sobre">
+            <img src="sello.png" class="envelope-seal" id="seal" alt="Abrir invitación">
         </div>
     </div>
-
     <div id="youtube-player"></div>
-
     <img src="florm.png" alt="Decoración floral" class="corner-flower" id="top-left">
     <img src="florm.png" alt="Decoración floral" class="corner-flower" id="top-right">
     <img src="florm.png" alt="Decoración floral" class="corner-flower" id="bottom-left">
     <img src="florm.png" alt="Decoración floral" class="corner-flower" id="bottom-right">
 
-    <main class="content-box">
+    <div class="main-container">
+        <header></header>
+        <main class="content-box">
             <img src="novios.jpeg" alt="Novios Daniel y Pamela" class="hero-image-overlay">
-            
             <p class="tracking-widest text-sm mb-4">LA BODA DE</p>
             <h1 class="font-script text-6xl md:text-8xl text-[#8C6B6B] mb-4">Daniel & Pamela</h1>
-            
-            <div class="my-6 italic text-gray-600 px-4 md:px-8"> 
-                <p>"Ponme como un sello sobre tu corazón, como un sello sobre tu brazo,
-                    porque el amor es tan fuerte como la muerte,
-                    y la devoción total, tan exigente como la Tumba.
-                    Sus llamas son un fuego ardiente, la llama de Jah"</p>
-                <p class="text-sm mt-2 text-gray-500">Cantar de los Cantares 8:6</p>
+            <div class="my-8 text-center px-4 md:px-8 relative z-10"> 
+                <p class="text-xl italic text-[#a58a8a] leading-relaxed"> 
+                    "Ponme como un sello sobre tu corazón, como un sello sobre tu brazo,<br>
+                    porque el amor es tan fuerte como la muerte,<br>
+                    y la devoción total, tan exigente como la Tumba.<br>
+                    Sus llamas son un fuego ardiente, la llama de Jah."
+                </p>
+                <p class="text-md mt-3 text-gray-500"> 
+                    Cantar de los Cantares 8:6
+                </p>
             </div>
-
-            <p class="text-2xl md:text-3xl mb-2">Domingo, 15 de Marzo de 2026</p> 
-            <p class="text-xl md:text-2xl font-bold text-gray-700">¡Estas Invitado, No Faltes!</p> 
-            
-            <nav class="flex justify-center items-center mt-8 space-x-2 md:space-x-4">
+            <p class="text-3xl md:text-4xl font-bold text-[#8C6B6B] mb-3">Domingo, 15 de Marzo de 2026</p> 
+            <p class="text-2xl md:text-3xl font-bold text-gray-800">Estamos Felices de poder compartir con ustedes este momento tan importante 
+            por eso te invitamos a que nos acompañes</p> 
+            <nav class="flex justify-center items-center mt-10 space-x-2 md:space-x-4"> 
                 <a href="#mapa-section" class="uppercase bg-[#C6A9A9] text-white py-2 px-4 rounded-full shadow-md transition-transform transform hover:scale-105">Ubicación</a>
                 <button id="openRsvpModal" class="uppercase bg-[#C6A9A9] text-white py-2 px-4 rounded-full shadow-md transition-transform transform hover:scale-105">Confirma</button>
                 <a href="#etiqueta-section" class="uppercase bg-[#C6A9A9] text-white py-2 px-4 rounded-full shadow-md transition-transform transform hover:scale-105">Etiqueta</a>
@@ -174,7 +109,7 @@
         <div id="countdown-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><h2 class="font-script text-5xl text-[#8C6B6B] mb-8">El Gran Día Se Acerca...</h2><div id="countdown" class="flex justify-center space-x-3 md:space-x-6"><div class="countdown-item flex flex-col items-center"><span id="days" class="countdown-number">0</span><span class="countdown-label">Días</span></div><div class="countdown-item flex flex-col items-center"><span id="hours" class="countdown-number">0</span><span class="countdown-label">Horas</span></div><div class="countdown-item flex flex-col items-center"><span id="minutes" class="countdown-number">0</span><span class="countdown-label">Minutos</span></div><div class="countdown-item flex flex-col items-center"><span id="seconds" class="countdown-number">0</span><span class="countdown-label">Segundos</span></div></div></div></div>
         <div id="itinerary-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-16">Itinerario</h2><div class="space-y-12 px-4 md:px-6"><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">1:00 pm</p><p class="text-2xl font-bold text-gray-800">Discurso</p><p class="text-lg text-gray-700">Salón del Reino de los Testigos de Jehová</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-glass-cheers fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">1:30 pm</p><p class="text-2xl font-bold text-gray-800">Recepción</p><p class="text-lg text-gray-700">Salón "El Jardín"</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-utensils fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">2:00 pm</p><p class="text-2xl font-bold text-gray-800">Cena</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-moon fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">10:00 pm</p><p class="text-2xl font-bold text-gray-800">Fin de la Celebración</p></div></div></div></div></div>
         <div id="etiqueta-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-16">Detalles Adicionales</h2><div class="space-y-12 px-4 md:px-6"><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-user-tie fa-3x"></i></div><div class="text-left"><p class="text-2xl font-bold text-gray-800">Código de Vestimenta</p><p class="text-lg text-gray-700">Agradecemos su presencia con atuendo **formal**.</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-smoking-ban fa-3x"></i></div><div class="text-left"><p class="text-2xl font-bold text-gray-800">Espacio Libre de Humo</p><p class="text-lg text-gray-700">Para la comodidad de todos, el evento es **libre de humo**.</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-parking fa-3x"></i></div><div class="text-left"><p class="text-2xl font-bold text-gray-800">Estacionamiento</p><p class="text-lg text-gray-700">Contamos con **estacionamiento gratuito** dentro del establecimiento.</p></div></div></div></div></div>
-        <div id="mapa-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><p class="text-lg font-bold">Salón "El Jardín"</p><p class="text-md text-gray-600">Prolongacion Jose Maria Morelos 1, Centro, 56530 Ixtapaluca, Méx., México</p><p class="text-md font-bold mt-2">1:00 pm</p><div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#dcd0c0] mt-4"><iframe src="https://maps.google.com/maps?q=Cjon.%20J.%20Ma.%20Morelos%201,%20Centro,%2056530%20Ixtapaluca,%20M%C3%A9x.,%20M%C3%A9xico&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div></div></div>
+        <div id="mapa-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><p class="text-lg font-bold">Salón "El Jardín"</p><p class="text-md text-gray-600">Prol. José Ma. Morelos 1, Centro, 56530 Ixtapaluca, Méx., México</p><p class="text-md font-bold mt-2">1:00 pm</p><div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#dcd0c0] mt-4"><iframe src="https://maps.google.com/maps?q=Cjon.%20J.%20Ma.%20Morelos%201,%20Centro,%2056530%20Ixtapaluca,%20M%C3%A9x.,%20M%C3%A9xico&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div></div></div>
         <footer class="mt-8 text-xs text-gray-500"><p>© 2025 Daniel & Pamela</p></footer>
     </div>
     <div id="rsvpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center relative"><button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button><h3 class="font-script text-4xl text-[#8C6B6B] mb-4">Confirmar Asistencia</h3><p class="mb-6 text-gray-600">Por favor, completa los siguientes datos para confirmar.</p><form id="rsvpForm" class="space-y-4"><input type="text" id="guestName" placeholder="Nombre completo del invitado principal" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required><input type="number" id="guestCount" placeholder="Número total de asistentes (incluyéndote)" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" min="1" required><button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">Confirmar y Generar Pase</button></form></div></div>
@@ -205,44 +140,52 @@
 
         window.onYouTubeIframeAPIReady = function() {
             player = new YT.Player('youtube-player', {
-                height: '1', width: '1',
-                // ===== CAMBIO: Video ID CORRECTO =====
-                videoId: 'kgUVq-ICt_Y', 
+                height: '1', width: '1', videoId: 'kgUVq-ICt_Y', 
                 playerVars: { 'playsinline': 1, 'controls': 0, 'showinfo': 0, 'rel': 0 },
                 events: { 'onReady': onPlayerReady }
             });
         }
-
         function onPlayerReady(event) {
             isPlayerReady = true;
-            if (firstClickDone) {
-                 event.target.playVideo();
-            }
+            if (firstClickDone) { event.target.playVideo(); }
         }
-
         seal.addEventListener('click', () => {
             if (firstClickDone) return;
             firstClickDone = true;
-
             envelopeWrapper.classList.add('open');
-
-            if (isPlayerReady && player && typeof player.playVideo === 'function') {
-                player.playVideo();
-            }
-
+            if (isPlayerReady && player && typeof player.playVideo === 'function') { player.playVideo(); }
             setTimeout(() => {
                 envelopeContainer.style.opacity = '0';
                 document.body.classList.add('invitation-visible');
-                setTimeout(() => {
-                    envelopeContainer.style.display = 'none';
-                }, 1000);
+                setTimeout(() => { envelopeContainer.style.display = 'none'; }, 1000);
             }, 1500);
         });
         
-        const rsvpModal=document.getElementById("rsvpModal"),thankYouModal=document.getElementById("thankYouModal"),openRsvpModalBtn=document.getElementById("openRsvpModal"),closeRsvpModalBtn=document.getElementById("closeRsvpModal"),closeThankYouModalBtn=document.getElementById("closeThankYouModal"),rsvpForm=document.getElementById("rsvpForm"),submitRsvpBtn=document.getElementById("submitRsvpBtn");const openModal=e=>{e.classList.remove("hidden"),setTimeout(()=>{e.classList.remove("opacity-0")},10)},closeModal=e=>{e.classList.add("opacity-0"),setTimeout(()=>{e.classList.add("hidden")},300)};openRsvpModalBtn.addEventListener("click",()=>openModal(rsvpModal)),closeRsvpModalBtn.addEventListener("click",()=>closeModal(rsvpModal)),closeThankYouModalBtn.addEventListener("click",()=>closeModal(thankYouModal)),rsvpForm.addEventListener("submit",async e=>{e.preventDefault(),submitRsvpBtn.disabled=!0,submitRsvpBtn.innerText="Confirmando...";const t=document.getElementById("guestName").value,o=document.getElementById("guestCount").value;try{await addDoc(collection(db,"invitados_confirmados"),{nombre:t,asistentes:Number(o),fecha_confirmacion:serverTimestamp()}),generateAndDownloadTicket(t,o),closeModal(rsvpModal),openModal(thankYouModal),rsvpForm.reset()}catch(e){console.error("Error al guardar la confirmación: ",e),alert("Hubo un error al confirmar. Por favor, inténtalo de nuevo.")}finally{submitRsvpBtn.disabled=!1,submitRsvpBtn.innerText="Confirmar y Generar Pase"}});function generateAndDownloadTicket(e,t){const o=(new(window.jspdf.jsPDF)({orientation:"landscape",unit:"px",format:[600,300]}));o.addImage("boleto-boda.png","PNG",0,0,600,300);const n="BODA-DP-"+Date.now(),a=`Invitado: ${e}\nAsistentes: ${t}\nID: ${n}`,d=qrcode(0,"L");d.addData(a),d.make();const i=d.createDataURL(4);o.addImage(i,"PNG",480,20,100,100),o.setFont("Helvetica","Bold"),o.setFontSize(20),o.setTextColor("#333333"),o.text("Pase de Acceso",20,40),o.setFontSize(16),o.setFont("Helvetica","Normal"),o.text(e,20,80),o.text(`Válido para ${t} persona(s)`,20,100),o.save(`Pase_Boda_Daniel_y_Pamela_${e.replace(/ /g,"_")}.pdf`)}
+        const rsvpModal=document.getElementById("rsvpModal"),thankYouModal=document.getElementById("thankYouModal"),openRsvpModalBtn=document.getElementById("openRsvpModal"),closeRsvpModalBtn=document.getElementById("closeRsvpModal"),closeThankYouModalBtn=document.getElementById("closeThankYouModal"),rsvpForm=document.getElementById("rsvpForm"),submitRsvpBtn=document.getElementById("submitRsvpBtn");const openModal=e=>{e.classList.remove("hidden"),setTimeout(()=>{e.classList.remove("opacity-0")},10)},closeModal=e=>{e.classList.add("opacity-0"),setTimeout(()=>{e.classList.add("hidden")},300)};openRsvpModalBtn.addEventListener("click",()=>openModal(rsvpModal)),closeRsvpModalBtn.addEventListener("click",()=>closeModal(rsvpModal)),closeThankYouModalBtn.addEventListener("click",()=>closeModal(thankYouModal)),rsvpForm.addEventListener("submit",async e=>{e.preventDefault(),submitRsvpBtn.disabled=!0,submitRsvpBtn.innerText="Confirmando...";const t=document.getElementById("guestName").value,o=document.getElementById("guestCount").value;try{await addDoc(collection(db,"invitados_confirmados"),{nombre:t,asistentes:Number(o),fecha_confirmacion:serverTimestamp()}),generateAndDownloadTicket(t,o),closeModal(rsvpModal),openModal(thankYouModal),rsvpForm.reset()}catch(e){console.error("Error al guardar la confirmación: ",e),alert("Hubo un error al confirmar. Por favor, inténtalo de nuevo.")}finally{submitRsvpBtn.disabled=!1,submitRsvpBtn.innerText="Confirmar y Generar Pase"}});
+        
+        // Función PDF actualizada
+        function generateAndDownloadTicket(guestName, guestCount) {
+            const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 600] }); 
+            doc.addImage("nuevo.jpeg", "JPEG", 0, 0, 600, 600); 
+            const ticketId = "BODA-DP-" + Date.now();
+            const qrCodeData = `Invitado: ${guestName}\nAsistentes: ${guestCount}\nID: ${ticketId}`;
+            const qr = qrcode(0, 'L');
+            qr.addData(qrCodeData);
+            qr.make();
+            const qrCodeImage = qr.createDataURL(4);
+            doc.addImage(qrCodeImage, "PNG", 480, 480, 100, 100); 
+            doc.setFont("Helvetica", "Bold");
+            doc.setFontSize(20);
+            doc.setTextColor("#333333"); 
+            doc.text("Pase de Acceso", 20, 40); 
+            doc.setFontSize(16);
+            doc.setFont("Helvetica", "Normal");
+            doc.text(guestName, 20, 80); 
+            doc.text(`Válido para ${guestCount} persona(s)`, 20, 100); 
+            doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
+        }
+        
         const countdownDate=new Date("March 15, 2026 13:00:00").getTime(),countdownFunction=setInterval(()=>{const e=(new Date).getTime(),t=countdownDate-e;if(t<0)return clearInterval(countdownFunction),void(document.getElementById("countdown").innerHTML="<div class='text-center w-full'><p class='font-script text-4xl text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>");document.getElementById("days").innerText=Math.floor(t/864e5),document.getElementById("hours").innerText=Math.floor(t%864e5/36e5),document.getElementById("minutes").innerText=Math.floor(t%36e5/6e4),document.getElementById("seconds").innerText=Math.floor(t%6e4/1e3)},1e3);
     </script>
 </body>
-
-
-
+</html>
