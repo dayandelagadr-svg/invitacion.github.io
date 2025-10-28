@@ -119,105 +119,165 @@
     <div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center"><h3 class="font-script text-4xl text-[#8C6B6B] mb-4">¡Gracias!</h3><p class="mb-6 text-gray-600">Tu asistencia ha sido confirmada. Tu pase personal se está descargando. ¡Nos vemos en la boda!</p><button id="closeThankYouModal" class="bg-[#C6A9A9] text-white font-bold py-2 px-4 rounded-lg">Cerrar</button></div></div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+   <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyCEFg3H7spJXUBvjNRc-QRocIHk3Hd6dho",
-            authDomain: "lista-de-asistencia-8cfc5.firebaseapp.com",
-            projectId: "lista-de-asistencia-8cfc5",
-            storageBucket: "lista-de-asistencia-8cfc5.firebasestorage.app",
-            messagingSenderId: "276452664903",
-            appId: "1:276452664903:web:8b060bdeef2e70852bf362"
-        };
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+// Configuración de Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyCEFg3H7spJXUBvjNRc-QRocIHk3Hd6dho",
+    authDomain: "lista-de-asistencia-8cfc5.firebaseapp.com",
+    projectId: "lista-de-asistencia-8cfc5",
+    storageBucket: "lista-de-asistencia-8cfc5.firebasestorage.app",
+    messagingSenderId: "276452664903",
+    appId: "1:276452664903:web:8b060bdeef2e70852bf362"
+};
 
-        const envelopeContainer = document.getElementById('envelope-container');
-        const envelopeWrapper = document.querySelector('.envelope-wrapper');
-        const seal = document.getElementById('seal');
-        let player;
-        let firstClickDone = false;
-        let isPlayerReady = false;
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-        window.onYouTubeIframeAPIReady = function() {
-            player = new YT.Player('youtube-player', {
-                height: '1', width: '1', videoId: 'kgUVq-ICt_Y', 
-                playerVars: { 'playsinline': 1, 'controls': 0, 'showinfo': 0, 'rel': 0 },
-                events: { 'onReady': onPlayerReady }
-            });
-        }
-        function onPlayerReady(event) {
-            isPlayerReady = true;
-            if (firstClickDone) { event.target.playVideo(); }
-        }
-        seal.addEventListener('click', () => {
-            if (firstClickDone) return;
-            firstClickDone = true;
-            envelopeWrapper.classList.add('open');
-            if (isPlayerReady && player && typeof player.playVideo === 'function') { player.playVideo(); }
-            setTimeout(() => {
-                envelopeContainer.style.opacity = '0';
-                document.body.classList.add('invitation-visible');
-                setTimeout(() => { envelopeContainer.style.display = 'none'; }, 1000);
-            }, 1500);
+// Elementos del sobre e invitación
+const envelopeContainer = document.getElementById('envelope-container');
+const envelopeWrapper = document.querySelector('.envelope-wrapper');
+const seal = document.getElementById('seal');
+
+let player;
+let firstClickDone = false;
+let isPlayerReady = false;
+
+// --- Configurar música ---
+window.onYouTubeIframeAPIReady = function () {
+    player = new YT.Player('youtube-player', {
+        height: '1',
+        width: '1',
+        videoId: 'kgUVq-ICt_Y', // reemplázalo si deseas otra canción
+        playerVars: { 'playsinline': 1, 'controls': 0, 'showinfo': 0, 'rel': 0 },
+        events: { 'onReady': onPlayerReady }
+    });
+};
+
+function onPlayerReady(event) {
+    isPlayerReady = true;
+}
+
+// --- Abrir invitación ---
+seal.addEventListener('click', () => {
+    if (firstClickDone) return;
+    firstClickDone = true;
+
+    // animar sobre
+    envelopeWrapper.classList.add('open');
+
+    // iniciar música si lista
+    if (isPlayerReady && player && typeof player.playVideo === 'function') {
+        player.playVideo();
+    }
+
+    // mostrar invitación después de la animación
+    setTimeout(() => {
+        envelopeContainer.style.opacity = '0';
+        setTimeout(() => {
+            envelopeContainer.style.display = 'none';
+            document.body.classList.add('invitation-visible');
+        }, 1000);
+    }, 1500);
+});
+
+// --- Modal de confirmación ---
+const rsvpModal = document.getElementById("rsvpModal");
+const thankYouModal = document.getElementById("thankYouModal");
+const openRsvpModalBtn = document.getElementById("openRsvpModal");
+const closeRsvpModalBtn = document.getElementById("closeRsvpModal");
+const closeThankYouModalBtn = document.getElementById("closeThankYouModal");
+const rsvpForm = document.getElementById("rsvpForm");
+const submitRsvpBtn = document.getElementById("submitRsvpBtn");
+
+const openModal = e => {
+    e.classList.remove("hidden");
+    setTimeout(() => e.classList.remove("opacity-0"), 10);
+};
+
+const closeModal = e => {
+    e.classList.add("opacity-0");
+    setTimeout(() => e.classList.add("hidden"), 300);
+};
+
+openRsvpModalBtn.addEventListener("click", () => openModal(rsvpModal));
+closeRsvpModalBtn.addEventListener("click", () => closeModal(rsvpModal));
+closeThankYouModalBtn.addEventListener("click", () => closeModal(thankYouModal));
+
+// --- Confirmación y pase ---
+rsvpForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    submitRsvpBtn.disabled = true;
+    submitRsvpBtn.innerText = "Confirmando...";
+
+    const guestName = document.getElementById("guestName").value;
+    const guestCount = document.getElementById("guestCount").value;
+
+    try {
+        await addDoc(collection(db, "invitados_confirmados"), {
+            nombre: guestName,
+            asistentes: Number(guestCount),
+            fecha_confirmacion: serverTimestamp()
         });
-        
-        const rsvpModal=document.getElementById("rsvpModal"),thankYouModal=document.getElementById("thankYouModal"),openRsvpModalBtn=document.getElementById("openRsvpModal"),closeRsvpModalBtn=document.getElementById("closeRsvpModal"),closeThankYouModalBtn=document.getElementById("closeThankYouModal"),rsvpForm=document.getElementById("rsvpForm"),submitRsvpBtn=document.getElementById("submitRsvpBtn");const openModal=e=>{e.classList.remove("hidden"),setTimeout(()=>{e.classList.remove("opacity-0")},10)},closeModal=e=>{e.classList.add("opacity-0"),setTimeout(()=>{e.classList.add("hidden")},300)};openRsvpModalBtn.addEventListener("click",()=>openModal(rsvpModal)),closeRsvpModalBtn.addEventListener("click",()=>closeModal(rsvpModal)),closeThankYouModalBtn.addEventListener("click",()=>closeModal(thankYouModal)),rsvpForm.addEventListener("submit",async e=>{e.preventDefault(),submitRsvpBtn.disabled=!0,submitRsvpBtn.innerText="Confirmando...";const t=document.getElementById("guestName").value,o=document.getElementById("guestCount").value;try{await addDoc(collection(db,"invitados_confirmados"),{nombre:t,asistentes:Number(o),fecha_confirmacion:serverTimestamp()}),generateAndDownloadTicket(t,o),closeModal(rsvpModal),openModal(thankYouModal),rsvpForm.reset()}catch(e){console.error("Error al guardar la confirmación: ",e),alert("Hubo un error al confirmar. Por favor, inténtalo de nuevo.")}finally{submitRsvpBtn.disabled=!1,submitRsvpBtn.innerText="Confirmar y Generar Pase"}});
-        
-        function generateAndDownloadTicket(guestName, guestCount) {
-    const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 600] }); 
-    
-    // Fondo del PDF
-    doc.addImage("nuevo.jpeg", "JPEG", 0, 0, 600, 600); 
+
+        generateAndDownloadTicket(guestName, guestCount);
+        closeModal(rsvpModal);
+        openModal(thankYouModal);
+        rsvpForm.reset();
+    } catch (err) {
+        console.error("Error al guardar la confirmación:", err);
+        alert("Hubo un error al confirmar. Por favor, inténtalo de nuevo.");
+    } finally {
+        submitRsvpBtn.disabled = false;
+        submitRsvpBtn.innerText = "Confirmar y Generar Pase";
+    }
+});
+
+// --- Generar pase PDF con QR ---
+function generateAndDownloadTicket(guestName, guestCount) {
+    const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 600] });
+    doc.addImage("nuevo.jpeg", "JPEG", 0, 0, 600, 600);
 
     const qrUrl = "https://dayandelagadr-svg.github.io/invitacion.github.io/";
-
-    // Generar QR
     const qr = qrcode(0, 'L');
     qr.addData(qrUrl);
     qr.make();
     const qrCodeImage = qr.createDataURL(4);
-    
-    // Título
+
     doc.setFont("Helvetica", "bold");
     doc.setFontSize(28);
     doc.setTextColor("#8C6B6B");
     doc.text("PASE DE ACCESO", 300, 100, { align: "center" });
-    
-    // Nombre del invitado con estilo elegante
-    doc.setFont("times", "italic"); // simulación de fuente elegante
+
+    doc.setFont("times", "italic");
     doc.setFontSize(24);
     doc.setTextColor("#5A4A4A");
     doc.text(guestName, 300, 160, { align: "center" });
 
-    // Cantidad de personas
     doc.setFont("Helvetica", "normal");
     doc.setFontSize(18);
     doc.setTextColor("#333");
     doc.text(`Válido para ${guestCount} persona(s)`, 300, 190, { align: "center" });
-    
-    // Fecha y lugar
+
     doc.setFontSize(16);
     doc.setTextColor("#555");
     doc.text("Boda de Daniel & Pamela", 300, 230, { align: "center" });
     doc.text("15 de marzo de 2026 - Salón El Jardín", 300, 250, { align: "center" });
-    
-    // QR centrado
+
     doc.addImage(qrCodeImage, "PNG", 230, 320, 140, 140);
-    
-    // Texto decorativo bajo el QR
     doc.setFontSize(12);
     doc.setTextColor("#777");
     doc.text("Escanea el código para ver la invitación digital", 300, 480, { align: "center" });
 
-    // Guardar PDF
     doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
 }
-<script>
+</script>
+
 </body>
 </html>
+
 
 
 
