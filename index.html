@@ -33,16 +33,16 @@
 
         /* Estilos imagen de novios */
         .hero-image-overlay {
-            position: absolute;
-            top: 5%; 
-            right: 5%; 
-            width: 45%; 
-            max-width: 300px; 
-            height: auto;
-            opacity: 0.35; /* Ajusta visibilidad */
-            z-index: 0;
-            pointer-events: none;
-        }
+   filter: brightness(0.9) blur(1px);
+    position: absolute;
+    inset: 0; /* ocupa todo el espacio del contenedor */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* cubre todo el contenedor sin deformarse */
+    opacity: 0.25; /* ajusta la transparencia para que el texto se vea bien */
+    z-index: 0;
+    pointer-events: none;
+}
 
         .font-script { font-family: 'Parisienne', cursive; }
         nav a, nav button { letter-spacing: .2em; font-size: .75rem; color: #8b7d7d; margin: 0 .5rem; text-decoration: none; transition: color .3s; }
@@ -69,7 +69,7 @@
 <body>
     <div id="envelope-container">
         <div class="envelope-wrapper">
-            <img src="sobreblanco.png" class="envelope-body" alt="Sobre">
+            <img src="sobre-con-sello.jpg" class="envelope-body" alt="Sobre">
             <img src="sobre-solapa.png" class="envelope-flap" alt="Solapa del sobre">
             <img src="sello.png" class="envelope-seal" id="seal" alt="Abrir invitación">
         </div>
@@ -189,3 +189,4 @@
     </script>
 </body>
 </html>
+
