@@ -39,7 +39,6 @@
         position: relative;
         z-index: 10;
         overflow: hidden;
-        /* min-height: 50vh;  <-- Eliminado */
     }
     @media (min-width: 768px) {
         main.content-box {
@@ -98,256 +97,189 @@
     <div id="envelope-container">
         <div class="envelope-wrapper-simple">
             <img src="sobreprueba.jpeg" class="envelope-image" alt="Sobre de invitación">
-            <img src="sello.png" class="envelope-seal-simple" id="seal" alt="Sello de apertura"> 
+            <img src="sello.png" class="envelope-seal-simple" id="seal" alt="Sello de apertura">
         </div>
     </div>
-    <div id="youtube-player"></div> 
+    <div id="youtube-player"></div>
     <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="top-left">
-    ...
+    <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="top-right">
+    <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="bottom-left">
+    <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="bottom-right">
+
     <div class="main-container">
         <header></header>
         <main class="content-box">
             <img src="novios.jpeg" alt="Novios Daniel y Pamela" class="hero-image-overlay">
             <p class="tracking-widest text-sm mb-4">LA BODA DE</p>
             <h1 class="font-script text-6xl md:text-8xl text-[#8C6B6B] mb-4">Daniel & Pamela</h1>
-            <div class="my-8 text-center px-4 md:px-8 relative z-10"> 
-                <p class="text-xl italic text-[#a58a8a] leading-relaxed"> 
+            <div class="my-8 text-center px-4 md:px-8 relative z-10">
+                <p class="text-xl italic text-[#a58a8a] leading-relaxed">
                     "Ponme como un sello sobre tu corazón, como un sello sobre tu brazo,<br>
                     porque el amor es tan fuerte como la muerte,<br>
                     y la devoción total, tan exigente como la Tumba.<br>
                     Sus llamas son un fuego ardiente, la llama de Jah."
                 </p>
-                <p class="text-md mt-3 text-gray-500"> 
+                <p class="text-md mt-3 text-gray-500">
                     Cantar de los Cantares 8:6
                 </p>
             </div>
-            <p class="text-3xl md:text-4xl font-bold text-[#8C6B6B] mb-3">Domingo, 15 de Marzo de 2026</p> 
-            <p class="text-2xl md:text-3xl font-bold text-gray-800">Estamos Felices de poder compartir con ustedes este momento tan importante 
-            por eso te invitamos a que nos acompañes a nuestra boda</p> 
+            <p class="text-3xl md:text-4xl font-bold text-[#8C6B6B] mb-3">Domingo, 15 de Marzo de 2026</p>
+            <p class="text-2xl md:text-3xl font-bold text-gray-800">Estamos Felices de poder compartir con ustedes este momento tan importante
+            por eso te invitamos a que nos acompañes a nuestra boda</p>
             <nav class="flex justify-center items-center mt-8 space-x-2 md:space-x-4">
-    <a href="#discurso-mapa-section" class="uppercase bg-[#C6A9A9] text-white py-2 px-4 rounded-full shadow-md transition-transform transform hover:scale-105">Ubicación</a>
-    ...
-</nav>
+                <a href="#discurso-mapa-section" class="uppercase bg-[#C6A9A9] text-white py-2 px-4 rounded-full shadow-md transition-transform transform hover:scale-105">Ubicación</a>
+                <button id="openRsvpModal" class="uppercase bg-[#C6A9A9] text-white py-4 px-8 text-lg font-bold rounded-full shadow-lg transition-transform transform hover:scale-105">Confirma tu asistencia</button>
+                <a href="#etiqueta-section" class="uppercase bg-[#C6A9A9] text-white py-2 px-4 rounded-full shadow-md transition-transform transform hover:scale-105">Etiqueta</a>
+            </nav>
         </main>
         <div id="countdown-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><h2 class="font-script text-5xl text-[#8C6B6B] mb-8">El Gran Día Se Acerca...</h2><div id="countdown" class="flex justify-center space-x-3 md:space-x-6"><div class="countdown-item flex flex-col items-center"><span id="days" class="countdown-number">0</span><span class="countdown-label">Días</span></div><div class="countdown-item flex flex-col items-center"><span id="hours" class="countdown-number">0</span><span class="countdown-label">Horas</span></div><div class="countdown-item flex flex-col items-center"><span id="minutes" class="countdown-number">0</span><span class="countdown-label">Minutos</span></div><div class="countdown-item flex flex-col items-center"><span id="seconds" class="countdown-number">0</span><span class="countdown-label">Segundos</span></div></div></div></div>
-        <div id="itinerary-section" class="w-full max-w-3xl mt-8 text-center"><div id="discurso-mapa-section" class="w-full max-w-3xl mt-8 text-center">
-    <div class="content-box">
-        <h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-8">Ubicación del Discurso</h2>
-        <p class="text-lg font-bold">Salón del Reino de los Testigos de Jehová</p>
-        <p class="text-md text-gray-600">Avenida Acozac #19, Esquina con Prolongación José Ma. Morelos, Unidad Habitacional Ixtapaluca Centro, 56586 Ixtapaluca, Méx.</p>
-        <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#dcd0c0] mt-4">
-            <iframe
-                src="https://maps.google.com/?cid=9850766696252599041&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ"
-                width="100%"
-                height="100%"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy">
-            </iframe>
-        </div>
-    </div>
-</div>
-            <div class="content-box"><h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-16">Itinerario</h2><div class="space-y-12 px-4 md:px-6"><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">3:00 pm</p><p class="text-2xl font-bold text-gray-800">Discurso</p><p class="text-lg text-gray-700">Salón del Reino de los Testigos de Jehová</p><p class="text-md text-gray-600">Av. Acozac #19, Ixtapaluca Centro, Méx.</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-glass-cheers fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">3:30 pm</p><p class="text-2xl font-bold text-gray-800">Recepción</p><p class="text-lg text-gray-700">Salón "El Jardín"</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-music fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">5:00 pm</p><p class="text-2xl font-bold text-gray-800">Baile</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-moon fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">10:00 pm</p><p class="text-2xl font-bold text-gray-800">Fin de la Celebración</p></div></div></div></div></div>
+        
+        <div id="itinerary-section" class="w-full max-w-3xl mt-8 text-center">
+             <div id="discurso-mapa-section" class="w-full max-w-3xl mt-8 text-center">
+                 <div class="content-box">
+                     <h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-8">Ubicación del Discurso</h2>
+                     <p class="text-lg font-bold">Salón del Reino de los Testigos de Jehová</p>
+                     <p class="text-md text-gray-600">Avenida Acozac #19, Esquina con Prolongación José Ma. Morelos, Unidad Habitacional Ixtapaluca Centro, 56586 Ixtapaluca, Méx.</p>
+                     <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#dcd0c0] mt-4">
+                         <iframe src="http://googleusercontent.com/maps/google.com/6" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                     </div>
+                 </div>
+             </div>
+             <div class="content-box"><h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-16">Itinerario</h2><div class="space-y-12 px-4 md:px-6"><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">3:00 pm</p><p class="text-2xl font-bold text-gray-800">Discurso</p><p class="text-lg text-gray-700">Salón del Reino de los Testigos de Jehová</p><p class="text-md text-gray-600">Av. Acozac #19, Ixtapaluca Centro, Méx.</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-glass-cheers fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">3:30 pm</p><p class="text-2xl font-bold text-gray-800">Recepción</p><p class="text-lg text-gray-700">Salón "El Jardín"</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-music fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">5:00 pm</p><p class="text-2xl font-bold text-gray-800">Baile</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-moon fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">10:00 pm</p><p class="text-2xl font-bold text-gray-800">Fin de la Celebración</p></div></div></div></div>
+         </div>
         <div id="etiqueta-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-16">Detalles Adicionales</h2><div class="space-y-12 px-4 md:px-6"><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-user-tie fa-3x"></i></div><div class="text-left"><p class="text-2xl font-bold text-gray-800">Código de Vestimenta</p><p class="text-lg text-gray-700">Agradecemos su presencia con atuendo **formal**.</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-smoking-ban fa-3x"></i></div><div class="text-left"><p class="text-2xl font-bold text-gray-800">Espacio Libre de Humo</p><p class="text-lg text-gray-700">Para la comodidad de todos, el evento es **libre de humo**.</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-parking fa-3x"></i></div><div class="text-left"><p class="text-2xl font-bold text-gray-800">Estacionamiento</p><p class="text-lg text-gray-700">Contamos con **estacionamiento gratuito** dentro del establecimiento.</p></div></div></div></div></div>
         <div id="recepcion-mapa-section" class="w-full max-w-3xl mt-8 text-center">
-    <div class="content-box">
-        <h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-8">Ubicación de la Recepción</h2>
-        <p class="text-lg font-bold">Salón "El Jardín"</p>
-        ...<p class="text-md text-gray-600">Prol. José Ma. Morelos 1, Centro, 56530 Ixtapaluca, Méx., México</p><p class="text-md font-bold mt-2">3:00 pm</p><div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#dcd0c0] mt-4"><iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.155394961366!2d-98.87525292520483!3d19.37501384514278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f17c3c0d8c9b%3A0x5b55b5e75bba1d12!2sProl.%20Jos%C3%A9%20Ma.%20Morelos%201%2C%20Centro%2C%2056530%20Ixtapaluca%2C%20M%C3%A9x.%2C%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1730053554382!5m2!1ses-419!2smx" 
-    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
-</iframe> </div></div></div>
+             <div class="content-box">
+                 <h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-8">Ubicación de la Recepción</h2>
+                 <p class="text-lg font-bold">Salón "El Jardín"</p>
+                 <p class="text-md text-gray-600">Prol. José Ma. Morelos 1, Centro, 56530 Ixtapaluca, Méx., México</p><p class="text-md font-bold mt-2">3:00 pm</p><div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#dcd0c0] mt-4"><iframe src="http://googleusercontent.com/maps/google.com/5" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe> </div></div>
+         </div>
         <footer class="mt-8 text-xs text-gray-500"><p>© 2025 Daniel & Pamela</p></footer>
     </div>
     <div id="rsvpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center relative"><button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button><h3 class="font-script text-4xl text-[#8C6B6B] mb-4">Confirmar Asistencia</h3><p class="mb-6 text-gray-600">Por favor, completa los siguientes datos para confirmar.</p><form id="rsvpForm" class="space-y-4"><input type="text" id="guestName" placeholder="Nombre completo del invitado principal" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required><input type="number" id="guestCount" placeholder="Número total de asistentes (incluyéndote)" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" min="1" required><button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">Confirmar y Generar Pase</button></form></div></div>
     <div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center"><h3 class="font-script text-4xl text-[#8C6B6B] mb-4">¡Gracias!</h3><p class="mb-6 text-gray-600">Tu asistencia ha sido confirmada. Tu pase personal se está descargando. ¡Nos vemos en la boda!</p><button id="closeThankYouModal" class="bg-[#C6A9A9] text-white font-bold py-2 px-4 rounded-lg">Cerrar</button></div></div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
-   <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 
-// Configuración de Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyCEFg3H7spJXUBvjNRc-QRocIHk3Hd6dho",
-    authDomain: "lista-de-asistencia-8cfc5.firebaseapp.com",
-    projectId: "lista-de-asistencia-8cfc5",
-    storageBucket: "lista-de-asistencia-8cfc5.firebasestorage.app",
-    messagingSenderId: "276452664903",
-    appId: "1:276452664903:web:8b060bdeef2e70852bf362"
-};
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEFg3H7spJXUBvjNRc-QRocIHk3Hd6dho",
+            authDomain: "lista-de-asistencia-8cfc5.firebaseapp.com",
+            projectId: "lista-de-asistencia-8cfc5",
+            storageBucket: "lista-de-asistencia-8cfc5.firebasestorage.app",
+            messagingSenderId: "276452664903",
+            appId: "1:276452664903:web:8b060bdeef2e70852bf362"
+        };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-// Elementos del sobre e invitación
-const envelopeContainer = document.getElementById('envelope-container');
-const envelopeWrapper = document.querySelector('.envelope-wrapper');
-const seal = document.getElementById('seal');
+        // Elementos del sobre e invitación
+        const envelopeContainer = document.getElementById('envelope-container');
+        // ===== CORRECCIÓN AQUÍ =====
+        const envelopeWrapper = document.querySelector('.envelope-wrapper-simple'); // Buscar por la clase correcta
+        const seal = document.getElementById('seal'); // Este ID debe estar en tu <img> del sello
 
-let player;
-let firstClickDone = false;
-let isPlayerReady = false;
+        let player;
+        let firstClickDone = false;
+        let isPlayerReady = false;
 
-// --- Configurar música ---
-window.onYouTubeIframeAPIReady = function () {
-    player = new YT.Player('youtube-player', {
-        height: '1',
-        width: '1',
-        videoId: 'kgUVq-ICt_Y', // reemplázalo si deseas otra canción
-        playerVars: { 'playsinline': 1, 'controls': 0, 'showinfo': 0, 'rel': 0 },
-        events: { 'onReady': onPlayerReady }
-    });
-};
+        // --- Configurar música ---
+        window.onYouTubeIframeAPIReady = function () {
+            player = new YT.Player('youtube-player', {
+                height: '1', width: '1', videoId: 'kgUVq-ICt_Y',
+                playerVars: { 'playsinline': 1, 'controls': 0, 'showinfo': 0, 'rel': 0 },
+                events: { 'onReady': onPlayerReady }
+            });
+        };
+        function onPlayerReady(event) { isPlayerReady = true; }
 
-function onPlayerReady(event) {
-    isPlayerReady = true;
-}
+        // --- Abrir invitación ---
+        if (seal) { // Verifica si el sello existe
+            seal.addEventListener('click', () => {
+                if (firstClickDone) return;
+                firstClickDone = true;
+                try { if (isPlayerReady && player && typeof player.playVideo === 'function') { player.playVideo(); } }
+                catch (e) { console.warn("Video no disponible, continuando sin música."); }
 
-// --- Abrir invitación ---
-seal.addEventListener('click', () => {
-    if (firstClickDone) return;
-    firstClickDone = true;
+                if(envelopeWrapper) envelopeWrapper.style.transform = 'scale(1.05)';
+                envelopeContainer.style.transition = 'opacity 1.2s ease-in-out';
+                setTimeout(() => {
+                    envelopeContainer.style.opacity = '0';
+                    document.body.classList.add('invitation-visible');
+                    setTimeout(() => envelopeContainer.style.display = 'none', 1200);
+                }, 400);
+            });
+        } else {
+             console.error("No se encontró el elemento con id='seal'. La invitación no se abrirá con clic.");
+             // Fallback: Muestra la invitación directamente si no hay sello
+             document.body.classList.add('invitation-visible');
+             if (envelopeContainer) envelopeContainer.style.display = 'none';
+        }
 
-    // animar sobre
-    envelopeWrapper.classList.add('open');
 
-    // iniciar música si lista
-    if (isPlayerReady && player && typeof player.playVideo === 'function') {
-        player.playVideo();
-    }
+        // --- Modal de confirmación ---
+        const rsvpModal = document.getElementById("rsvpModal"), thankYouModal = document.getElementById("thankYouModal"), openRsvpModalBtn = document.getElementById("openRsvpModal"), closeRsvpModalBtn = document.getElementById("closeRsvpModal"), closeThankYouModalBtn = document.getElementById("closeThankYouModal"), rsvpForm = document.getElementById("rsvpForm"), submitRsvpBtn = document.getElementById("submitRsvpBtn");
+        const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
+        const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
+        if (openRsvpModalBtn) openRsvpModalBtn.addEventListener("click", () => openModal(rsvpModal));
+        if (closeRsvpModalBtn) closeRsvpModalBtn.addEventListener("click", () => closeModal(rsvpModal));
+        if (closeThankYouModalBtn) closeThankYouModalBtn.addEventListener("click", () => closeModal(thankYouModal));
 
-    // mostrar invitación después de la animación
-    setTimeout(() => {
-        envelopeContainer.style.opacity = '0';
-        setTimeout(() => {
-            envelopeContainer.style.display = 'none';
-            document.body.classList.add('invitation-visible');
-        }, 1000);
-    }, 1500);
-});
+        // --- Confirmación y pase ---
+        if (rsvpForm) {
+            rsvpForm.addEventListener("submit", async e => {
+                e.preventDefault(); submitRsvpBtn.disabled = true; submitRsvpBtn.innerText = "Confirmando...";
+                const guestName = document.getElementById("guestName").value, guestCount = document.getElementById("guestCount").value;
+                try {
+                    await addDoc(collection(db, "invitados_confirmados"), { nombre: guestName, asistentes: Number(guestCount), fecha_confirmacion: serverTimestamp() });
+                    generateAndDownloadTicket(guestName, guestCount); closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
+                } catch (err) { console.error("Error al guardar la confirmación:", err); alert("Hubo un error al confirmar. Por favor, inténtalo de nuevo.");
+                } finally { submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Confirmar y Generar Pase"; }
+            });
+        }
 
-// --- Modal de confirmación ---
-const rsvpModal = document.getElementById("rsvpModal");
-const thankYouModal = document.getElementById("thankYouModal");
-const openRsvpModalBtn = document.getElementById("openRsvpModal");
-const closeRsvpModalBtn = document.getElementById("closeRsvpModal");
-const closeThankYouModalBtn = document.getElementById("closeThankYouModal");
-const rsvpForm = document.getElementById("rsvpForm");
-const submitRsvpBtn = document.getElementById("submitRsvpBtn");
-
-const openModal = e => {
-    e.classList.remove("hidden");
-    setTimeout(() => e.classList.remove("opacity-0"), 10);
-};
-
-const closeModal = e => {
-    e.classList.add("opacity-0");
-    setTimeout(() => e.classList.add("hidden"), 300);
-};
-
-openRsvpModalBtn.addEventListener("click", () => openModal(rsvpModal));
-closeRsvpModalBtn.addEventListener("click", () => closeModal(rsvpModal));
-closeThankYouModalBtn.addEventListener("click", () => closeModal(thankYouModal));
-
-// --- Confirmación y pase ---
-rsvpForm.addEventListener("submit", async e => {
-    e.preventDefault();
-    submitRsvpBtn.disabled = true;
-    submitRsvpBtn.innerText = "Confirmando...";
-
-    const guestName = document.getElementById("guestName").value;
-    const guestCount = document.getElementById("guestCount").value;
-
-    try {
-        await addDoc(collection(db, "invitados_confirmados"), {
-            nombre: guestName,
-            asistentes: Number(guestCount),
-            fecha_confirmacion: serverTimestamp()
-        });
-
-        generateAndDownloadTicket(guestName, guestCount);
-        closeModal(rsvpModal);
-        openModal(thankYouModal);
-        rsvpForm.reset();
-    } catch (err) {
-        console.error("Error al guardar la confirmación:", err);
-        alert("Hubo un error al confirmar. Por favor, inténtalo de nuevo.");
-    } finally {
-        submitRsvpBtn.disabled = false;
-        submitRsvpBtn.innerText = "Confirmar y Generar Pase";
-    }
-});
-
-// --- Generar pase PDF con QR (Elementos en las esquinas) ---
+        // --- Generar pase PDF con QR ---
         function generateAndDownloadTicket(guestName, guestCount) {
-            // PDF sigue siendo cuadrado 600x600, formato portrait
-            const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 600] }); 
-            doc.addImage("nuevo.jpeg", "JPEG", 0, 0, 600, 600); // Fondo
-
+            const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 600] });
+            doc.addImage("nuevo.jpeg", "JPEG", 0, 0, 600, 600);
             const qrUrl = "https://dayandelagadr-svg.github.io/invitacion.github.io/";
-            const qr = qrcode(0, 'L'); qr.addData(qrUrl); qr.make();
-            const qrCodeImage = qr.createDataURL(4);
-
-            // --- Textos en la Esquina Superior Izquierda ---
-            doc.setFont("Helvetica", "bold"); 
-            doc.setFontSize(20); 
-            doc.setTextColor(50, 50, 50); 
-            doc.text("Pase de Acceso", 30, 40); // (x=30, y=40)
-
-            doc.setFontSize(16);
-            doc.setFont("Helvetica", "normal");
-            doc.text(guestName, 30, 70); // Debajo del título
-            doc.text(`Válido para ${guestCount} persona(s)`, 30, 90); // Debajo del nombre
-
-            doc.setFontSize(12); // Más pequeño para detalles
-            doc.text("Boda D&P | 15 Marzo 2026", 30, 120); // Info adicional
-
-            // --- QR en la Esquina Inferior Derecha ---
-            const qrSize = 100; // Tamaño del QR
-            const qrMargin = 30; // Margen desde los bordes
-            const qrX = 600 - qrSize - qrMargin; // Posición X (ancho total - tamaño - margen)
-            const qrY = 600 - qrSize - qrMargin; // Posición Y (alto total - tamaño - margen)
-            doc.addImage(qrCodeImage, "PNG", qrX, qrY, qrSize, qrSize); 
-
-            // Texto debajo del QR (opcional, ajustado a la esquina)
-            doc.setFontSize(9); 
-            doc.setTextColor(100, 100, 100);
-            // Centrado horizontalmente respecto al QR
-            doc.text("Ver invitación digital", qrX + qrSize / 2, qrY + qrSize + 15, { align: "center" }); 
-
+            const qr = qrcode(0, 'L'); qr.addData(qrUrl); qr.make(); const qrCodeImage = qr.createDataURL(4);
+            doc.setFont("Helvetica", "bold"); doc.setFontSize(28); doc.setTextColor("#8C6B6B"); doc.text("PASE DE ACCESO", 300, 100, { align: "center" });
+            doc.setFont("times", "italic"); doc.setFontSize(24); doc.setTextColor("#5A4A4A"); doc.text(guestName, 300, 160, { align: "center" });
+            doc.setFont("Helvetica", "normal"); doc.setFontSize(18); doc.setTextColor("#333"); doc.text(`Válido para ${guestCount} persona(s)`, 300, 190, { align: "center" });
+            doc.setFontSize(16); doc.setTextColor("#555"); doc.text("Boda de Daniel & Pamela", 300, 230, { align: "center" }); doc.text("15 de marzo de 2026 - Salón El Jardín", 300, 250, { align: "center" });
+            doc.addImage(qrCodeImage, "PNG", 230, 320, 140, 140);
+            doc.setFontSize(12); doc.setTextColor("#777"); doc.text("Escanea el código para ver la invitación digital", 300, 480, { align: "center" });
             doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
-        } // --- Cuenta Regresiva (Restaurada) ---
-const countdownDate = new Date("March 15, 2026 13:00:00").getTime();
-const countdownFunction = setInterval(() => {
-    const now = new Date().getTime();
-    const distance = countdownDate - now;
-    if (distance < 0) {
-        clearInterval(countdownFunction);
-        const countdownEl = document.getElementById("countdown");
-        if(countdownEl) countdownEl.innerHTML = "<div class='text-center w-full'><p class='font-script text-4xl text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>";
-        return;
-    }
-    const daysEl = document.getElementById("days");
-    const hoursEl = document.getElementById("hours");
-    const minutesEl = document.getElementById("minutes");
-    const secondsEl = document.getElementById("seconds");
+        }
+        
+        // --- Cuenta Regresiva ---
+        const countdownDate = new Date("March 15, 2026 13:00:00").getTime();
+        const countdownFunction = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                const countdownEl = document.getElementById("countdown");
+                if(countdownEl) countdownEl.innerHTML = "<div class='text-center w-full'><p class='font-script text-4xl text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>";
+                return;
+            }
+            const daysEl = document.getElementById("days");
+            const hoursEl = document.getElementById("hours");
+            const minutesEl = document.getElementById("minutes");
+            const secondsEl = document.getElementById("seconds");
 
-    if (daysEl && hoursEl && minutesEl && secondsEl) {
-        daysEl.innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-        hoursEl.innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        minutesEl.innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        secondsEl.innerText = Math.floor((distance % (1000 * 60)) / 1000);
-    }
-}, 1000);
-</script>
-
+            if (daysEl && hoursEl && minutesEl && secondsEl) {
+                daysEl.innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+                hoursEl.innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                minutesEl.innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                secondsEl.innerText = Math.floor((distance % (1000 * 60)) / 1000);
+            }
+        }, 1000);
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
