@@ -76,7 +76,17 @@
     #envelope-container { position: fixed; inset: 0; background-color: #FBF9F7; z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease-in-out; }
     .envelope-wrapper-simple { position: relative; width: 90vw; max-width: 500px; aspect-ratio: 1.5 / 1; }
     .envelope-image { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15)); transition: transform 1s ease; }
-    .envelope-seal-simple { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20%; max-width: 80px; cursor: pointer; transition: transform 0.4s ease, filter 0.4s ease; }
+    .envelope-seal-simple {
+        position: absolute;
+        top: 50%; /* Centrado vertical */
+        left: 50%; /* Centrado horizontal */
+        transform: translate(-50%, -50%); /* Ajuste fino para centrar perfectamente */
+        width: 20%; /* Tamaño relativo */
+        max-width: 80px; /* Tamaño máximo */
+        cursor: pointer;
+        transition: transform 0.4s ease, filter 0.4s ease;
+        z-index: 20; /* Asegura que esté encima de la imagen del sobre */
+    }
     .envelope-seal-simple:hover { transform: translate(-50%, -50%) scale(1.15); filter: brightness(1.2); }
     .envelope-seal-simple:active { transform: translate(-50%, -50%) scale(0.95); filter: brightness(0.9); }
     #rsvpModal, #thankYouModal { z-index: 60; }
@@ -120,12 +130,12 @@
             por eso te invitamos a que nos acompañes a nuestra boda</p> 
             <nav class="flex justify-center items-center mt-10 space-x-2 md:space-x-4"> 
                 <a href="#mapa-section" class="uppercase bg-[#C6A9A9] text-white py-2 px-4 rounded-full shadow-md transition-transform transform hover:scale-105">Ubicación</a>
-                <button id="openRsvpModal" class="uppercase bg-[#C6A9A9] text-white py-4 px-8 text-lg font-bold rounded-full shadow-lg transition-transform transform hover:scale-105">Confirma tu asistencia</button>
+                <button id="openRsvpModal" class="uppercase bg-[#C6A9A9] text-white py-4 px-8 text-lg font-bold rounded-full shadow-lg transition-transform transform hover:scale-100">Confirma tu asistencia</button>
                 <a href="#etiqueta-section" class="uppercase bg-[#C6A9A9] text-white py-2 px-4 rounded-full shadow-md transition-transform transform hover:scale-105">Etiqueta</a>
             </nav>
         </main>
         <div id="countdown-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><h2 class="font-script text-5xl text-[#8C6B6B] mb-8">El Gran Día Se Acerca...</h2><div id="countdown" class="flex justify-center space-x-3 md:space-x-6"><div class="countdown-item flex flex-col items-center"><span id="days" class="countdown-number">0</span><span class="countdown-label">Días</span></div><div class="countdown-item flex flex-col items-center"><span id="hours" class="countdown-number">0</span><span class="countdown-label">Horas</span></div><div class="countdown-item flex flex-col items-center"><span id="minutes" class="countdown-number">0</span><span class="countdown-label">Minutos</span></div><div class="countdown-item flex flex-col items-center"><span id="seconds" class="countdown-number">0</span><span class="countdown-label">Segundos</span></div></div></div></div>
-        <div id="itinerary-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-16">Itinerario</h2><div class="space-y-12 px-4 md:px-6"><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">1:00 pm</p><p class="text-2xl font-bold text-gray-800">Discurso</p><p class="text-lg text-gray-700">Salón del Reino de los Testigos de Jehová</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-glass-cheers fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">1:30 pm</p><p class="text-2xl font-bold text-gray-800">Recepción</p><p class="text-lg text-gray-700">Salón "El Jardín"</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-utensils fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">2:00 pm</p><p class="text-2xl font-bold text-gray-800">Cena</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-moon fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">10:00 pm</p><p class="text-2xl font-bold text-gray-800">Fin de la Celebración</p></div></div></div></div></div>
+        <div id="itinerary-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-16">Itinerario</h2><div class="space-y-12 px-4 md:px-6"><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">3:00 pm</p><p class="text-2xl font-bold text-gray-800">Discurso</p><p class="text-lg text-gray-700">Salón del Reino de los Testigos de Jehová</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-glass-cheers fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">3:30 pm</p><p class="text-2xl font-bold text-gray-800">Recepción</p><p class="text-lg text-gray-700">Salón "El Jardín"</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-music fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">5:00 pm</p><p class="text-2xl font-bold text-gray-800">Baile</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-moon fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">10:00 pm</p><p class="text-2xl font-bold text-gray-800">Fin de la Celebración</p></div></div></div></div></div>
         <div id="etiqueta-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-16">Detalles Adicionales</h2><div class="space-y-12 px-4 md:px-6"><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-user-tie fa-3x"></i></div><div class="text-left"><p class="text-2xl font-bold text-gray-800">Código de Vestimenta</p><p class="text-lg text-gray-700">Agradecemos su presencia con atuendo **formal**.</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-smoking-ban fa-3x"></i></div><div class="text-left"><p class="text-2xl font-bold text-gray-800">Espacio Libre de Humo</p><p class="text-lg text-gray-700">Para la comodidad de todos, el evento es **libre de humo**.</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-parking fa-3x"></i></div><div class="text-left"><p class="text-2xl font-bold text-gray-800">Estacionamiento</p><p class="text-lg text-gray-700">Contamos con **estacionamiento gratuito** dentro del establecimiento.</p></div></div></div></div></div>
         <div id="mapa-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><p class="text-lg font-bold">Salón "El Jardín"</p><p class="text-md text-gray-600">Prol. José Ma. Morelos 1, Centro, 56530 Ixtapaluca, Méx., México</p><p class="text-md font-bold mt-2">3:00 pm</p><div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#dcd0c0] mt-4"><iframe 
     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.155394961366!2d-98.87525292520483!3d19.37501384514278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f17c3c0d8c9b%3A0x5b55b5e75bba1d12!2sProl.%20Jos%C3%A9%20Ma.%20Morelos%201%2C%20Centro%2C%2056530%20Ixtapaluca%2C%20M%C3%A9x.%2C%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1730053554382!5m2!1ses-419!2smx" 
@@ -253,48 +263,72 @@ rsvpForm.addEventListener("submit", async e => {
     }
 });
 
-// --- Generar pase PDF con QR ---
-function generateAndDownloadTicket(guestName, guestCount) {
-    const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 600] });
-    doc.addImage("nuevo.jpeg", "JPEG", 0, 0, 600, 600);
+// --- Generar pase PDF con QR (Elementos en las esquinas) ---
+        function generateAndDownloadTicket(guestName, guestCount) {
+            // PDF sigue siendo cuadrado 600x600, formato portrait
+            const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 600] }); 
+            doc.addImage("nuevo.jpeg", "JPEG", 0, 0, 600, 600); // Fondo
 
-    const qrUrl = "https://dayandelagadr-svg.github.io/invitacion.github.io/";
-    const qr = qrcode(0, 'L');
-    qr.addData(qrUrl);
-    qr.make();
-    const qrCodeImage = qr.createDataURL(4);
+            const qrUrl = "https://dayandelagadr-svg.github.io/invitacion.github.io/";
+            const qr = qrcode(0, 'L'); qr.addData(qrUrl); qr.make();
+            const qrCodeImage = qr.createDataURL(4);
 
-    doc.setFont("Helvetica", "bold");
-    doc.setFontSize(28);
-    doc.setTextColor("#8C6B6B");
-    doc.text("PASE DE ACCESO", 300, 100, { align: "center" });
+            // --- Textos en la Esquina Superior Izquierda ---
+            doc.setFont("Helvetica", "bold"); 
+            doc.setFontSize(20); 
+            doc.setTextColor(50, 50, 50); 
+            doc.text("Pase de Acceso", 30, 40); // (x=30, y=40)
 
-    doc.setFont("times", "italic");
-    doc.setFontSize(24);
-    doc.setTextColor("#5A4A4A");
-    doc.text(guestName, 300, 160, { align: "center" });
+            doc.setFontSize(16);
+            doc.setFont("Helvetica", "normal");
+            doc.text(guestName, 30, 70); // Debajo del título
+            doc.text(`Válido para ${guestCount} persona(s)`, 30, 90); // Debajo del nombre
 
-    doc.setFont("Helvetica", "normal");
-    doc.setFontSize(18);
-    doc.setTextColor("#333");
-    doc.text(`Válido para ${guestCount} persona(s)`, 300, 190, { align: "center" });
+            doc.setFontSize(12); // Más pequeño para detalles
+            doc.text("Boda D&P | 15 Marzo 2026", 30, 120); // Info adicional
 
-    doc.setFontSize(16);
-    doc.setTextColor("#555");
-    doc.text("Boda de Daniel & Pamela", 300, 230, { align: "center" });
-    doc.text("15 de marzo de 2026 - Salón El Jardín", 300, 250, { align: "center" });
+            // --- QR en la Esquina Inferior Derecha ---
+            const qrSize = 100; // Tamaño del QR
+            const qrMargin = 30; // Margen desde los bordes
+            const qrX = 600 - qrSize - qrMargin; // Posición X (ancho total - tamaño - margen)
+            const qrY = 600 - qrSize - qrMargin; // Posición Y (alto total - tamaño - margen)
+            doc.addImage(qrCodeImage, "PNG", qrX, qrY, qrSize, qrSize); 
 
-    doc.addImage(qrCodeImage, "PNG", 230, 320, 140, 140);
-    doc.setFontSize(12);
-    doc.setTextColor("#777");
-    doc.text("Escanea el código para ver la invitación digital", 300, 480, { align: "center" });
+            // Texto debajo del QR (opcional, ajustado a la esquina)
+            doc.setFontSize(9); 
+            doc.setTextColor(100, 100, 100);
+            // Centrado horizontalmente respecto al QR
+            doc.text("Ver invitación digital", qrX + qrSize / 2, qrY + qrSize + 15, { align: "center" }); 
 
-    doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
-}
+            doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
+        } // --- Cuenta Regresiva (Restaurada) ---
+const countdownDate = new Date("March 15, 2026 13:00:00").getTime();
+const countdownFunction = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = countdownDate - now;
+    if (distance < 0) {
+        clearInterval(countdownFunction);
+        const countdownEl = document.getElementById("countdown");
+        if(countdownEl) countdownEl.innerHTML = "<div class='text-center w-full'><p class='font-script text-4xl text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>";
+        return;
+    }
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    if (daysEl && hoursEl && minutesEl && secondsEl) {
+        daysEl.innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+        hoursEl.innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        minutesEl.innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        secondsEl.innerText = Math.floor((distance % (1000 * 60)) / 1000);
+    }
+}, 1000);
 </script>
 
 </body>
 </html>
+
 
 
 
