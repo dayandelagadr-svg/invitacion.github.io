@@ -100,6 +100,7 @@
             <img src="sello.png" class="envelope-seal-simple" id="seal" alt="Sello de apertura">
         </div>
     </div>
+    
     <div id="youtube-player"></div>
     <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="top-left">
     <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="top-right">
@@ -132,22 +133,33 @@
                 <a href="#etiqueta-section" class="uppercase bg-[#C6A9A9] text-white py-2 px-4 rounded-full shadow-md transition-transform transform hover:scale-105">Etiqueta</a>
             </nav>
         </main>
-        <div id="countdown-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><h2 class="font-script text-5xl text-[#8C6B6B] mb-8">El Gran Día Se Acerca...</h2><div id="countdown" class="flex justify-center space-x-3 md:space-x-6"><div class="countdown-item flex flex-col items-center"><span id="days" class="countdown-number">0</span><span class="countdown-label">Días</span></div><div class="countdown-item flex flex-col items-center"><span id="hours" class="countdown-number">0</span><span class="countdown-label">Horas</span></div><div class="countdown-item flex flex-col items-center"><span id="minutes" class="countdown-number">0</span><span class="countdown-label">Minutos</span></div><div class="countdown-item flex flex-col items-center"><span id="seconds" class="countdown-number">0</span><span class="countdown-label">Segundos</span></div></div></div></div>
         
+        <div id="countdown-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><h2 class="font-script text-5xl text-[#8C6B6B] mb-8">El Gran Día Se Acerca...</h2><div id="countdown" class="flex justify-center space-x-3 md:space-x-6"><div class="countdown-item flex flex-col items-center"><span id="days" class="countdown-number">0</span><span class="countdown-label">Días</span></div><div class="countdown-item flex flex-col items-center"><span id="hours" class="countdown-number">0</span><span class="countdown-label">Horas</span></div><div class="countdown-item flex flex-col items-center"><span id="minutes" class="countdown-number">0</span><span class="countdown-label">Minutos</span></div><div class="countdown-item flex flex-col items-center"><span id="seconds" class="countdown-number">0</span><span class="countdown-label">Segundos</span></div></div></div></div>
+
+        <div id="discurso-mapa-section" class="w-full max-w-3xl mt-8 text-center">
+            <div class="content-box">
+                <h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-8">Ubicación del Discurso</h2>
+                <p class="text-lg font-bold">Salón del Reino de los Testigos de Jehová</p>
+                <p class="text-md text-gray-600">Avenida Acozac #19, Esquina con Prolongación José Ma. Morelos, Unidad Habitacional Ixtapaluca Centro, 56586 Ixtapaluca, Méx.</p>
+                <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#dcd0c0] mt-4">
+                    <iframe
+                        src="http://googleusercontent.com/maps/google.com/6"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
         <div id="itinerary-section" class="w-full max-w-3xl mt-8 text-center">
-             <div id="discurso-mapa-section" class="w-full max-w-3xl mt-8 text-center">
-                 <div class="content-box">
-                     <h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-8">Ubicación del Discurso</h2>
-                     <p class="text-lg font-bold">Salón del Reino de los Testigos de Jehová</p>
-                     <p class="text-md text-gray-600">Avenida Acozac #19, Esquina con Prolongación José Ma. Morelos, Unidad Habitacional Ixtapaluca Centro, 56586 Ixtapaluca, Méx.</p>
-                     <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#dcd0c0] mt-4">
-                         <iframe src="http://googleusercontent.com/maps/google.com/6" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                     </div>
-                 </div>
-             </div>
-             <div class="content-box"><h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-16">Itinerario</h2><div class="space-y-12 px-4 md:px-6"><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">3:00 pm</p><p class="text-2xl font-bold text-gray-800">Discurso</p><p class="text-lg text-gray-700">Salón del Reino de los Testigos de Jehová</p><p class="text-md text-gray-600">Av. Acozac #19, Ixtapaluca Centro, Méx.</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-glass-cheers fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">3:30 pm</p><p class="text-2xl font-bold text-gray-800">Recepción</p><p class="text-lg text-gray-700">Salón "El Jardín"</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-music fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">5:00 pm</p><p class="text-2xl font-bold text-gray-800">Baile</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-moon fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">10:00 pm</p><p class="text-2xl font-bold text-gray-800">Fin de la Celebración</p></div></div></div></div>
-         </div>
+            <div class="content-box"><h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-16">Itinerario</h2><div class="space-y-12 px-4 md:px-6"><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">3:00 pm</p><p class="text-2xl font-bold text-gray-800">Discurso</p><p class="text-lg text-gray-700">Salón del Reino de los Testigos de Jehová</p><p class="text-md text-gray-600">Av. Acozac #19, Ixtapaluca Centro, Méx.</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-glass-cheers fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">3:30 pm</p><p class="text-2xl font-bold text-gray-800">Recepción</p><p class="text-lg text-gray-700">Salón "El Jardín"</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-music fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">5:00 pm</p><p class="text-2xl font-bold text-gray-800">Baile</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-moon fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">10:00 pm</p><p class="text-2xl font-bold text-gray-800">Fin de la Celebración</p></div></div></div></div>
+        </div>
+
         <div id="etiqueta-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-16">Detalles Adicionales</h2><div class="space-y-12 px-4 md:px-6"><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-user-tie fa-3x"></i></div><div class="text-left"><p class="text-2xl font-bold text-gray-800">Código de Vestimenta</p><p class="text-lg text-gray-700">Agradecemos su presencia con atuendo **formal**.</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-smoking-ban fa-3x"></i></div><div class="text-left"><p class="text-2xl font-bold text-gray-800">Espacio Libre de Humo</p><p class="text-lg text-gray-700">Para la comodidad de todos, el evento es **libre de humo**.</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-parking fa-3x"></i></div><div class="text-left"><p class="text-2xl font-bold text-gray-800">Estacionamiento</p><p class="text-lg text-gray-700">Contamos con **estacionamiento gratuito** dentro del establecimiento.</p></div></div></div></div></div>
+        
         <div id="recepcion-mapa-section" class="w-full max-w-3xl mt-8 text-center">
              <div class="content-box">
                  <h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-8">Ubicación de la Recepción</h2>
@@ -156,6 +168,7 @@
          </div>
         <footer class="mt-8 text-xs text-gray-500"><p>© 2025 Daniel & Pamela</p></footer>
     </div>
+    
     <div id="rsvpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center relative"><button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button><h3 class="font-script text-4xl text-[#8C6B6B] mb-4">Confirmar Asistencia</h3><p class="mb-6 text-gray-600">Por favor, completa los siguientes datos para confirmar.</p><form id="rsvpForm" class="space-y-4"><input type="text" id="guestName" placeholder="Nombre completo del invitado principal" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required><input type="number" id="guestCount" placeholder="Número total de asistentes (incluyéndote)" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" min="1" required><button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">Confirmar y Generar Pase</button></form></div></div>
     <div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center"><h3 class="font-script text-4xl text-[#8C6B6B] mb-4">¡Gracias!</h3><p class="mb-6 text-gray-600">Tu asistencia ha sido confirmada. Tu pase personal se está descargando. ¡Nos vemos en la boda!</p><button id="closeThankYouModal" class="bg-[#C6A9A9] text-white font-bold py-2 px-4 rounded-lg">Cerrar</button></div></div>
 
@@ -179,9 +192,8 @@
 
         // Elementos del sobre e invitación
         const envelopeContainer = document.getElementById('envelope-container');
-        // ===== CORRECCIÓN AQUÍ =====
-        const envelopeWrapper = document.querySelector('.envelope-wrapper-simple'); // Buscar por la clase correcta
-        const seal = document.getElementById('seal'); // Este ID debe estar en tu <img> del sello
+        const envelopeWrapper = document.querySelector('.envelope-wrapper-simple');
+        const seal = document.getElementById('seal');
 
         let player;
         let firstClickDone = false;
@@ -198,7 +210,7 @@
         function onPlayerReady(event) { isPlayerReady = true; }
 
         // --- Abrir invitación ---
-        if (seal) { // Verifica si el sello existe
+        if (seal) {
             seal.addEventListener('click', () => {
                 if (firstClickDone) return;
                 firstClickDone = true;
@@ -214,12 +226,10 @@
                 }, 400);
             });
         } else {
-             console.error("No se encontró el elemento con id='seal'. La invitación no se abrirá con clic.");
-             // Fallback: Muestra la invitación directamente si no hay sello
+             console.error("No se encontró el elemento con id='seal'.");
              document.body.classList.add('invitation-visible');
              if (envelopeContainer) envelopeContainer.style.display = 'none';
         }
-
 
         // --- Modal de confirmación ---
         const rsvpModal = document.getElementById("rsvpModal"), thankYouModal = document.getElementById("thankYouModal"), openRsvpModalBtn = document.getElementById("openRsvpModal"), closeRsvpModalBtn = document.getElementById("closeRsvpModal"), closeThankYouModalBtn = document.getElementById("closeThankYouModal"), rsvpForm = document.getElementById("rsvpForm"), submitRsvpBtn = document.getElementById("submitRsvpBtn");
@@ -283,3 +293,7 @@
     </script>
 </body>
 </html>
+
+
+
+
