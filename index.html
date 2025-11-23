@@ -27,97 +27,53 @@
     #bottom-right { bottom: 10px; right: 10px; transform: scale(-1,-1); }
     body.invitation-visible .corner-flower { opacity: 1; }
 
-    /* --- CAMBIO PRINCIPAL: CONTENEDOR ALARGADO --- */
-    .main-container { 
-        position: relative; 
-        z-index: 10; 
-        width: 100%; 
-        /* Ancho máximo mucho mayor para efecto "Landing Page" alargada */
-        max-width: 1200px; 
-        text-align: center; 
-        opacity: 0; 
-        transition: opacity 1s ease-in-out 1.5s; 
-        pointer-events: none; 
-        padding: 0 1rem; /* Pequeño padding lateral en móvil */
-    }
-    
-    @media (max-width: 767px) { 
-        body { padding-top: 4rem; padding-bottom: 4rem; } 
-        /* En móvil, permitimos que ocupe casi todo el ancho */
-        .main-container { padding: 0 0.5rem; }
-    }
-    
+    /* Contenedor Alargado */
+    .main-container { position: relative; z-index: 10; width: 100%; max-width: 1200px; text-align: center; opacity: 0; transition: opacity 1s ease-in-out 1.5s; pointer-events: none; padding: 0 1rem; }
+    @media (max-width: 767px) { body { padding-top: 4rem; padding-bottom: 4rem; } .main-container { padding: 0 0.5rem; } }
     body.invitation-visible .main-container { opacity: 1; pointer-events: auto; }
     body.invitation-visible { overflow-y: auto; }
 
-    /* --- ESTILO DEL CAJÓN (CONTENT BOX) --- */
+    /* Cajón Principal (Content Box) */
     main.content-box {
         border: 1px solid #dcd0c0;
-        /* Padding ajustado para que se vea espacioso pero horizontal */
         padding: 3rem 1rem; 
         background-color: #FBF9F7;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, .05); /* Sombra más suave y elegante */
+        box-shadow: 0 10px 25px rgba(0, 0, 0, .05);
         position: relative;
         z-index: 10;
         overflow: hidden;
-        border-radius: 20px; /* Bordes redondeados modernos */
-        min-height: 60vh; /* Altura mínima considerable */
+        border-radius: 20px;
+        min-height: 60vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
-    @media (min-width: 768px) {
-        main.content-box {
-            padding: 4rem 4rem;
-            min-height: 70vh; /* Más alto en desktop */
-        }
-    }
+    @media (min-width: 768px) { main.content-box { padding: 4rem 4rem; min-height: 70vh; } }
 
-    /* Imagen de fondo cubriendo todo (Estilo Cover) */
+    /* Imagen de fondo */
     .hero-image-overlay {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Cubre todo el rectángulo */
+        top: 0; left: 0; width: 100%; height: 100%;
+        object-fit: cover;
         opacity: 0.25;
         z-index: 0;
         pointer-events: none;
-        filter: brightness(0.9) blur(0px); /* Quitamos un poco de blur para que se vea mejor */
+        filter: brightness(0.9);
     }
 
-    /* Resto de estilos */
     .font-script { font-family: 'Parisienne', cursive; }
     
-    /* --- ESTILOS DE BOTONES MEJORADOS PARA MÓVIL --- */
-    nav {
-        display: flex;
-        flex-wrap: wrap; /* Permite que los botones bajen si no caben */
-        justify-content: center;
-        gap: 10px; /* Espacio entre botones */
-        width: 100%;
-    }
+    /* Botones Responsivos */
+    nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%; }
     nav a, nav button { 
-        letter-spacing: .1em; 
-        font-size: .7rem; /* Letra un poco más pequeña en móvil para que quepa */
-        color: white; 
-        margin: 0; /* Quitamos margen lateral porque usamos gap */
-        text-decoration: none; 
-        transition: transform .3s, background-color .3s;
-        white-space: nowrap; /* Evita que el texto se parta en dos líneas dentro del botón */
+        letter-spacing: .1em; font-size: .7rem; color: white; margin: 0; 
+        text-decoration: none; transition: transform .3s, background-color .3s; white-space: nowrap; 
     }
-    @media (min-width: 768px) { 
-        nav { gap: 20px; }
-        nav a, nav button { 
-            font-size: .9rem; /* Letra normal en desktop */
-            padding: 1rem 2rem; 
-        } 
-    }
-    
+    @media (min-width: 768px) { nav { gap: 20px; } nav a, nav button { font-size: .9rem; padding: 1rem 2rem; } }
     nav a:hover, nav button:hover { transform: scale(1.05); }
     
+    /* Countdown */
     .countdown-item { background-color: #F8EDEB; border: 1px solid #dcd0c0; border-radius: 8px; padding: .8rem .4rem; min-width: 65px; box-shadow: 0 2px 4px rgba(0, 0, 0, .03); }
     @media (min-width: 768px) { .countdown-item { min-width: 100px; padding: 1.5rem 1rem; } }
     .countdown-number { font-family: 'Parisienne', cursive; font-size: 2rem; color: #8C6B6B; line-height: 1; margin-bottom: .25rem; }
@@ -125,26 +81,49 @@
     .countdown-label { font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: #5d5d5d; font-weight: 700; }
     @media (min-width: 768px) { .countdown-label { font-size: .9rem; } }
     
-    /* Sobre y otros componentes */
+    /* Sobre */
     #envelope-container { position: fixed; inset: 0; background-color: #FBF9F7; z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease-in-out; }
     .envelope-wrapper-simple { position: relative; width: 90vw; max-width: 500px; aspect-ratio: 1.5 / 1; }
     .envelope-image { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15)); transition: transform 1s ease; }
-    .envelope-seal-simple { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20%; max-width: 80px; cursor: pointer; transition: transform 0.4s ease, filter 0.4s ease; z-index: 20; }
+    .envelope-seal-simple {
+        position: absolute;
+        top: 50%; left: 50%; transform: translate(-50%, -50%);
+        width: 20%; max-width: 80px; cursor: pointer;
+        transition: transform 0.4s ease, filter 0.4s ease;
+        z-index: 20;
+    }
     .envelope-seal-simple:hover { transform: translate(-50%, -50%) scale(1.15); filter: brightness(1.2); }
     .envelope-seal-simple:active { transform: translate(-50%, -50%) scale(0.95); filter: brightness(0.9); }
     
+    /* BOTÓN DE WHATSAPP */
+    .whatsapp-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25D366;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 35px;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+        z-index: 90; /* Debajo del sobre pero sobre el contenido */
+        transition: transform 0.3s ease;
+        text-decoration: none;
+    }
+    .whatsapp-btn:hover {
+        transform: scale(1.1);
+        background-color: #20BA5A;
+    }
+
+    /* Cajas secundarias */
+    .secondary-box { background-color: #FBF9F7; border: 1px solid #dcd0c0; padding: 2rem; border-radius: 15px; margin-top: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+    
     #rsvpModal, #thankYouModal { z-index: 60; }
     #youtube-player { position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; }
-    
-    /* Cajas de secciones secundarias (Itinerario, etc.) */
-    .secondary-box {
-        background-color: #FBF9F7;
-        border: 1px solid #dcd0c0;
-        padding: 2rem;
-        border-radius: 15px;
-        margin-top: 2rem;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-    }
 </style>
 </head>
 
@@ -157,7 +136,11 @@
     </div>
 
     <div id="youtube-player"></div>
-    
+
+    <a href="https://wa.me/5215515747387?text=Hola,%20tengo%20una%20duda%20sobre%20la%20boda..." class="whatsapp-btn" target="_blank" title="¿Dudas? Escríbenos">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="top-left">
     <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="top-right">
     <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="bottom-left">
@@ -232,123 +215,65 @@
     <div id="rsvpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center relative"><button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button><h3 class="font-script text-4xl text-[#8C6B6B] mb-4">Confirmar Asistencia</h3><p class="mb-6 text-gray-600">Por favor, completa los siguientes datos para confirmar.</p><form id="rsvpForm" class="space-y-4"><input type="text" id="guestName" placeholder="Nombre completo del invitado principal" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required><input type="number" id="guestCount" placeholder="Número total de asistentes (incluyéndote)" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" min="1" required><button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">Confirmar y Generar Pase</button></form></div></div>
     <div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center"><h3 class="font-script text-4xl text-[#8C6B6B] mb-4">¡Gracias!</h3><p class="mb-6 text-gray-600">Tu asistencia ha sido confirmada. Tu pase personal se está descargando. ¡Nos vemos en la boda!</p><button id="closeThankYouModal" class="bg-[#C6A9A9] text-white font-bold py-2 px-4 rounded-lg">Cerrar</button></div></div>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
-
-        // Configuración de Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyCEFg3H7spJXUBvjNRc-QRocIHk3Hd6dho",
-            authDomain: "lista-de-asistencia-8cfc5.firebaseapp.com",
-            projectId: "lista-de-asistencia-8cfc5",
-            storageBucket: "lista-de-asistencia-8cfc5.firebasestorage.app",
-            messagingSenderId: "276452664903",
-            appId: "1:276452664903:web:8b060bdeef2e70852bf362"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // Elementos del sobre e invitación
+    <script>
         const envelopeContainer = document.getElementById('envelope-container');
         const envelopeWrapper = document.querySelector('.envelope-wrapper-simple');
         const seal = document.getElementById('seal');
-
+        const rsvpModal = document.getElementById("rsvpModal");
+        const thankYouModal = document.getElementById("thankYouModal");
+        const openRsvpModalBtn = document.getElementById("openRsvpModal");
+        const closeRsvpModalBtn = document.getElementById("closeRsvpModal");
+        const closeThankYouModalBtn = document.getElementById("closeThankYouModal");
+        
         let player;
         let firstClickDone = false;
         let isPlayerReady = false;
 
-        // --- Configurar música ---
-        window.onYouTubeIframeAPIReady = function () {
+        function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
-                height: '1', width: '1', videoId: 'kgUVq-ICt_Y',
+                height: '1', width: '1', 
+                videoId: 'kgUVq-ICt_Y', 
                 playerVars: { 'playsinline': 1, 'controls': 0, 'showinfo': 0, 'rel': 0 },
                 events: { 'onReady': onPlayerReady }
             });
-        };
-        function onPlayerReady(event) { isPlayerReady = true; }
+        }
 
-        // --- Abrir invitación ---
+        function onPlayerReady(event) {
+            isPlayerReady = true;
+        }
+
         if (seal) {
             seal.addEventListener('click', () => {
                 if (firstClickDone) return;
                 firstClickDone = true;
-                try { if (isPlayerReady && player && typeof player.playVideo === 'function') { player.playVideo(); } }
-                catch (e) { console.warn("Video no disponible, continuando sin música."); }
+
+                try {
+                    if (isPlayerReady && player && typeof player.playVideo === 'function') {
+                        player.playVideo();
+                    } else {
+                         setTimeout(() => { if(player && player.playVideo) player.playVideo(); }, 1000);
+                    }
+                } catch (e) { console.warn("Video no disponible."); }
 
                 if(envelopeWrapper) envelopeWrapper.style.transform = 'scale(1.05)';
-                envelopeContainer.style.transition = 'opacity 1.2s ease-in-out';
+                if(envelopeContainer) envelopeContainer.style.transition = 'opacity 1.2s ease-in-out';
+                
                 setTimeout(() => {
-                    envelopeContainer.style.opacity = '0';
+                    if(envelopeContainer) envelopeContainer.style.opacity = '0';
                     document.body.classList.add('invitation-visible');
-                    setTimeout(() => envelopeContainer.style.display = 'none', 1200);
+                    setTimeout(() => {
+                        if(envelopeContainer) envelopeContainer.style.display = 'none';
+                    }, 1200);
                 }, 400);
             });
-        } else {
-             document.body.classList.add('invitation-visible');
-             if (envelopeContainer) envelopeContainer.style.display = 'none';
         }
 
-        // --- Modal de confirmación ---
-        const rsvpModal = document.getElementById("rsvpModal"), thankYouModal = document.getElementById("thankYouModal"), openRsvpModalBtn = document.getElementById("openRsvpModal"), closeRsvpModalBtn = document.getElementById("closeRsvpModal"), closeThankYouModalBtn = document.getElementById("closeThankYouModal"), rsvpForm = document.getElementById("rsvpForm"), submitRsvpBtn = document.getElementById("submitRsvpBtn");
         const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
         const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
+        
         if (openRsvpModalBtn) openRsvpModalBtn.addEventListener("click", () => openModal(rsvpModal));
         if (closeRsvpModalBtn) closeRsvpModalBtn.addEventListener("click", () => closeModal(rsvpModal));
         if (closeThankYouModalBtn) closeThankYouModalBtn.addEventListener("click", () => closeModal(thankYouModal));
 
-        // --- Confirmación y pase ---
-        if (rsvpForm) {
-            rsvpForm.addEventListener("submit", async e => {
-                e.preventDefault(); submitRsvpBtn.disabled = true; submitRsvpBtn.innerText = "Confirmando...";
-                const guestName = document.getElementById("guestName").value, guestCount = document.getElementById("guestCount").value;
-                try {
-                    await addDoc(collection(db, "invitados_confirmados"), { nombre: guestName, asistentes: Number(guestCount), fecha_confirmacion: serverTimestamp() });
-                    generateAndDownloadTicket(guestName, guestCount); closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
-                } catch (err) { console.error("Error al guardar la confirmación:", err); alert("Hubo un error al confirmar. Por favor, inténtalo de nuevo.");
-                } finally { submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Confirmar y Generar Pase"; }
-            });
-        }
-
-        // --- Generar pase PDF con QR ---
-        function generateAndDownloadTicket(guestName, guestCount) {
-            const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 600] });
-            doc.addImage("nuevo.jpeg", "JPEG", 0, 0, 600, 600);
-            const qrUrl = "https://dayandelagadr-svg.github.io/invitacion.github.io/";
-            const qr = qrcode(0, 'L'); qr.addData(qrUrl); qr.make(); const qrCodeImage = qr.createDataURL(4);
-            doc.setFont("Helvetica", "bold"); doc.setFontSize(28); doc.setTextColor("#8C6B6B"); doc.text("PASE DE ACCESO", 300, 100, { align: "center" });
-            doc.setFont("times", "italic"); doc.setFontSize(24); doc.setTextColor("#5A4A4A"); doc.text(guestName, 300, 160, { align: "center" });
-            doc.setFont("Helvetica", "normal"); doc.setFontSize(18); doc.setTextColor("#333"); doc.text(`Válido para ${guestCount} persona(s)`, 300, 190, { align: "center" });
-            doc.setFontSize(16); doc.setTextColor("#555"); doc.text("Boda de Daniel & Pamela", 300, 230, { align: "center" }); doc.text("15 de marzo de 2026 - Salón El Jardín", 300, 250, { align: "center" });
-            doc.addImage(qrCodeImage, "PNG", 230, 320, 140, 140);
-            doc.setFontSize(12); doc.setTextColor("#777"); doc.text("Escanea el código para ver la invitación digital", 300, 480, { align: "center" });
-            doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
-        }
-        
-        // --- Cuenta Regresiva ---
         const countdownDate = new Date("March 15, 2026 13:00:00").getTime();
-        const countdownFunction = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = countdownDate - now;
-            if (distance < 0) {
-                clearInterval(countdownFunction);
-                const countdownEl = document.getElementById("countdown");
-                if(countdownEl) countdownEl.innerHTML = "<div class='text-center w-full'><p class='font-script text-4xl text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>";
-                return;
-            }
-            const daysEl = document.getElementById("days");
-            const hoursEl = document.getElementById("hours");
-            const minutesEl = document.getElementById("minutes");
-            const secondsEl = document.getElementById("seconds");
-
-            if (daysEl && hoursEl && minutesEl && secondsEl) {
-                daysEl.innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-                hoursEl.innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                minutesEl.innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                secondsEl.innerText = Math.floor((distance % (1000 * 60)) / 1000);
-            }
-        }, 1000);
-    </script>
-</body>
-</html>
+        const countdown
