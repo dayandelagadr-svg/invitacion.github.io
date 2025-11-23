@@ -19,13 +19,10 @@
     /* Estilos generales */
     body { font-family: 'Cormorant Garamond', serif; background-color: #F7EBEB; color: #5d5d5d; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 2rem; padding-bottom: 2rem; padding-left: 0; padding-right: 0; position: relative; overflow-x: hidden; overflow-y: hidden; }
     
-    .corner-flower { position: fixed; width: 120px; height: auto; z-index: 5; opacity: 0; transition: opacity 1s ease-in-out; }
-    @media (min-width: 768px) { .corner-flower { width: 180px; } }
-    #top-left { top: 10px; left: 10px; }
-    #top-right { top: 10px; right: 10px; transform: scaleX(-1); }
-    #bottom-left { bottom: 10px; left: 10px; transform: scaleY(-1); }
-    #bottom-right { bottom: 10px; right: 10px; transform: scale(-1,-1); }
-    body.invitation-visible .corner-flower { opacity: 1; }
+    /* PÉTALOS */
+    #petals-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; overflow: hidden; }
+    .petal { position: absolute; top: -10%; background-color: #FFC0CB; opacity: 0.8; border-radius: 10% 70%; animation: fall linear infinite; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+    @keyframes fall { 0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; } }
 
     /* Contenedor Alargado */
     .main-container { position: relative; z-index: 10; width: 100%; max-width: 1200px; text-align: center; opacity: 0; transition: opacity 1s ease-in-out 1.5s; pointer-events: none; padding: 0 1rem; }
@@ -87,11 +84,6 @@
     <a href="https://wa.me/5215515747387?text=Hola,%20tengo%20una%20duda%20sobre%20la%20boda..." class="whatsapp-btn" target="_blank" title="¿Dudas? Escríbenos">
         <i class="fab fa-whatsapp"></i>
     </a>
-
-    <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="top-left">
-    <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="top-right">
-    <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="bottom-left">
-    <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="bottom-right">
 
     <div class="main-container">
         <header></header>
@@ -164,12 +156,10 @@
             <button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button>
             <h3 class="font-script text-4xl text-[#8C6B6B] mb-2">Confirmar Asistencia</h3>
             <p class="mb-6 text-gray-600 text-sm">Ingresa los datos tal como aparecen en tu invitación.</p>
-            
             <form id="rsvpForm" class="space-y-5">
                 <div class="text-left">
                     <label class="block text-gray-700 text-sm font-bold mb-1" for="guestName">Familia o Nombre Completo</label>
-                    <input type="text" id="guestName" placeholder="Ej. Familia Pérez López o Juan Soto" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required>
-                    <p class="text-xs text-gray-400 mt-1">Escribe los apellidos (si es familia) o tu nombre completo.</p>
+                    <input type="text" id="guestName" placeholder="Ej. Familia Pérez López" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required>
                 </div>
                 <button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">
                     Buscar mi Invitación
@@ -205,6 +195,24 @@
         const closeRsvpModalBtn = document.getElementById("closeRsvpModal");
         const closeThankYouModalBtn = document.getElementById("closeThankYouModal");
         
+        // PÉTALOS
+        function createPetals() {
+            const container = document.createElement('div');
+            container.id = 'petals-container';
+            document.body.appendChild(container);
+            for (let i = 0; i < 20; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                const size = Math.random() * 15 + 10; petal.style.width = `${size}px`; petal.style.height = `${size}px`;
+                petal.style.left = `${Math.random() * 100}vw`;
+                petal.style.animationDuration = `${Math.random() * 5 + 5}s`; petal.style.animationDelay = `${Math.random() * 5}s`;
+                const colors = ['#FADadd', '#FFC0CB', '#FFF0F5', '#E6E6FA'];
+                petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                container.appendChild(petal);
+            }
+        }
+
+        // MÚSICA
         let player; let firstClickDone = false; let isPlayerReady = false;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', { height: '1', width: '1', videoId: 'kgUVq-ICt_Y', playerVars: { 'playsinline': 1, 'controls': 0, 'showinfo': 0, 'rel': 0 }, events: { 'onReady': onPlayerReady } });
@@ -217,7 +225,11 @@
                 try { if (isPlayerReady && player && typeof player.playVideo === 'function') { player.playVideo(); } else { setTimeout(() => { if(player && player.playVideo) player.playVideo(); }, 1000); } } catch (e) {}
                 if(envelopeWrapper) envelopeWrapper.style.transform = 'scale(1.05)';
                 envelopeContainer.style.transition = 'opacity 1.2s ease-in-out';
-                setTimeout(() => { envelopeContainer.style.opacity = '0'; document.body.classList.add('invitation-visible'); setTimeout(() => { envelopeContainer.style.display = 'none'; createPetals(); }, 1200); }, 400);
+                setTimeout(() => {
+                    if(envelopeContainer) envelopeContainer.style.opacity = '0';
+                    document.body.classList.add('invitation-visible');
+                    setTimeout(() => { if(envelopeContainer) envelopeContainer.style.display = 'none'; createPetals(); }, 1200);
+                }, 400);
             });
         }
 
@@ -237,22 +249,6 @@
             if (m) m.innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             if (s) s.innerText = Math.floor((distance % (1000 * 60)) / 1000);
         }, 1000);
-
-        function createPetals() {
-            const container = document.createElement('div');
-            container.id = 'petals-container';
-            document.body.appendChild(container);
-            for (let i = 0; i < 20; i++) {
-                const petal = document.createElement('div');
-                petal.classList.add('petal');
-                const size = Math.random() * 15 + 10; petal.style.width = `${size}px`; petal.style.height = `${size}px`;
-                petal.style.left = `${Math.random() * 100}vw`;
-                petal.style.animationDuration = `${Math.random() * 5 + 5}s`; petal.style.animationDelay = `${Math.random() * 5}s`;
-                const colors = ['#FADadd', '#FFC0CB', '#FFF0F5', '#E6E6FA'];
-                petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                container.appendChild(petal);
-            }
-        }
     </script>
 
     <script src="https://www.youtube.com/iframe_api"></script>
@@ -301,7 +297,7 @@
             });
         }
 
-        // --- CONFIRMACIÓN SEGURA ---
+        // --- CONFIRMACIÓN SEGURA (Minúsculas) ---
         if (rsvpForm) {
             rsvpForm.addEventListener("submit", async e => {
                 e.preventDefault(); 
@@ -310,11 +306,12 @@
                 const guestNameInput = document.getElementById("guestName").value.trim();
                 
                 try {
+                    // Buscamos "nombre" en minúscula
                     const q = query(collection(db, "lista_invitados"), where("nombre", "==", guestNameInput));
                     const querySnapshot = await getDocs(q);
 
                     if (querySnapshot.empty) {
-                        alert("No encontramos una invitación con ese nombre exacto.");
+                        alert("No encontramos una invitación con ese nombre exacto. Verifica mayúsculas y acentos.");
                         submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación";
                         return;
                     }
@@ -323,12 +320,14 @@
                     const guestData = guestDoc.data();
                     const guestId = guestDoc.id;
                     
+                    // Verificamos "confirmado" en minúscula
                     if (guestData.confirmado === true) {
                         alert(`Hola ${guestData.nombre}, ya habías confirmado tu asistencia.`);
                         submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación";
                         return;
                     }
 
+                    // Obtenemos "boletos" en minúscula
                     const confirmedCount = guestData.boletos || 1;
 
                     await addDoc(collection(db, "invitados_confirmados"), { nombre: guestData.nombre, asistentes: Number(confirmedCount), fecha_confirmacion: serverTimestamp() });
@@ -343,7 +342,6 @@
                     console.error("Error:", err); alert("Hubo un error."); 
                 } finally { 
                     if(submitRsvpBtn) { 
-                         // Si hubo error y no se completó, reactivar botón
                          if (submitRsvpBtn.innerText !== "Buscando invitación...") {
                             submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación"; 
                          }
