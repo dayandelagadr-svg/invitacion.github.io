@@ -317,32 +317,75 @@ END:VCALENDAR`;
                 const guestCount = document.getElementById("guestCount").value;
                 try {
                     await addDoc(collection(db, "invitados_confirmados"), { nombre: guestName, asistentes: Number(guestCount), fecha_confirmacion: serverTimestamp() });
-                    generateAndDownloadTicket(guestName, guestCount); 
-                    closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
-                } catch (err) { console.error("Error:", err); alert("Hubo un error."); } 
-                finally { if(submitRsvpBtn) { submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Confirmar y Generar Pase"; } }
-            });
-        }
-
-        window.generateAndDownloadTicket = function(guestName, guestCount) {
+                    // --- Generar pase PDF con diseño "Tarjeta Elegante" ---
+        function generateAndDownloadTicket(guestName, guestCount) {
+            // 1. Crear PDF Cuadrado (600x600)
             const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 600] });
-            doc.addImage("nuevo.jpeg", "JPEG", 0, 0, 600, 600);
-            const qrUrl = "https://dayandelagadr-svg.github.io/invitacion.github.io/";
-            const qr = qrcode(0, 'L'); qr.addData(qrUrl); qr.make(); const qrCodeImage = qr.createDataURL(4);
-            
-            const leftMargin = 40; let currentY = 60;
-            doc.setFont("Helvetica", "bold"); doc.setFontSize(28); doc.setTextColor("#8C6B6B"); doc.text("PASE DE ACCESO", leftMargin, currentY); 
-            currentY += 50; doc.setFont("times", "italic"); doc.setFontSize(24); doc.setTextColor("#5A4A4A"); doc.text(guestName, leftMargin, currentY); 
-            currentY += 30; doc.setFont("Helvetica", "normal"); doc.setFontSize(18); doc.setTextColor("#333"); doc.text(`Válido para ${guestCount} persona(s)`, leftMargin, currentY); 
-            currentY += 40; doc.setFontSize(16); doc.setTextColor("#555"); doc.text("Boda de Daniel & Pamela", leftMargin, currentY); doc.text("15 de marzo de 2026 - Salón El Jardín", leftMargin, currentY + 25);
 
-            const qrSize = 120; const rightMargin = 40; const bottomMargin = 50;
-            const qrX = 600 - qrSize - rightMargin; const qrY = 600 - qrSize - bottomMargin; 
-            doc.addImage(qrCodeImage, "PNG", qrX, qrY, qrSize, qrSize);
-            doc.setFontSize(12); doc.setTextColor("#777"); doc.text("Escanea el código para ver la invitación digital", 600 - rightMargin, qrY + qrSize + 20, { align: "right" });
+            // 2. Fondo: Imagen de los novios (cubriendo todo)
+            doc.addImage("nuevo.jpeg", "JPEG", 0, 0, 600, 600);
+
+            // 3. "Caja" Blanca Central (Simula el estilo de tu web)
+            // Dibujamos un rectángulo blanco semi-transparente o sólido
+            doc.setFillColor(251, 249, 247); // Color #FBF9F7 (El mismo fondo de tu web)
+            doc.setDrawColor(220, 208, 192); // Color del borde #dcd0c0
+            doc.setLineWidth(2);
+            // rect(x, y, ancho, alto, estilo) -> 'FD' significa Fill (Relleno) y Draw (Borde)
+            // Dejamos un margen de 50px alrededor
+            doc.rect(50, 50, 500, 500, 'FD');
+
+            // 4. Generar QR
+            const qrUrl = "https://dayandelagadr-svg.github.io/invitacion.github.io/";
+            const qr = qrcode(0, 'L'); qr.addData(qrUrl); qr.make(); 
+            const qrCodeImage = qr.createDataURL(4);
+
+            // --- TEXTOS DENTRO DE LA CAJA BLANCA ---
+            
+            // Título: "PASE DE ACCESO" (Color Palo de Rosa #8C6B6B)
+            doc.setFont("Helvetica", "bold"); 
+            doc.setFontSize(24); 
+            doc.setTextColor(140, 107, 107); // RGB aproximado de #8C6B6B
+            doc.text("PASE DE ACCESO", 300, 100, { align: "center" });
+
+            // Línea decorativa simple
+            doc.setDrawColor(140, 107, 107);
+            doc.line(200, 110, 400, 110);
+
+            // Nombre del Invitado (Estilo elegante - Times Italic)
+            doc.setFont("times", "italic"); 
+            doc.setFontSize(28); 
+            doc.setTextColor(50, 50, 50); // Gris oscuro
+            // Ajustamos texto largo si es necesario (splitTextToSize)
+            const splitName = doc.splitTextToSize(guestName, 400);
+            doc.text(splitName, 300, 160, { align: "center" });
+
+            // Cantidad de Personas
+            doc.setFont("Helvetica", "normal"); 
+            doc.setFontSize(16); 
+            doc.setTextColor(100, 100, 100); // Gris medio
+            doc.text(`Pase válido para: ${guestCount} persona(s)`, 300, 210, { align: "center" });
+
+            // Detalles del Evento
+            doc.setFontSize(14);
+            doc.setTextColor(80, 80, 80);
+            doc.text("Boda de Daniel & Pamela", 300, 250, { align: "center" });
+            doc.text("Domingo, 15 de Marzo de 2026", 300, 270, { align: "center" });
+            doc.text("Salón El Jardín - 1:00 PM", 300, 290, { align: "center" });
+
+            // --- CÓDIGO QR ---
+            // Centrado en la parte inferior de la caja
+            doc.addImage(qrCodeImage, "PNG", 250, 330, 100, 100); 
+
+            // Pie del boleto
+            doc.setFontSize(10);
+            doc.setTextColor(150, 150, 150);
+            doc.text("Presenta este código al llegar", 300, 450, { align: "center" });
+            doc.text("¡Gracias por acompañarnos!", 300, 520, { align: "center" });
 
             doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
         }
+        
     </script>
 </body>
 </html>
+
