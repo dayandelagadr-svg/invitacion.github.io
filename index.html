@@ -33,7 +33,7 @@
     body.invitation-visible .main-container { opacity: 1; pointer-events: auto; }
     body.invitation-visible { overflow-y: auto; }
 
-    /* Cajón Principal (Content Box) */
+    /* Cajón Principal */
     main.content-box {
         border: 1px solid #dcd0c0;
         padding: 3rem 1rem; 
@@ -51,20 +51,14 @@
     }
     @media (min-width: 768px) { main.content-box { padding: 4rem 4rem; min-height: 70vh; } }
 
-    /* Imagen de fondo */
     .hero-image-overlay {
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        object-fit: cover;
-        opacity: 0.25;
-        z-index: 0;
-        pointer-events: none;
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        object-fit: cover; opacity: 0.25; z-index: 0; pointer-events: none;
         filter: brightness(0.9);
     }
 
     .font-script { font-family: 'Parisienne', cursive; }
     
-    /* Botones Responsivos */
     nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%; }
     nav a, nav button { 
         letter-spacing: .1em; font-size: .7rem; color: white; margin: 0; 
@@ -73,7 +67,6 @@
     @media (min-width: 768px) { nav { gap: 20px; } nav a, nav button { font-size: .9rem; padding: 1rem 2rem; } }
     nav a:hover, nav button:hover { transform: scale(1.05); }
     
-    /* Countdown */
     .countdown-item { background-color: #F8EDEB; border: 1px solid #dcd0c0; border-radius: 8px; padding: .8rem .4rem; min-width: 65px; box-shadow: 0 2px 4px rgba(0, 0, 0, .03); }
     @media (min-width: 768px) { .countdown-item { min-width: 100px; padding: 1.5rem 1rem; } }
     .countdown-number { font-family: 'Parisienne', cursive; font-size: 2rem; color: #8C6B6B; line-height: 1; margin-bottom: .25rem; }
@@ -81,55 +74,45 @@
     .countdown-label { font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: #5d5d5d; font-weight: 700; }
     @media (min-width: 768px) { .countdown-label { font-size: .9rem; } }
     
-    /* Sobre */
+    /* ===== ESTILOS DEL SOBRE CORREGIDOS ===== */
     #envelope-container { position: fixed; inset: 0; background-color: #FBF9F7; z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease-in-out; }
-    .envelope-wrapper-simple { position: relative; width: 90vw; max-width: 500px; aspect-ratio: 1.5 / 1; }
-    .envelope-image { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15)); transition: transform 1s ease; }
+    .envelope-wrapper-simple { position: relative; width: 90vw; max-width: 500px; aspect-ratio: 1.5 / 1; transition: transform 0.5s ease; }
+    .envelope-image { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15)); }
+    
+    /* Sello */
     .envelope-seal-simple {
-        position: absolute;
-        top: 50%; left: 50%; transform: translate(-50%, -50%);
+        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
         width: 20%; max-width: 80px; cursor: pointer;
-        transition: transform 0.4s ease, filter 0.4s ease;
+        transition: transform 0.4s ease, filter 0.4s ease, opacity 0.5s ease;
         z-index: 20;
     }
     .envelope-seal-simple:hover { transform: translate(-50%, -50%) scale(1.15); filter: brightness(1.2); }
     .envelope-seal-simple:active { transform: translate(-50%, -50%) scale(0.95); filter: brightness(0.9); }
     
-    /* BOTÓN DE WHATSAPP */
+    /* Clase para cuando se abre (animación) */
+    .envelope-open .envelope-seal-simple { opacity: 0; pointer-events: none; }
+    
+    /* Botón WhatsApp */
     .whatsapp-btn {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #25D366;
-        color: white;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 35px;
-        box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-        z-index: 90; /* Debajo del sobre pero sobre el contenido */
-        transition: transform 0.3s ease;
-        text-decoration: none;
+        position: fixed; bottom: 20px; right: 20px;
+        background-color: #25D366; color: white;
+        width: 60px; height: 60px; border-radius: 50%;
+        display: flex; justify-content: center; align-items: center;
+        font-size: 35px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+        z-index: 90; transition: transform 0.3s ease; text-decoration: none;
     }
-    .whatsapp-btn:hover {
-        transform: scale(1.1);
-        background-color: #20BA5A;
-    }
+    .whatsapp-btn:hover { transform: scale(1.1); background-color: #20BA5A; }
 
-    /* Cajas secundarias */
     .secondary-box { background-color: #FBF9F7; border: 1px solid #dcd0c0; padding: 2rem; border-radius: 15px; margin-top: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
     
-    #rsvpModal, #thankYouModal { z-index: 60; }
+    #rsvpModal, #thankYouModal { z-index: 150; } /* Z-index alto para estar sobre todo */
     #youtube-player { position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; }
 </style>
 </head>
 
 <body>
     <div id="envelope-container">
-        <div class="envelope-wrapper-simple">
+        <div class="envelope-wrapper-simple" id="envelope-wrapper">
             <img src="sobre-con-sello.jpg" class="envelope-image" alt="Sobre de invitación">
             <img src="sello.png" class="envelope-seal-simple" id="seal" alt="Sello de apertura">
         </div>
@@ -216,19 +199,24 @@
     <div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center"><h3 class="font-script text-4xl text-[#8C6B6B] mb-4">¡Gracias!</h3><p class="mb-6 text-gray-600">Tu asistencia ha sido confirmada. Tu pase personal se está descargando. ¡Nos vemos en la boda!</p><button id="closeThankYouModal" class="bg-[#C6A9A9] text-white font-bold py-2 px-4 rounded-lg">Cerrar</button></div></div>
 
     <script>
+        // Referencias
         const envelopeContainer = document.getElementById('envelope-container');
+        // CORRECCIÓN: Buscamos la clase correcta del wrapper
         const envelopeWrapper = document.querySelector('.envelope-wrapper-simple');
         const seal = document.getElementById('seal');
+        
+        // Modales
         const rsvpModal = document.getElementById("rsvpModal");
         const thankYouModal = document.getElementById("thankYouModal");
         const openRsvpModalBtn = document.getElementById("openRsvpModal");
         const closeRsvpModalBtn = document.getElementById("closeRsvpModal");
         const closeThankYouModalBtn = document.getElementById("closeThankYouModal");
-        
+
         let player;
         let firstClickDone = false;
         let isPlayerReady = false;
 
+        // 1. Cargar YouTube Player
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
                 height: '1', width: '1', 
@@ -237,43 +225,147 @@
                 events: { 'onReady': onPlayerReady }
             });
         }
+        function onPlayerReady(event) { isPlayerReady = true; }
 
-        function onPlayerReady(event) {
-            isPlayerReady = true;
-        }
-
+        // 2. Lógica abrir sobre
         if (seal) {
             seal.addEventListener('click', () => {
                 if (firstClickDone) return;
                 firstClickDone = true;
 
+                // Música
                 try {
                     if (isPlayerReady && player && typeof player.playVideo === 'function') {
                         player.playVideo();
-                    } else {
-                         setTimeout(() => { if(player && player.playVideo) player.playVideo(); }, 1000);
                     }
-                } catch (e) { console.warn("Video no disponible."); }
+                } catch(e) { console.log("Error audio", e); }
 
-                if(envelopeWrapper) envelopeWrapper.style.transform = 'scale(1.05)';
-                if(envelopeContainer) envelopeContainer.style.transition = 'opacity 1.2s ease-in-out';
+                // Animación: Añadimos clase para el CSS si existiera, o manipulamos estilo directo
+                if(envelopeWrapper) envelopeWrapper.classList.add('envelope-open'); // Para CSS si lo usaras
+                
+                // Efecto visual simple (zoom)
+                if(envelopeWrapper) envelopeWrapper.style.transform = 'scale(1.1)';
+                envelopeContainer.style.transition = 'opacity 1.2s ease-in-out';
                 
                 setTimeout(() => {
-                    if(envelopeContainer) envelopeContainer.style.opacity = '0';
+                    envelopeContainer.style.opacity = '0';
                     document.body.classList.add('invitation-visible');
-                    setTimeout(() => {
-                        if(envelopeContainer) envelopeContainer.style.display = 'none';
-                    }, 1200);
-                }, 400);
+                    setTimeout(() => { envelopeContainer.style.display = 'none'; }, 1200);
+                }, 500);
             });
         }
 
+        // 3. Lógica Modales
         const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
         const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
-        
         if (openRsvpModalBtn) openRsvpModalBtn.addEventListener("click", () => openModal(rsvpModal));
         if (closeRsvpModalBtn) closeRsvpModalBtn.addEventListener("click", () => closeModal(rsvpModal));
         if (closeThankYouModalBtn) closeThankYouModalBtn.addEventListener("click", () => closeModal(thankYouModal));
 
+        // 4. Cuenta Regresiva
         const countdownDate = new Date("March 15, 2026 13:00:00").getTime();
-        const countdown
+        const countdownFunction = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+            const countdownEl = document.getElementById("countdown");
+            
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                if(countdownEl) countdownEl.innerHTML = "<div class='text-center w-full'><p class='font-script text-4xl text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>";
+                return;
+            }
+            const daysEl = document.getElementById("days");
+            const hoursEl = document.getElementById("hours");
+            const minutesEl = document.getElementById("minutes");
+            const secondsEl = document.getElementById("seconds");
+            if (daysEl) daysEl.innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            if (hoursEl) hoursEl.innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            if (minutesEl) minutesEl.innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            if (secondsEl) secondsEl.innerText = Math.floor((distance % (1000 * 60)) / 1000);
+        }, 1000);
+    </script>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEFg3H7spJXUBvjNRc-QRocIHk3Hd6dho",
+            authDomain: "lista-de-asistencia-8cfc5.firebaseapp.com",
+            projectId: "lista-de-asistencia-8cfc5",
+            storageBucket: "lista-de-asistencia-8cfc5.firebasestorage.app",
+            messagingSenderId: "276452664903",
+            appId: "1:276452664903:web:8b060bdeef2e70852bf362"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        const rsvpForm = document.getElementById("rsvpForm");
+        const submitRsvpBtn = document.getElementById("submitRsvpBtn");
+        const rsvpModal = document.getElementById("rsvpModal");
+        const thankYouModal = document.getElementById("thankYouModal");
+        const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
+        const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
+
+        if (rsvpForm) {
+            rsvpForm.addEventListener("submit", async e => {
+                e.preventDefault(); 
+                if(submitRsvpBtn) {
+                    submitRsvpBtn.disabled = true; 
+                    submitRsvpBtn.innerText = "Confirmando...";
+                }
+                const guestName = document.getElementById("guestName").value;
+                const guestCount = document.getElementById("guestCount").value;
+                try {
+                    await addDoc(collection(db, "invitados_confirmados"), { nombre: guestName, asistentes: Number(guestCount), fecha_confirmacion: serverTimestamp() });
+                    generateAndDownloadTicket(guestName, guestCount); 
+                    closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
+                } catch (err) { 
+                    console.error("Error:", err); alert("Hubo un error. Inténtalo de nuevo.");
+                } finally { 
+                    if(submitRsvpBtn) { submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Confirmar y Generar Pase"; }
+                }
+            });
+        }
+
+        window.generateAndDownloadTicket = function(guestName, guestCount) {
+            const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 600] });
+            doc.addImage("nuevo.jpeg", "JPEG", 0, 0, 600, 600);
+            const qrUrl = "https://dayandelagadr-svg.github.io/invitacion.github.io/";
+            const qr = qrcode(0, 'L'); qr.addData(qrUrl); qr.make(); const qrCodeImage = qr.createDataURL(4);
+            
+            // TEXTOS SUPERIOR IZQUIERDA
+            const leftMargin = 40; 
+            let currentY = 60;
+            doc.setFont("Helvetica", "bold"); doc.setFontSize(28); doc.setTextColor("#8C6B6B");
+            doc.text("PASE DE ACCESO", leftMargin, currentY); 
+            
+            currentY += 50;
+            doc.setFont("times", "italic"); doc.setFontSize(24); doc.setTextColor("#5A4A4A");
+            doc.text(guestName, leftMargin, currentY); 
+            
+            currentY += 30;
+            doc.setFont("Helvetica", "normal"); doc.setFontSize(18); doc.setTextColor("#333");
+            doc.text(`Válido para ${guestCount} persona(s)`, leftMargin, currentY); 
+            
+            currentY += 40;
+            doc.setFontSize(16); doc.setTextColor("#555");
+            doc.text("Boda de Daniel & Pamela", leftMargin, currentY);
+            doc.text("15 de marzo de 2026 - Salón El Jardín", leftMargin, currentY + 25);
+
+            // QR INFERIOR DERECHA
+            const qrSize = 120; const rightMargin = 40; const bottomMargin = 50;
+            const qrX = 600 - qrSize - rightMargin; 
+            const qrY = 600 - qrSize - bottomMargin; 
+            doc.addImage(qrCodeImage, "PNG", qrX, qrY, qrSize, qrSize);
+            doc.setFontSize(12); doc.setTextColor("#777");
+            doc.text("Escanea el código para ver la invitación digital", 600 - rightMargin, qrY + qrSize + 20, { align: "right" });
+
+            doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
+        }
+    </script>
+</body>
+</html>
