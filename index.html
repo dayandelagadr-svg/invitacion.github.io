@@ -18,35 +18,13 @@
    <style>
     /* Estilos generales */
     body { font-family: 'Cormorant Garamond', serif; background-color: #F7EBEB; color: #5d5d5d; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 2rem; padding-bottom: 2rem; padding-left: 0; padding-right: 0; position: relative; overflow-x: hidden; overflow-y: hidden; }
-       
-       .corner-flower { position: fixed; width: 120px; height: auto; z-index: 5; opacity: 0; transition: opacity 1s ease-in-out; }
-    @media (min-width: 768px) { .corner-flower { width: 180px; } }
-    #top-left { top: 10px; left: 10px; }
-    #top-right { top: 10px; right: 10px; transform: scaleX(-1); }
-    #bottom-left { bottom: 10px; left: 10px; transform: scaleY(-1); }
-    #bottom-right { bottom: 10px; right: 10px; transform: scale(-1,-1); }
-    body.invitation-visible .corner-flower { opacity: 1; }
-
-       /* Contenedor de pétalos */
-    #petals-container {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        pointer-events: none; z-index: 4; overflow: hidden;
-    }
-    .petal {
-        position: absolute;
-        top: -10%;
-        background-color: #FFC0CB; /* Color rosa pétalo */
-        opacity: 0.8;
-        border-radius: 10% 70%; /* Forma de hoja/pétalo */
-        animation: fall linear infinite;
-        box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    }
-    @keyframes fall {
-        0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; }
-        100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; }
-    }
     
-       /* Contenedor Alargado */
+    /* Estilos Pétalos */
+    #petals-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; overflow: hidden; }
+    .petal { position: absolute; top: -10%; background-color: #FFC0CB; opacity: 0.8; border-radius: 10% 70%; animation: fall linear infinite; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+    @keyframes fall { 0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; } }
+
+    /* Contenedor Alargado */
     .main-container { position: relative; z-index: 10; width: 100%; max-width: 1200px; text-align: center; opacity: 0; transition: opacity 1s ease-in-out 1.5s; pointer-events: none; padding: 0 1rem; }
     @media (max-width: 767px) { body { padding-top: 4rem; padding-bottom: 4rem; } .main-container { padding: 0 0.5rem; } }
     body.invitation-visible .main-container { opacity: 1; pointer-events: auto; }
@@ -54,35 +32,16 @@
 
     /* Cajón Principal */
     main.content-box {
-        border: 1px solid #dcd0c0;
-        padding: 3rem 1rem; 
-        background-color: #FBF9F7;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, .05);
-        position: relative;
-        z-index: 10;
-        overflow: hidden;
-        border-radius: 20px;
-        min-height: 60vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        border: 1px solid #dcd0c0; padding: 3rem 1rem; background-color: #F7EBEB; box-shadow: 0 10px 25px rgba(0, 0, 0, .05); position: relative; z-index: 10; overflow: hidden; border-radius: 20px; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
     }
     @media (min-width: 768px) { main.content-box { padding: 4rem 4rem; min-height: 70vh; } }
 
-    .hero-image-overlay {
-        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        object-fit: cover; opacity: 0.25; z-index: 0; pointer-events: none;
-        filter: brightness(0.9);
-    }
+    .hero-image-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; z-index: 0; pointer-events: none; filter: brightness(0.9); }
 
     .font-script { font-family: 'Parisienne', cursive; }
     
     nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%; }
-    nav a, nav button { 
-        letter-spacing: .1em; font-size: .7rem; color: white; margin: 0; 
-        text-decoration: none; transition: transform .3s, background-color .3s; white-space: nowrap; 
-    }
+    nav a, nav button { letter-spacing: .1em; font-size: .7rem; color: white; margin: 0; text-decoration: none; transition: transform .3s, background-color .3s; white-space: nowrap; }
     @media (min-width: 768px) { nav { gap: 20px; } nav a, nav button { font-size: .9rem; padding: 1rem 2rem; } }
     nav a:hover, nav button:hover { transform: scale(1.05); }
     
@@ -93,45 +52,28 @@
     .countdown-label { font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: #5d5d5d; font-weight: 700; }
     @media (min-width: 768px) { .countdown-label { font-size: .9rem; } }
     
-    /* ===== ESTILOS DEL SOBRE CORREGIDOS ===== */
+    /* Sobre */
     #envelope-container { position: fixed; inset: 0; background-color: #F7EBEB; z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease-in-out; }
-    .envelope-wrapper-simple { position: relative; width: 90vw; max-width: 500px; aspect-ratio: 1.5 / 1; transition: transform 0.5s ease; }
-    .envelope-image { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15)); }
-    
-    /* Sello */
-    .envelope-seal-simple {
-        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-        width: 20%; max-width: 80px; cursor: pointer;
-        transition: transform 0.4s ease, filter 0.4s ease, opacity 0.5s ease;
-        z-index: 20;
-    }
+    .envelope-wrapper-simple { position: relative; width: 90vw; max-width: 500px; aspect-ratio: 1.5 / 1; }
+    .envelope-image { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15)); transition: transform 1s ease; }
+    .envelope-seal-simple { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20%; max-width: 80px; cursor: pointer; transition: transform 0.4s ease, filter 0.4s ease; z-index: 20; }
     .envelope-seal-simple:hover { transform: translate(-50%, -50%) scale(1.15); filter: brightness(1.2); }
     .envelope-seal-simple:active { transform: translate(-50%, -50%) scale(0.95); filter: brightness(0.9); }
     
-    /* Clase para cuando se abre (animación) */
-    .envelope-open .envelope-seal-simple { opacity: 0; pointer-events: none; }
-    
     /* Botón WhatsApp */
-    .whatsapp-btn {
-        position: fixed; bottom: 20px; right: 20px;
-        background-color: #25D366; color: white;
-        width: 60px; height: 60px; border-radius: 50%;
-        display: flex; justify-content: center; align-items: center;
-        font-size: 35px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-        z-index: 90; transition: transform 0.3s ease; text-decoration: none;
-    }
+    .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 35px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 90; transition: transform 0.3s ease; text-decoration: none; }
     .whatsapp-btn:hover { transform: scale(1.1); background-color: #20BA5A; }
 
-    .secondary-box { background-color: #FBF9F7; border: 1px solid #dcd0c0; padding: 2rem; border-radius: 15px; margin-top: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+    .secondary-box { background-color: #F7EBEB; border: 1px solid #dcd0c0; padding: 2rem; border-radius: 15px; margin-top: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
     
-    #rsvpModal, #thankYouModal { z-index: 150; } /* Z-index alto para estar sobre todo */
+    #rsvpModal, #thankYouModal { z-index: 150; }
     #youtube-player { position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; }
 </style>
 </head>
 
 <body>
     <div id="envelope-container">
-        <div class="envelope-wrapper-simple" id="envelope-wrapper">
+        <div class="envelope-wrapper-simple">
             <img src="sobre-con-sello.jpg" class="envelope-image" alt="Sobre de invitación">
             <img src="sello.png" class="envelope-seal-simple" id="seal" alt="Sello de apertura">
         </div>
@@ -161,9 +103,8 @@
                 </div>
                 
                 <p class="text-2xl md:text-4xl font-bold text-[#8C6B6B] mb-2">Domingo, 15 de Marzo de 2026</p>
-                <p class="text-xl md:text-2xl font-bold text-gray-700 mb-8 px-4">
-                "Queremos compartir la alegría de unir nuestras vidas contigo."
-                </p>                
+                <p class="text-xl md:text-2xl font-bold text-gray-700 mb-8 px-4">"Queremos compartir la alegría de unir nuestras vidas contigo."</p>
+                
                 <nav class="mt-4">
                     <a href="#recepcion-mapa-section" class="uppercase bg-[#C6A9A9] py-3 px-4 rounded-full shadow-lg">Ubicación</a>
                     <button id="openRsvpModal" class="uppercase bg-[#C6A9A9] py-3 px-4 rounded-full shadow-lg">Confirma Asistencia</button>
@@ -211,92 +152,96 @@
     </div>
     
     <div id="rsvpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center relative"><button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button><h3 class="font-script text-4xl text-[#8C6B6B] mb-4">Confirmar Asistencia</h3><p class="mb-6 text-gray-600">Por favor, completa los siguientes datos para confirmar.</p><form id="rsvpForm" class="space-y-4"><input type="text" id="guestName" placeholder="Nombre completo del invitado principal" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required><input type="number" id="guestCount" placeholder="Número total de asistentes (incluyéndote)" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" min="1" required><button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">Confirmar y Generar Pase</button></form></div></div>
-    <div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center"><h3 class="font-script text-4xl text-[#8C6B6B] mb-4">¡Gracias!</h3><p class="mb-6 text-gray-600">Tu asistencia ha sido confirmada. Tu pase personal se está descargando. ¡Nos vemos en la boda!</p><button id="closeThankYouModal" class="bg-[#C6A9A9] text-white font-bold py-2 px-4 rounded-lg">Cerrar</button></div></div>
+    
+    <div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300">
+        <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center">
+            <h3 class="font-script text-4xl text-[#8C6B6B] mb-4">¡Gracias!</h3>
+            <p class="mb-6 text-gray-600">Tu asistencia ha sido confirmada. Tu pase personal se está descargando.</p>
+            
+            <div class="flex flex-col space-y-3 mb-6">
+                <button id="addToGoogleCalendarBtn" class="bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center shadow-md">
+                    <i class="fab fa-google mr-2"></i> Agregar a Google Calendar
+                </button>
+                <button id="addToIcsBtn" class="bg-gray-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-gray-700 transition flex items-center justify-center shadow-md">
+                    <i class="far fa-calendar-alt mr-2"></i> Agregar a Outlook/Apple
+                </button>
+            </div>
+            <button id="closeThankYouModal" class="text-gray-500 underline text-sm mt-2">Cerrar</button>
+        </div>
+    </div>
 
     <script>
-        // Referencias
+        // UI Elements
         const envelopeContainer = document.getElementById('envelope-container');
-        // CORRECCIÓN: Buscamos la clase correcta del wrapper
         const envelopeWrapper = document.querySelector('.envelope-wrapper-simple');
         const seal = document.getElementById('seal');
-        
-        // Modales
         const rsvpModal = document.getElementById("rsvpModal");
         const thankYouModal = document.getElementById("thankYouModal");
         const openRsvpModalBtn = document.getElementById("openRsvpModal");
         const closeRsvpModalBtn = document.getElementById("closeRsvpModal");
         const closeThankYouModalBtn = document.getElementById("closeThankYouModal");
+        
+        // PÉTALOS
+        function createPetals() {
+            const container = document.createElement('div');
+            container.id = 'petals-container';
+            document.body.appendChild(container);
+            for (let i = 0; i < 20; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                const size = Math.random() * 15 + 10; petal.style.width = `${size}px`; petal.style.height = `${size}px`;
+                petal.style.left = `${Math.random() * 100}vw`;
+                petal.style.animationDuration = `${Math.random() * 5 + 5}s`; petal.style.animationDelay = `${Math.random() * 5}s`;
+                const colors = ['#FADadd', '#FFC0CB', '#FFF0F5', '#E6E6FA'];
+                petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                container.appendChild(petal);
+            }
+        }
 
-        let player;
-        let firstClickDone = false;
-        let isPlayerReady = false;
-
-        // 1. Cargar YouTube Player
+        // MÚSICA
+        let player; let firstClickDone = false; let isPlayerReady = false;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
-                height: '1', width: '1', 
-                videoId: 'kgUVq-ICt_Y', 
+                height: '1', width: '1', videoId: 'kgUVq-ICt_Y', 
                 playerVars: { 'playsinline': 1, 'controls': 0, 'showinfo': 0, 'rel': 0 },
                 events: { 'onReady': onPlayerReady }
             });
         }
         function onPlayerReady(event) { isPlayerReady = true; }
 
-        // 2. Lógica abrir sobre
+        // ABRIR SOBRE
         if (seal) {
             seal.addEventListener('click', () => {
                 if (firstClickDone) return;
                 firstClickDone = true;
-
-                // Música
-                try {
-                    if (isPlayerReady && player && typeof player.playVideo === 'function') {
-                        player.playVideo();
-                    }
-                } catch(e) { console.log("Error audio", e); }
-
-                // Animación: Añadimos clase para el CSS si existiera, o manipulamos estilo directo
-                if(envelopeWrapper) envelopeWrapper.classList.add('envelope-open'); // Para CSS si lo usaras
-                
-                // Efecto visual simple (zoom)
-                if(envelopeWrapper) envelopeWrapper.style.transform = 'scale(1.1)';
+                try { if (isPlayerReady && player && typeof player.playVideo === 'function') { player.playVideo(); } } catch (e) {}
+                if(envelopeWrapper) envelopeWrapper.style.transform = 'scale(1.05)';
                 envelopeContainer.style.transition = 'opacity 1.2s ease-in-out';
-                
                 setTimeout(() => {
-                    envelopeContainer.style.opacity = '0';
+                    if(envelopeContainer) envelopeContainer.style.opacity = '0';
                     document.body.classList.add('invitation-visible');
-                    setTimeout(() => { envelopeContainer.style.display = 'none'; }, 1200);
-                }, 500);
+                    setTimeout(() => { if(envelopeContainer) envelopeContainer.style.display = 'none'; createPetals(); }, 1200);
+                }, 400);
             });
         }
 
-        // 3. Lógica Modales
+        // MODALES
         const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
         const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
         if (openRsvpModalBtn) openRsvpModalBtn.addEventListener("click", () => openModal(rsvpModal));
         if (closeRsvpModalBtn) closeRsvpModalBtn.addEventListener("click", () => closeModal(rsvpModal));
         if (closeThankYouModalBtn) closeThankYouModalBtn.addEventListener("click", () => closeModal(thankYouModal));
 
-        // 4. Cuenta Regresiva
+        // CUENTA REGRESIVA
         const countdownDate = new Date("March 15, 2026 13:00:00").getTime();
         const countdownFunction = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = countdownDate - now;
-            const countdownEl = document.getElementById("countdown");
-            
-            if (distance < 0) {
-                clearInterval(countdownFunction);
-                if(countdownEl) countdownEl.innerHTML = "<div class='text-center w-full'><p class='font-script text-4xl text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>";
-                return;
-            }
-            const daysEl = document.getElementById("days");
-            const hoursEl = document.getElementById("hours");
-            const minutesEl = document.getElementById("minutes");
-            const secondsEl = document.getElementById("seconds");
-            if (daysEl) daysEl.innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-            if (hoursEl) hoursEl.innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            if (minutesEl) minutesEl.innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            if (secondsEl) secondsEl.innerText = Math.floor((distance % (1000 * 60)) / 1000);
+            const now = new Date().getTime(); const distance = countdownDate - now;
+            if (distance < 0) { clearInterval(countdownFunction); document.getElementById("countdown").innerHTML = "¡Llegó el día!"; return; }
+            const d = document.getElementById("days"), h = document.getElementById("hours"), m = document.getElementById("minutes"), s = document.getElementById("seconds");
+            if (d) d.innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            if (h) h.innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            if (m) m.innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            if (s) s.innerText = Math.floor((distance % (1000 * 60)) / 1000);
         }, 1000);
     </script>
 
@@ -322,27 +267,60 @@
         const submitRsvpBtn = document.getElementById("submitRsvpBtn");
         const rsvpModal = document.getElementById("rsvpModal");
         const thankYouModal = document.getElementById("thankYouModal");
+        const addToGoogleCalendarBtn = document.getElementById("addToGoogleCalendarBtn");
+        const addToIcsBtn = document.getElementById("addToIcsBtn");
+
         const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
         const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
+
+        // FUNCIONES DE CALENDARIO
+        if (addToGoogleCalendarBtn) {
+            addToGoogleCalendarBtn.addEventListener("click", () => {
+                const title = encodeURIComponent("Boda de Daniel & Pamela");
+                const details = encodeURIComponent("¡Estás invitado a nuestra boda! Recuerda llevar tu pase.");
+                const location = encodeURIComponent("Salón 'El Jardín', Prolongacion Jose Maria Morelos 1, Centro, 56530 Ixtapaluca, Méx.");
+                const startDate = "20260315T130000"; const endDate = "20260315T220000";
+                window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`, '_blank');
+            });
+        }
+
+        if (addToIcsBtn) {
+            addToIcsBtn.addEventListener("click", () => {
+                const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Daniel y Pamela//Boda//ES
+BEGIN:VEVENT
+UID:boda-daniel-pamela-2026
+DTSTAMP:${new Date().toISOString().replace(/[-:.]/g, '')}
+DTSTART:20260315T130000
+DTEND:20260315T220000
+SUMMARY:Boda de Daniel & Pamela
+DESCRIPTION:¡Estás invitado a nuestra boda! Recuerda llevar tu pase.
+LOCATION:Salón "El Jardín", Prolongacion Jose Maria Morelos 1, Centro, 56530 Ixtapaluca, Méx.
+END:VEVENT
+END:VCALENDAR`;
+                const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+                const link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.setAttribute('download', 'Boda_Daniel_y_Pamela.ics');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        }
 
         if (rsvpForm) {
             rsvpForm.addEventListener("submit", async e => {
                 e.preventDefault(); 
-                if(submitRsvpBtn) {
-                    submitRsvpBtn.disabled = true; 
-                    submitRsvpBtn.innerText = "Confirmando...";
-                }
+                if(submitRsvpBtn) { submitRsvpBtn.disabled = true; submitRsvpBtn.innerText = "Confirmando..."; }
                 const guestName = document.getElementById("guestName").value;
                 const guestCount = document.getElementById("guestCount").value;
                 try {
                     await addDoc(collection(db, "invitados_confirmados"), { nombre: guestName, asistentes: Number(guestCount), fecha_confirmacion: serverTimestamp() });
                     generateAndDownloadTicket(guestName, guestCount); 
                     closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
-                } catch (err) { 
-                    console.error("Error:", err); alert("Hubo un error. Inténtalo de nuevo.");
-                } finally { 
-                    if(submitRsvpBtn) { submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Confirmar y Generar Pase"; }
-                }
+                } catch (err) { console.error("Error:", err); alert("Hubo un error."); } 
+                finally { if(submitRsvpBtn) { submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Confirmar y Generar Pase"; } }
             });
         }
 
@@ -352,76 +330,19 @@
             const qrUrl = "https://dayandelagadr-svg.github.io/invitacion.github.io/";
             const qr = qrcode(0, 'L'); qr.addData(qrUrl); qr.make(); const qrCodeImage = qr.createDataURL(4);
             
-            // TEXTOS SUPERIOR IZQUIERDA
-            const leftMargin = 40; 
-            let currentY = 60;
-            doc.setFont("Helvetica", "bold"); doc.setFontSize(28); doc.setTextColor("#8C6B6B");
-            doc.text("PASE DE ACCESO", leftMargin, currentY); 
-            
-            currentY += 50;
-            doc.setFont("times", "italic"); doc.setFontSize(24); doc.setTextColor("#5A4A4A");
-            doc.text(guestName, leftMargin, currentY); 
-            
-            currentY += 30;
-            doc.setFont("Helvetica", "normal"); doc.setFontSize(18); doc.setTextColor("#333");
-            doc.text(`Válido para ${guestCount} persona(s)`, leftMargin, currentY); 
-            
-            currentY += 40;
-            doc.setFontSize(16); doc.setTextColor("#555");
-            doc.text("Boda de Daniel & Pamela", leftMargin, currentY);
-            doc.text("15 de marzo de 2026 - Salón El Jardín", leftMargin, currentY + 25);
+            const leftMargin = 40; let currentY = 60;
+            doc.setFont("Helvetica", "bold"); doc.setFontSize(28); doc.setTextColor("#8C6B6B"); doc.text("PASE DE ACCESO", leftMargin, currentY); 
+            currentY += 50; doc.setFont("times", "italic"); doc.setFontSize(24); doc.setTextColor("#5A4A4A"); doc.text(guestName, leftMargin, currentY); 
+            currentY += 30; doc.setFont("Helvetica", "normal"); doc.setFontSize(18); doc.setTextColor("#333"); doc.text(`Válido para ${guestCount} persona(s)`, leftMargin, currentY); 
+            currentY += 40; doc.setFontSize(16); doc.setTextColor("#555"); doc.text("Boda de Daniel & Pamela", leftMargin, currentY); doc.text("15 de marzo de 2026 - Salón El Jardín", leftMargin, currentY + 25);
 
-            // QR INFERIOR DERECHA
             const qrSize = 120; const rightMargin = 40; const bottomMargin = 50;
-            const qrX = 600 - qrSize - rightMargin; 
-            const qrY = 600 - qrSize - bottomMargin; 
+            const qrX = 600 - qrSize - rightMargin; const qrY = 600 - qrSize - bottomMargin; 
             doc.addImage(qrCodeImage, "PNG", qrX, qrY, qrSize, qrSize);
-            doc.setFontSize(12); doc.setTextColor("#777");
-            doc.text("Escanea el código para ver la invitación digital", 600 - rightMargin, qrY + qrSize + 20, { align: "right" });
+            doc.setFontSize(12); doc.setTextColor("#777"); doc.text("Escanea el código para ver la invitación digital", 600 - rightMargin, qrY + qrSize + 20, { align: "right" });
 
             doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
         }
-<script>
-    function createPetals() {
-        const container = document.createElement('div');
-        container.id = 'petals-container';
-        document.body.appendChild(container);
-
-        const petalCount = 20; // Cantidad de pétalos
-        for (let i = 0; i < petalCount; i++) {
-            const petal = document.createElement('div');
-            petal.classList.add('petal');
-            
-            // Tamaño aleatorio
-            const size = Math.random() * 15 + 10; 
-            petal.style.width = `${size}px`;
-            petal.style.height = `${size}px`;
-            
-            // Posición aleatoria
-            petal.style.left = `${Math.random() * 100}vw`;
-            
-            // Duración y retraso aleatorios para que se vea natural
-            petal.style.animationDuration = `${Math.random() * 5 + 5}s`;
-            petal.style.animationDelay = `${Math.random() * 5}s`;
-            
-            // Color variado (rosas y blancos)
-            const colors = ['#FADadd', '#FFC0CB', '#FFF0F5', '#E6E6FA'];
-            petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-
-            container.appendChild(petal);
-        }
-    }
-    // Iniciar lluvia después de abrir el sobre
-    const sealBtn = document.getElementById('seal');
-    if(sealBtn) {
-        sealBtn.addEventListener('click', () => {
-            setTimeout(createPetals, 1000); // Empiezan a caer 1 seg después de abrir
-        });
-    }
-      
     </script>
 </body>
 </html>
-
-
-
