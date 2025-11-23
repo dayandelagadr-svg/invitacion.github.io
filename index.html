@@ -52,8 +52,8 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 80%;   /* Ajusta según necesites */
-        height: 80%;  /* Ajusta según necesites */
+        width: 80%;
+        height: 80%;
         object-fit: contain;
         opacity: 0.3;
         z-index: 0;
@@ -90,6 +90,30 @@
     .envelope-seal-simple:active { transform: translate(-50%, -50%) scale(0.95); filter: brightness(0.9); }
     #rsvpModal, #thankYouModal { z-index: 60; }
     #youtube-player { position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; }
+
+    /* ===== ESTILO BOTÓN WHATSAPP ===== */
+    .whatsapp-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25D366;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 35px;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+        z-index: 90; /* Debajo del sobre (100) pero sobre el contenido */
+        transition: transform 0.3s ease;
+        text-decoration: none;
+    }
+    .whatsapp-btn:hover {
+        transform: scale(1.1);
+        background-color: #20BA5A;
+    }
 </style>
 </head>
 
@@ -102,6 +126,11 @@
     </div>
 
     <div id="youtube-player"></div>
+    
+    <a href="https://wa.me/521XXXXXXXXXX?text=Hola,%20tengo%20una%20duda%20sobre%20la%20boda..." class="whatsapp-btn" target="_blank" title="¿Dudas? Escríbenos">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="top-left">
     <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="top-right">
     <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="bottom-left">
@@ -133,11 +162,9 @@
                 <a href="#etiqueta-section" class="uppercase bg-[#C6A9A9] text-white py-2 px-4 rounded-full shadow-md transition-transform transform hover:scale-105">Etiqueta</a>
             </nav>
         </main>
-
         <div id="countdown-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><h2 class="font-script text-5xl text-[#8C6B6B] mb-8">El Gran Día Se Acerca...</h2><div id="countdown" class="flex justify-center space-x-3 md:space-x-6"><div class="countdown-item flex flex-col items-center"><span id="days" class="countdown-number">0</span><span class="countdown-label">Días</span></div><div class="countdown-item flex flex-col items-center"><span id="hours" class="countdown-number">0</span><span class="countdown-label">Horas</span></div><div class="countdown-item flex flex-col items-center"><span id="minutes" class="countdown-number">0</span><span class="countdown-label">Minutos</span></div><div class="countdown-item flex flex-col items-center"><span id="seconds" class="countdown-number">0</span><span class="countdown-label">Segundos</span></div></div></div></div>
         
         <div id="itinerary-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-16">Itinerario</h2><div class="space-y-12 px-4 md:px-6"><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">1:00 pm</p><p class="text-2xl font-bold text-gray-800">Discurso</p><p class="text-lg text-gray-700">Salón del Reino de los Testigos de Jehová</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-glass-cheers fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">1:30 pm</p><p class="text-2xl font-bold text-gray-800">Recepción</p><p class="text-lg text-gray-700">Salón "El Jardín"</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-music fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">2:00 pm</p><p class="text-2xl font-bold text-gray-800">Baile</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-moon fa-3x"></i></div><div class="text-left"><p class="font-bold text-3xl text-[#8C6B6B]">10:00 pm</p><p class="text-2xl font-bold text-gray-800">Fin de la Celebración</p></div></div></div></div></div>
-        
         <div id="etiqueta-section" class="w-full max-w-3xl mt-8 text-center"><div class="content-box"><h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-16">Detalles Adicionales</h2><div class="space-y-12 px-4 md:px-6"><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-user-tie fa-3x"></i></div><div class="text-left"><p class="text-2xl font-bold text-gray-800">Código de Vestimenta</p><p class="text-lg text-gray-700">Agradecemos su presencia con atuendo **formal**.</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-smoking-ban fa-3x"></i></div><div class="text-left"><p class="text-2xl font-bold text-gray-800">Espacio Libre de Humo</p><p class="text-lg text-gray-700">Para la comodidad de todos, el evento es **libre de humo**.</p></div></div><div class="flex items-center space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-20 h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-parking fa-3x"></i></div><div class="text-left"><p class="text-2xl font-bold text-gray-800">Estacionamiento</p><p class="text-lg text-gray-700">Contamos con **estacionamiento gratuito** dentro del establecimiento.</p></div></div></div></div></div>
         
         <div id="recepcion-mapa-section" class="w-full max-w-3xl mt-8 text-center">
