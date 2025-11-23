@@ -19,10 +19,13 @@
     /* Estilos generales */
     body { font-family: 'Cormorant Garamond', serif; background-color: #F7EBEB; color: #5d5d5d; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 2rem; padding-bottom: 2rem; padding-left: 0; padding-right: 0; position: relative; overflow-x: hidden; overflow-y: hidden; }
     
-    /* Estilos Pétalos */
-    #petals-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; overflow: hidden; }
-    .petal { position: absolute; top: -10%; background-color: #FFC0CB; opacity: 0.8; border-radius: 10% 70%; animation: fall linear infinite; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
-    @keyframes fall { 0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; } }
+    .corner-flower { position: fixed; width: 120px; height: auto; z-index: 5; opacity: 0; transition: opacity 1s ease-in-out; }
+    @media (min-width: 768px) { .corner-flower { width: 180px; } }
+    #top-left { top: 10px; left: 10px; }
+    #top-right { top: 10px; right: 10px; transform: scaleX(-1); }
+    #bottom-left { bottom: 10px; left: 10px; transform: scaleY(-1); }
+    #bottom-right { bottom: 10px; right: 10px; transform: scale(-1,-1); }
+    body.invitation-visible .corner-flower { opacity: 1; }
 
     /* Contenedor Alargado */
     .main-container { position: relative; z-index: 10; width: 100%; max-width: 1200px; text-align: center; opacity: 0; transition: opacity 1s ease-in-out 1.5s; pointer-events: none; padding: 0 1rem; }
@@ -84,6 +87,11 @@
     <a href="https://wa.me/5215515747387?text=Hola,%20tengo%20una%20duda%20sobre%20la%20boda..." class="whatsapp-btn" target="_blank" title="¿Dudas? Escríbenos">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="top-left">
+    <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="top-right">
+    <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="bottom-left">
+    <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="bottom-right">
 
     <div class="main-container">
         <header></header>
@@ -151,7 +159,24 @@
         <footer class="mt-8 text-xs text-gray-500"><p>© 2025 Daniel & Pamela</p></footer>
     </div>
     
-    <div id="rsvpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center relative"><button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button><h3 class="font-script text-4xl text-[#8C6B6B] mb-4">Confirmar Asistencia</h3><p class="mb-6 text-gray-600">Por favor, completa los siguientes datos para confirmar.</p><form id="rsvpForm" class="space-y-4"><input type="text" id="guestName" placeholder="Nombre completo del invitado principal" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required><input type="number" id="guestCount" placeholder="Número total de asistentes (incluyéndote)" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" min="1" required><button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">Confirmar y Generar Pase</button></form></div></div>
+    <div id="rsvpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300">
+        <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center relative">
+            <button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button>
+            <h3 class="font-script text-4xl text-[#8C6B6B] mb-2">Confirmar Asistencia</h3>
+            <p class="mb-6 text-gray-600 text-sm">Ingresa los datos tal como aparecen en tu invitación.</p>
+            
+            <form id="rsvpForm" class="space-y-5">
+                <div class="text-left">
+                    <label class="block text-gray-700 text-sm font-bold mb-1" for="guestName">Familia o Nombre Completo</label>
+                    <input type="text" id="guestName" placeholder="Ej. Familia Pérez López o Juan Soto" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required>
+                    <p class="text-xs text-gray-400 mt-1">Escribe los apellidos (si es familia) o tu nombre completo.</p>
+                </div>
+                <button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">
+                    Buscar mi Invitación
+                </button>
+            </form>
+        </div>
+    </div>
     
     <div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300">
         <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center">
@@ -171,7 +196,6 @@
     </div>
 
     <script>
-        // UI Elements
         const envelopeContainer = document.getElementById('envelope-container');
         const envelopeWrapper = document.querySelector('.envelope-wrapper-simple');
         const seal = document.getElementById('seal');
@@ -181,7 +205,39 @@
         const closeRsvpModalBtn = document.getElementById("closeRsvpModal");
         const closeThankYouModalBtn = document.getElementById("closeThankYouModal");
         
-        // PÉTALOS
+        let player; let firstClickDone = false; let isPlayerReady = false;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', { height: '1', width: '1', videoId: 'kgUVq-ICt_Y', playerVars: { 'playsinline': 1, 'controls': 0, 'showinfo': 0, 'rel': 0 }, events: { 'onReady': onPlayerReady } });
+        }
+        function onPlayerReady(event) { isPlayerReady = true; }
+
+        if (seal) {
+            seal.addEventListener('click', () => {
+                if (firstClickDone) return; firstClickDone = true;
+                try { if (isPlayerReady && player && typeof player.playVideo === 'function') { player.playVideo(); } else { setTimeout(() => { if(player && player.playVideo) player.playVideo(); }, 1000); } } catch (e) {}
+                if(envelopeWrapper) envelopeWrapper.style.transform = 'scale(1.05)';
+                envelopeContainer.style.transition = 'opacity 1.2s ease-in-out';
+                setTimeout(() => { envelopeContainer.style.opacity = '0'; document.body.classList.add('invitation-visible'); setTimeout(() => { envelopeContainer.style.display = 'none'; createPetals(); }, 1200); }, 400);
+            });
+        }
+
+        const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
+        const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
+        if (openRsvpModalBtn) openRsvpModalBtn.addEventListener("click", () => openModal(rsvpModal));
+        if (closeRsvpModalBtn) closeRsvpModalBtn.addEventListener("click", () => closeModal(rsvpModal));
+        if (closeThankYouModalBtn) closeThankYouModalBtn.addEventListener("click", () => closeModal(thankYouModal));
+
+        const countdownDate = new Date("March 15, 2026 13:00:00").getTime();
+        const countdownFunction = setInterval(() => {
+            const now = new Date().getTime(); const distance = countdownDate - now;
+            if (distance < 0) { clearInterval(countdownFunction); document.getElementById("countdown").innerHTML = "<div class='text-center w-full'><p class='font-script text-4xl text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>"; return; }
+            const d = document.getElementById("days"), h = document.getElementById("hours"), m = document.getElementById("minutes"), s = document.getElementById("seconds");
+            if (d) d.innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            if (h) h.innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            if (m) m.innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            if (s) s.innerText = Math.floor((distance % (1000 * 60)) / 1000);
+        }, 1000);
+
         function createPetals() {
             const container = document.createElement('div');
             container.id = 'petals-container';
@@ -197,59 +253,13 @@
                 container.appendChild(petal);
             }
         }
-
-        // MÚSICA
-        let player; let firstClickDone = false; let isPlayerReady = false;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
-                height: '1', width: '1', videoId: 'kgUVq-ICt_Y', 
-                playerVars: { 'playsinline': 1, 'controls': 0, 'showinfo': 0, 'rel': 0 },
-                events: { 'onReady': onPlayerReady }
-            });
-        }
-        function onPlayerReady(event) { isPlayerReady = true; }
-
-        // ABRIR SOBRE
-        if (seal) {
-            seal.addEventListener('click', () => {
-                if (firstClickDone) return;
-                firstClickDone = true;
-                try { if (isPlayerReady && player && typeof player.playVideo === 'function') { player.playVideo(); } } catch (e) {}
-                if(envelopeWrapper) envelopeWrapper.style.transform = 'scale(1.05)';
-                envelopeContainer.style.transition = 'opacity 1.2s ease-in-out';
-                setTimeout(() => {
-                    if(envelopeContainer) envelopeContainer.style.opacity = '0';
-                    document.body.classList.add('invitation-visible');
-                    setTimeout(() => { if(envelopeContainer) envelopeContainer.style.display = 'none'; createPetals(); }, 1200);
-                }, 400);
-            });
-        }
-
-        // MODALES
-        const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
-        const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
-        if (openRsvpModalBtn) openRsvpModalBtn.addEventListener("click", () => openModal(rsvpModal));
-        if (closeRsvpModalBtn) closeRsvpModalBtn.addEventListener("click", () => closeModal(rsvpModal));
-        if (closeThankYouModalBtn) closeThankYouModalBtn.addEventListener("click", () => closeModal(thankYouModal));
-
-        // CUENTA REGRESIVA
-        const countdownDate = new Date("March 15, 2026 13:00:00").getTime();
-        const countdownFunction = setInterval(() => {
-            const now = new Date().getTime(); const distance = countdownDate - now;
-            if (distance < 0) { clearInterval(countdownFunction); document.getElementById("countdown").innerHTML = "¡Llegó el día!"; return; }
-            const d = document.getElementById("days"), h = document.getElementById("hours"), m = document.getElementById("minutes"), s = document.getElementById("seconds");
-            if (d) d.innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-            if (h) h.innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            if (m) m.innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            if (s) s.innerText = Math.floor((distance % (1000 * 60)) / 1000);
-        }, 1000);
     </script>
 
     <script src="https://www.youtube.com/iframe_api"></script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, serverTimestamp, query, where, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCEFg3H7spJXUBvjNRc-QRocIHk3Hd6dho",
@@ -273,7 +283,7 @@
         const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
         const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
 
-        // FUNCIONES DE CALENDARIO
+        // --- CALENDARIO ---
         if (addToGoogleCalendarBtn) {
             addToGoogleCalendarBtn.addEventListener("click", () => {
                 const title = encodeURIComponent("Boda de Daniel & Pamela");
@@ -283,109 +293,97 @@
                 window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`, '_blank');
             });
         }
-
         if (addToIcsBtn) {
             addToIcsBtn.addEventListener("click", () => {
-                const icsContent = `BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//Daniel y Pamela//Boda//ES
-BEGIN:VEVENT
-UID:boda-daniel-pamela-2026
-DTSTAMP:${new Date().toISOString().replace(/[-:.]/g, '')}
-DTSTART:20260315T130000
-DTEND:20260315T220000
-SUMMARY:Boda de Daniel & Pamela
-DESCRIPTION:¡Estás invitado a nuestra boda! Recuerda llevar tu pase.
-LOCATION:Salón "El Jardín", Prolongacion Jose Maria Morelos 1, Centro, 56530 Ixtapaluca, Méx.
-END:VEVENT
-END:VCALENDAR`;
-                const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-                const link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.setAttribute('download', 'Boda_Daniel_y_Pamela.ics');
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+                const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Daniel y Pamela//Boda//ES\nBEGIN:VEVENT\nSUMMARY:Boda Daniel y Pamela\nDTSTART:20260315T130000\nDTEND:20260315T220000\nLOCATION:Salón El Jardín\nEND:VEVENT\nEND:VCALENDAR`;
+                const link = document.createElement('a'); link.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsContent);
+                link.setAttribute('download', 'Boda_Daniel_y_Pamela.ics'); document.body.appendChild(link); link.click();
             });
         }
 
+        // --- CONFIRMACIÓN SEGURA ---
         if (rsvpForm) {
             rsvpForm.addEventListener("submit", async e => {
                 e.preventDefault(); 
-                if(submitRsvpBtn) { submitRsvpBtn.disabled = true; submitRsvpBtn.innerText = "Confirmando..."; }
-                const guestName = document.getElementById("guestName").value;
-                const guestCount = document.getElementById("guestCount").value;
+                if(submitRsvpBtn) { submitRsvpBtn.disabled = true; submitRsvpBtn.innerText = "Buscando invitación..."; }
+                
+                const guestNameInput = document.getElementById("guestName").value.trim();
+                
                 try {
-                    await addDoc(collection(db, "invitados_confirmados"), { nombre: guestName, asistentes: Number(guestCount), fecha_confirmacion: serverTimestamp() });
-                    // --- Generar pase PDF con diseño "Tarjeta Elegante" ---
-        function generateAndDownloadTicket(guestName, guestCount) {
-            // 1. Crear PDF Cuadrado (600x600)
+                    const q = query(collection(db, "lista_invitados"), where("nombre", "==", guestNameInput));
+                    const querySnapshot = await getDocs(q);
+
+                    if (querySnapshot.empty) {
+                        alert("No encontramos una invitación con ese nombre exacto.");
+                        submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación";
+                        return;
+                    }
+
+                    const guestDoc = querySnapshot.docs[0];
+                    const guestData = guestDoc.data();
+                    const guestId = guestDoc.id;
+                    
+                    if (guestData.confirmado === true) {
+                        alert(`Hola ${guestData.nombre}, ya habías confirmado tu asistencia.`);
+                        submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación";
+                        return;
+                    }
+
+                    const confirmedCount = guestData.boletos || 1;
+
+                    await addDoc(collection(db, "invitados_confirmados"), { nombre: guestData.nombre, asistentes: Number(confirmedCount), fecha_confirmacion: serverTimestamp() });
+                    
+                    const guestRef = doc(db, "lista_invitados", guestId);
+                    await updateDoc(guestRef, { confirmado: true });
+
+                    generateAndDownloadTicket(guestData.nombre, confirmedCount); 
+                    closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
+
+                } catch (err) { 
+                    console.error("Error:", err); alert("Hubo un error."); 
+                } finally { 
+                    if(submitRsvpBtn) { 
+                         // Si hubo error y no se completó, reactivar botón
+                         if (submitRsvpBtn.innerText !== "Buscando invitación...") {
+                            submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación"; 
+                         }
+                    }
+                }
+            });
+        }
+
+        window.generateAndDownloadTicket = function(guestName, guestCount) {
             const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 600] });
-
-            // 2. Fondo: Imagen de los novios (cubriendo todo)
             doc.addImage("nuevo.jpeg", "JPEG", 0, 0, 600, 600);
-
-            // 3. "Caja" Blanca Central (Simula el estilo de tu web)
-            // Dibujamos un rectángulo blanco semi-transparente o sólido
-            doc.setFillColor(251, 249, 247); // Color #FBF9F7 (El mismo fondo de tu web)
-            doc.setDrawColor(220, 208, 192); // Color del borde #dcd0c0
-            doc.setLineWidth(2);
-            // rect(x, y, ancho, alto, estilo) -> 'FD' significa Fill (Relleno) y Draw (Borde)
-            // Dejamos un margen de 50px alrededor
-            doc.rect(50, 50, 500, 500, 'FD');
-
-            // 4. Generar QR
-            const qrUrl = "https://dayandelagadr-svg.github.io/invitacion.github.io/";
-            const qr = qrcode(0, 'L'); qr.addData(qrUrl); qr.make(); 
-            const qrCodeImage = qr.createDataURL(4);
-
-            // --- TEXTOS DENTRO DE LA CAJA BLANCA ---
             
-            // Título: "PASE DE ACCESO" (Color Palo de Rosa #8C6B6B)
-            doc.setFont("Helvetica", "bold"); 
-            doc.setFontSize(24); 
-            doc.setTextColor(140, 107, 107); // RGB aproximado de #8C6B6B
+            // CAJA BLANCA ESTILO TARJETA
+            doc.setFillColor(251, 249, 247); doc.setDrawColor(220, 208, 192); doc.rect(50, 50, 500, 500, 'FD');
+
+            const qrUrl = "https://dayandelagadr-svg.github.io/invitacion.github.io/";
+            const qr = qrcode(0, 'L'); qr.addData(qrUrl); qr.make(); const qrCodeImage = qr.createDataURL(4);
+            
+            doc.setFont("Helvetica", "bold"); doc.setFontSize(24); doc.setTextColor(140, 107, 107);
             doc.text("PASE DE ACCESO", 300, 100, { align: "center" });
+            doc.setDrawColor(140, 107, 107); doc.line(200, 110, 400, 110);
 
-            // Línea decorativa simple
-            doc.setDrawColor(140, 107, 107);
-            doc.line(200, 110, 400, 110);
-
-            // Nombre del Invitado (Estilo elegante - Times Italic)
-            doc.setFont("times", "italic"); 
-            doc.setFontSize(28); 
-            doc.setTextColor(50, 50, 50); // Gris oscuro
-            // Ajustamos texto largo si es necesario (splitTextToSize)
+            doc.setFont("times", "italic"); doc.setFontSize(28); doc.setTextColor(50, 50, 50); 
             const splitName = doc.splitTextToSize(guestName, 400);
             doc.text(splitName, 300, 160, { align: "center" });
 
-            // Cantidad de Personas
-            doc.setFont("Helvetica", "normal"); 
-            doc.setFontSize(16); 
-            doc.setTextColor(100, 100, 100); // Gris medio
+            doc.setFont("Helvetica", "normal"); doc.setFontSize(16); doc.setTextColor(100, 100, 100);
             doc.text(`Pase válido para: ${guestCount} persona(s)`, 300, 210, { align: "center" });
 
-            // Detalles del Evento
-            doc.setFontSize(14);
-            doc.setTextColor(80, 80, 80);
+            doc.setFontSize(14); doc.setTextColor(80, 80, 80);
             doc.text("Boda de Daniel & Pamela", 300, 250, { align: "center" });
             doc.text("Domingo, 15 de Marzo de 2026", 300, 270, { align: "center" });
-            doc.text("Salón El Jardín - 1:00 PM", 300, 290, { align: "center" });
 
-            // --- CÓDIGO QR ---
-            // Centrado en la parte inferior de la caja
             doc.addImage(qrCodeImage, "PNG", 250, 330, 100, 100); 
-
-            // Pie del boleto
-            doc.setFontSize(10);
-            doc.setTextColor(150, 150, 150);
+            doc.setFontSize(10); doc.setTextColor(150, 150, 150);
             doc.text("Presenta este código al llegar", 300, 450, { align: "center" });
             doc.text("¡Gracias por acompañarnos!", 300, 520, { align: "center" });
 
             doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
         }
-        
     </script>
 </body>
 </html>
-
