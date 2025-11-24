@@ -336,12 +336,14 @@
                     }
 
                     const confirmedCount = guestData.boletos || 1;
+
                     await addDoc(collection(db, "invitados_confirmados"), { nombre: guestData.nombre, asistentes: Number(confirmedCount), fecha_confirmacion: serverTimestamp() });
+                    
                     const guestRef = doc(db, "lista_invitados", guestId);
                     await updateDoc(guestRef, { confirmado: true });
                     
                     const nombreParaPDF = guestData.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
-                    generateAndDownloadTicket(nombreParaPDF, confirmedCount, guestId); // Pasamos el ID para el código de barras
+                    generateAndDownloadTicket(nombreParaPDF, confirmedCount, guestId); // Pasamos el ID
                     
                     closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
 
@@ -350,45 +352,35 @@
             });
         }
 
-        // --- GENERAR PDF CON CÓDIGO DE BARRAS ---
+        // GENERAR PDF CON CÓDIGO DE BARRAS (Y SIN QR GENERADO)
         window.generateAndDownloadTicket = function(guestName, guestCount, guestId) {
             const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
             
-            // 1. Imagen de Fondo
-            doc.addImage("nuevo.jpeg", "JPEG", 0, 0, 600, 850);
+            // 1. Imagen de Fondo (plantilla-boleto.png)
+            doc.addImage("plantilla-boleto.png", "PNG", 0, 0, 600, 850);
 
-            // 2. Configuración Texto
+            // 2. Configuración de Texto Blanco
             doc.setTextColor(255, 255, 255); 
 
-            // 3. Nombre Invitado
+            // 3. Nombre del Invitado
             doc.setFont("times", "italic"); doc.setFontSize(32); 
             doc.text(guestName, 300, 600, { align: "center" }); 
 
             // 4. Cantidad
-            doc.setFont("helvetica", "normal"); doc.setFontSize(22); 
-            doc.text(`${guestCount}`, 300, 650, { align: "center" }); // Solo el número
+            doc.setFont("helvetica", "normal"); doc.setFontSize(20); 
+            doc.text(`Válido para ${guestCount} personas`, 300, 635, { align: "center" }); 
 
-            // 5. Código de Barras
+            // 5. Generar Código de Barras
             const canvas = document.createElement("canvas");
-            // Generamos código de barras con el ID único o nombre
-            JsBarcode(canvas, guestId.substring(0, 8).toUpperCase(), { 
-                format: "CODE128", 
-                displayValue: false, 
-                lineColor: "#000", 
-                width: 3, 
-                height: 60,
-                margin: 0
+            const barcodeValue = guestId.substring(0, 8).toUpperCase();
+            
+            JsBarcode(canvas, barcodeValue, { 
+                format: "CODE128", displayValue: true, lineColor: "#000", width: 2, height: 50, margin: 10, fontSize: 14, background: "#ffffff" 
             });
             const barcodeImg = canvas.toDataURL("image/png");
 
-            // Fondo blanco para el código de barras para que se lea bien
-            doc.setFillColor(255, 255, 255);
-            doc.rect(150, 720, 300, 80, 'F'); // Rectángulo blanco de fondo
-            doc.addImage(barcodeImg, "PNG", 170, 730, 260, 60); // Código encima
-
-            // 6. Código de Texto (ID Visible)
-            doc.setFontSize(12); doc.setTextColor(255, 255, 255);
-            doc.text(`ID: ${guestId.substring(0, 8).toUpperCase()}`, 300, 820, { align: "center" });
+            // 6. Pegar Código de Barras
+            doc.addImage(barcodeImg, "PNG", 175, 720, 250, 80); 
 
             doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
         }
