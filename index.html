@@ -170,8 +170,8 @@
             <form id="rsvpForm" class="space-y-5">
                 <div class="text-left">
                     <label class="block text-gray-700 text-sm font-bold mb-1" for="guestName">Familia o Nombre Completo</label>
-                    <input type="text" id="guestName" placeholder="Ej. Familia Pérez López o Juan Soto" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required>
-                    <p class="text-xs text-gray-400 mt-1">Escribe los apellidos (si es familia) o tu nombre completo.</p>
+                    <input type="text" id="guestName" placeholder="Ej. Familia Pérez López" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required>
+                    <p class="text-xs text-gray-400 mt-1">Escribe los apellidos o tu nombre completo.</p>
                 </div>
                 <button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">
                     Buscar mi Invitación
@@ -338,12 +338,10 @@
                     const confirmedCount = guestData.boletos || 1;
 
                     await addDoc(collection(db, "invitados_confirmados"), { nombre: guestData.nombre, asistentes: Number(confirmedCount), fecha_confirmacion: serverTimestamp() });
-                    
                     const guestRef = doc(db, "lista_invitados", guestId);
                     await updateDoc(guestRef, { confirmado: true });
                     
                     const nombreParaPDF = guestData.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
-                    // Pasamos el ID para generar el código de barras
                     generateAndDownloadTicket(nombreParaPDF, confirmedCount, guestId); 
                     
                     closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
@@ -353,37 +351,35 @@
             });
         }
 
-        // GENERAR PDF (TEXTO ARRIBA, BARCODE IZQUIERDA ABAJO)
+        // GENERAR PDF CON CÓDIGO DE BARRAS (AJUSTADO)
         window.generateAndDownloadTicket = function(guestName, guestCount, guestId) {
-            // Formato Vertical
             const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
             
-            // 1. Imagen de Fondo
+            // 1. Fondo
             doc.addImage("plantilla-boleto.png", "PNG", 0, 0, 600, 850);
 
-            // 2. Configuración Texto Blanco
+            // 2. Texto Blanco
             doc.setTextColor(255, 255, 255); 
 
-            // 3. Nombre (Más arriba: Y=530)
-            doc.setFont("times", "italic"); doc.setFontSize(36); 
-            doc.text(guestName, 300, 530, { align: "center" }); 
+            // 3. Nombre (Y=510 - Más arriba)
+            doc.setFont("times", "italic"); doc.setFontSize(32); 
+            doc.text(guestName, 300, 510, { align: "center" }); 
 
-            // 4. Cantidad (Solo número, Y=580)
-            doc.setFont("helvetica", "normal"); doc.setFontSize(22); 
-            doc.text(`${guestCount}`, 300, 580, { align: "center" }); 
+            // 4. Cantidad (Solo número, Y=560 - Más arriba)
+            doc.setFont("helvetica", "bold"); doc.setFontSize(40); 
+            doc.text(`${guestCount}`, 450, 560, { align: "center" }); 
 
-            // 5. Generar Código de Barras
+            // 5. Código de Barras (Pequeño, Esquina Inferior Izquierda)
             const canvas = document.createElement("canvas");
             const barcodeValue = guestId.substring(0, 8).toUpperCase();
             JsBarcode(canvas, barcodeValue, { 
                 format: "CODE128", displayValue: true, lineColor: "#000", 
-                width: 1.5, height: 40, margin: 5, fontSize: 12, background: "#ffffff" 
+                width: 1.5, height: 30, margin: 5, fontSize: 10, background: "#ffffff" 
             });
             const barcodeImg = canvas.toDataURL("image/png");
 
-            // 6. Pegar Código de Barras (Esquina inferior IZQUIERDA)
-            // X=40, Y=760 (ajustado para que quede abajo a la izquierda)
-            doc.addImage(barcodeImg, "PNG", 40, 760, 160, 60); 
+            // 6. Pegar Código de Barras (X=40, Y=760 -> Esquina inferior IZQUIERDA)
+            doc.addImage(barcodeImg, "PNG", 40, 760, 140, 50); 
 
             doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
         }
