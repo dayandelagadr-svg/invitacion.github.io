@@ -156,11 +156,12 @@
             <button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button>
             <h3 class="font-script text-4xl text-[#8C6B6B] mb-2">Confirmar Asistencia</h3>
             <p class="mb-6 text-gray-600 text-sm">Ingresa los datos tal como aparecen en tu invitación.</p>
+            
             <form id="rsvpForm" class="space-y-5">
                 <div class="text-left">
                     <label class="block text-gray-700 text-sm font-bold mb-1" for="guestName">Familia o Nombre Completo</label>
-                    <input type="text" id="guestName" placeholder="Ej. Familia Pérez López" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required>
-                    <p class="text-xs text-gray-400 mt-1">Escribe los apellidos o tu nombre completo.</p>
+                    <input type="text" id="guestName" placeholder="Ej. Familia Pérez López o Juan Soto" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required>
+                    <p class="text-xs text-gray-400 mt-1">Escribe los apellidos (si es familia) o tu nombre completo.</p>
                 </div>
                 <button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">
                     Buscar mi Invitación
@@ -173,6 +174,7 @@
         <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center">
             <h3 class="font-script text-4xl text-[#8C6B6B] mb-4">¡Gracias!</h3>
             <p class="mb-6 text-gray-600">Tu asistencia ha sido confirmada. Tu pase personal se está descargando.</p>
+            
             <div class="flex flex-col space-y-3 mb-6">
                 <button id="addToGoogleCalendarBtn" class="bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center shadow-md">
                     <i class="fab fa-google mr-2"></i> Agregar a Google Calendar
@@ -212,7 +214,6 @@
             }
         }
 
-        // MÚSICA
         let player; let firstClickDone = false; let isPlayerReady = false;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', { height: '1', width: '1', videoId: 'kgUVq-ICt_Y', playerVars: { 'playsinline': 1, 'controls': 0, 'showinfo': 0, 'rel': 0 }, events: { 'onReady': onPlayerReady } });
@@ -279,7 +280,7 @@
         const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
         const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
 
-        // CALENDARIO
+        // FUNCIONES CALENDARIO
         if (addToGoogleCalendarBtn) {
             addToGoogleCalendarBtn.addEventListener("click", () => {
                 const title = encodeURIComponent("Boda de Daniel & Pamela");
@@ -297,7 +298,7 @@
             });
         }
 
-        // CONFIRMACIÓN SEGURA
+        // CONFIRMACIÓN
         if (rsvpForm) {
             rsvpForm.addEventListener("submit", async e => {
                 e.preventDefault(); 
@@ -310,7 +311,7 @@
                     const querySnapshot = await getDocs(q);
 
                     if (querySnapshot.empty) {
-                        alert("No encontramos una invitación con ese nombre. Verifica mayúsculas y acentos.");
+                        alert("No encontramos una invitación con ese nombre exacto. Verifica mayúsculas y acentos.");
                         submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación";
                         return;
                     }
@@ -326,50 +327,38 @@
                     }
 
                     const confirmedCount = guestData.boletos || 1;
-
                     await addDoc(collection(db, "invitados_confirmados"), { nombre: guestData.nombre, asistentes: Number(confirmedCount), fecha_confirmacion: serverTimestamp() });
-                    
                     const guestRef = doc(db, "lista_invitados", guestId);
                     await updateDoc(guestRef, { confirmado: true });
                     
-                    // Convertir nombre a formato título para el PDF (primera letra mayúscula)
                     const nombreParaPDF = guestData.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
-
                     generateAndDownloadTicket(nombreParaPDF, confirmedCount); 
+                    
                     closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
 
-                } catch (err) { 
-                    console.error("Error:", err); alert("Hubo un error."); 
-                } finally { 
-                    if(submitRsvpBtn) { 
-                         if (submitRsvpBtn.innerText !== "Buscando invitación...") {
-                            submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación"; 
-                         }
-                    }
-                }
+                } catch (err) { console.error("Error:", err); alert("Hubo un error."); } 
+                finally { if(submitRsvpBtn) { if (submitRsvpBtn.innerText !== "Buscando invitación...") { submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación"; } } }
             });
         }
 
+        // GENERAR PDF
         window.generateAndDownloadTicket = function(guestName, guestCount) {
-            const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 600] });
-            doc.addImage("pdf.png", "PNG", 0, 0, 600, 600); // IMAGEN DE FONDO PDF
+            const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
+            doc.addImage("pdf.png", "JPEG", 0, 0, 600, 850);
+
             const qrUrl = "https://dayandelagadr-svg.github.io/invitacion.github.io/";
             const qr = qrcode(0, 'L'); qr.addData(qrUrl); qr.make(); const qrCodeImage = qr.createDataURL(4);
             
-            // Título
-            doc.setFont("Helvetica", "bold"); doc.setFontSize(28); doc.setTextColor(140, 107, 107);
-            doc.text("PASE DE ACCESO", 300, 100, { align: "center" });
+            // Nombre Invitado (Debajo de la fecha)
+            doc.setFont("times", "italic"); doc.setFontSize(30); doc.setTextColor(80, 80, 80); 
+            doc.text(guestName, 300, 550, { align: "center" }); 
 
-            // Nombre Invitado
-            doc.setFont("times", "italic"); doc.setFontSize(28); doc.setTextColor(50, 50, 50); 
-            doc.text(guestName, 300, 160, { align: "center" });
+            // Cantidad de Personas
+            doc.setFont("Helvetica", "normal"); doc.setFontSize(20); doc.setTextColor(100, 100, 100);
+            doc.text(`Válido para: ${guestCount} persona(s)`, 300, 600, { align: "center" });
 
-            // Cantidad
-            doc.setFont("Helvetica", "normal"); doc.setFontSize(18); doc.setTextColor(100, 100, 100);
-            doc.text(`Pase válido para: ${guestCount} persona(s)`, 300, 210, { align: "center" });
-
-            // QR en esquina
-            doc.addImage(qrCodeImage, "PNG", 460, 460, 100, 100); 
+            // QR (Esquina inferior derecha)
+            doc.addImage(qrCodeImage, "PNG", 480, 680, 100, 100); 
 
             doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
         }
