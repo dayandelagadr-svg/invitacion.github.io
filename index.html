@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuestra Boda - Daniel y Pamela</title>
     
+    <meta property="og:title" content="Nuestra Boda - Daniel & Pamela" />
+    <meta property="og:description" content="Queremos compartir la alegría de unir nuestras vidas contigo. Entra para ver los detalles y confirmar tu asistencia." />
+    <meta property="og:image" content="https://dayandelagadr-svg.github.io/invitacion.github.io/novios.jpeg" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +17,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
    <style>
@@ -56,7 +62,12 @@
     #envelope-container { position: fixed; inset: 0; background-color: #F7EBEB; z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease-in-out; }
     .envelope-wrapper-simple { position: relative; width: 90vw; max-width: 500px; aspect-ratio: 1.5 / 1; }
     .envelope-image { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15)); transition: transform 1s ease; }
-    .envelope-seal-simple { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20%; max-width: 80px; cursor: pointer; transition: transform 0.4s ease, filter 0.4s ease; z-index: 20; }
+    .envelope-seal-simple {
+        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        width: 20%; max-width: 80px; cursor: pointer;
+        transition: transform 0.4s ease, filter 0.4s ease;
+        z-index: 20;
+    }
     .envelope-seal-simple:hover { transform: translate(-50%, -50%) scale(1.15); filter: brightness(1.2); }
     .envelope-seal-simple:active { transform: translate(-50%, -50%) scale(0.95); filter: brightness(0.9); }
     
@@ -156,7 +167,6 @@
             <button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button>
             <h3 class="font-script text-4xl text-[#8C6B6B] mb-2">Confirmar Asistencia</h3>
             <p class="mb-6 text-gray-600 text-sm">Ingresa los datos tal como aparecen en tu invitación.</p>
-            
             <form id="rsvpForm" class="space-y-5">
                 <div class="text-left">
                     <label class="block text-gray-700 text-sm font-bold mb-1" for="guestName">Familia o Nombre Completo</label>
@@ -174,7 +184,6 @@
         <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center">
             <h3 class="font-script text-4xl text-[#8C6B6B] mb-4">¡Gracias!</h3>
             <p class="mb-6 text-gray-600">Tu asistencia ha sido confirmada. Tu pase personal se está descargando.</p>
-            
             <div class="flex flex-col space-y-3 mb-6">
                 <button id="addToGoogleCalendarBtn" class="bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center shadow-md">
                     <i class="fab fa-google mr-2"></i> Agregar a Google Calendar
@@ -280,7 +289,7 @@
         const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
         const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
 
-        // FUNCIONES CALENDARIO
+        // CALENDARIO
         if (addToGoogleCalendarBtn) {
             addToGoogleCalendarBtn.addEventListener("click", () => {
                 const title = encodeURIComponent("Boda de Daniel & Pamela");
@@ -298,7 +307,7 @@
             });
         }
 
-        // CONFIRMACIÓN
+        // CONFIRMACIÓN SEGURA
         if (rsvpForm) {
             rsvpForm.addEventListener("submit", async e => {
                 e.preventDefault(); 
@@ -332,7 +341,7 @@
                     await updateDoc(guestRef, { confirmado: true });
                     
                     const nombreParaPDF = guestData.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
-                    generateAndDownloadTicket(nombreParaPDF, confirmedCount); 
+                    generateAndDownloadTicket(nombreParaPDF, confirmedCount, guestId); // Pasamos el ID para el código de barras
                     
                     closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
 
@@ -341,24 +350,45 @@
             });
         }
 
-        // GENERAR PDF
-        window.generateAndDownloadTicket = function(guestName, guestCount) {
+        // --- GENERAR PDF CON CÓDIGO DE BARRAS ---
+        window.generateAndDownloadTicket = function(guestName, guestCount, guestId) {
             const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
-            doc.addImage("pdf.png", "JPEG", 0, 0, 600, 850);
-
-            const qrUrl = "https://dayandelagadr-svg.github.io/invitacion.github.io/";
-            const qr = qrcode(0, 'L'); qr.addData(qrUrl); qr.make(); const qrCodeImage = qr.createDataURL(4);
             
-            // Nombre Invitado (Debajo de la fecha)
-            doc.setFont("times", "italic"); doc.setFontSize(30); doc.setTextColor(80, 80, 80); 
-            doc.text(guestName, 300, 550, { align: "center" }); 
+            // 1. Imagen de Fondo
+            doc.addImage("nuevo.jpeg", "JPEG", 0, 0, 600, 850);
 
-            // Cantidad de Personas
-            doc.setFont("Helvetica", "normal"); doc.setFontSize(20); doc.setTextColor(100, 100, 100);
-            doc.text(`Válido para: ${guestCount} persona(s)`, 300, 600, { align: "center" });
+            // 2. Configuración Texto
+            doc.setTextColor(255, 255, 255); 
 
-            // QR (Esquina inferior derecha)
-            doc.addImage(qrCodeImage, "PNG", 480, 680, 100, 100); 
+            // 3. Nombre Invitado
+            doc.setFont("times", "italic"); doc.setFontSize(32); 
+            doc.text(guestName, 300, 600, { align: "center" }); 
+
+            // 4. Cantidad
+            doc.setFont("helvetica", "normal"); doc.setFontSize(22); 
+            doc.text(`${guestCount}`, 300, 650, { align: "center" }); // Solo el número
+
+            // 5. Código de Barras
+            const canvas = document.createElement("canvas");
+            // Generamos código de barras con el ID único o nombre
+            JsBarcode(canvas, guestId.substring(0, 8).toUpperCase(), { 
+                format: "CODE128", 
+                displayValue: false, 
+                lineColor: "#000", 
+                width: 3, 
+                height: 60,
+                margin: 0
+            });
+            const barcodeImg = canvas.toDataURL("image/png");
+
+            // Fondo blanco para el código de barras para que se lea bien
+            doc.setFillColor(255, 255, 255);
+            doc.rect(150, 720, 300, 80, 'F'); // Rectángulo blanco de fondo
+            doc.addImage(barcodeImg, "PNG", 170, 730, 260, 60); // Código encima
+
+            // 6. Código de Texto (ID Visible)
+            doc.setFontSize(12); doc.setTextColor(255, 255, 255);
+            doc.text(`ID: ${guestId.substring(0, 8).toUpperCase()}`, 300, 820, { align: "center" });
 
             doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
         }
