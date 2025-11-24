@@ -301,21 +301,22 @@
             });
         }
 
-        // --- CONFIRMACIÓN SEGURA ---
+        // --- CONFIRMACIÓN SEGURA (FLEXIBLE) ---
         if (rsvpForm) {
             rsvpForm.addEventListener("submit", async e => {
                 e.preventDefault(); 
                 if(submitRsvpBtn) { submitRsvpBtn.disabled = true; submitRsvpBtn.innerText = "Buscando invitación..."; }
                 
-                const guestNameInput = document.getElementById("guestName").value.trim();
+                // 1. Limpiamos el texto del usuario (minúsculas y sin espacios extra)
+                const guestNameInput = document.getElementById("guestName").value.toLowerCase().trim();
                 
                 try {
-                    // Buscamos "Nombre" con MAYÚSCULA
-                    const q = query(collection(db, "lista_invitados"), where("Nombre", "==", guestNameInput));
+                    // 2. Buscamos en Firebase
+                    const q = query(collection(db, "lista_invitados"), where("nombre", "==", guestNameInput));
                     const querySnapshot = await getDocs(q);
 
                     if (querySnapshot.empty) {
-                        alert("No encontramos una invitación con ese nombre exacto. Verifica mayúsculas y acentos.");
+                        alert("No encontramos una invitación con ese nombre. Por favor verifica que esté bien escrito.");
                         submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación";
                         return;
                     }
@@ -324,12 +325,41 @@
                     const guestData = guestDoc.data();
                     const guestId = guestDoc.id;
                     
-                    // Verificamos "Confirmado" con MAYÚSCULA
-                    if (guestData.Confirmado === true) {
-                        alert(`Hola ${guestData.Nombre}, ya habías confirmado tu asistencia.`);
+                    if (guestData.confirmado === true) {
+                        alert(`Hola ${guestData.nombre}, ya habías confirmado tu asistencia.`);
                         submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación";
                         return;
                     }
+
+                    const confirmedCount = guestData.boletos || 1;
+
+                    await addDoc(collection(db, "invitados_confirmados"), { 
+                        // Guardamos el nombre original de la base de datos para que se vea bonito en el reporte
+                        nombre: guestData.nombre, 
+                        asistentes: Number(confirmedCount), 
+                        fecha_confirmacion: serverTimestamp() 
+                    });
+                    
+                    const guestRef = doc(db, "lista_invitados", guestId);
+                    await updateDoc(guestRef, { confirmado: true });
+
+                    // 3. Para el PDF, ponemos la primera letra de cada palabra en mayúscula para que se vea elegante
+                    const nombreParaPDF = guestData.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+                    
+                    generateAndDownloadTicket(nombreParaPDF, confirmedCount); 
+                    closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
+
+                } catch (err) { 
+                    console.error("Error:", err); alert("Hubo un error de conexión."); 
+                } finally { 
+                    if(submitRsvpBtn) { 
+                         if (submitRsvpBtn.innerText !== "Buscando invitación...") {
+                            submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación"; 
+                         }
+                    }
+                }
+            });
+        }
 
                     // Obtenemos "Boletos" con MAYÚSCULA
                     const confirmedCount = guestData.Boletos || 1;
@@ -388,3 +418,4 @@
     </script>
 </body>
 </html>
+
