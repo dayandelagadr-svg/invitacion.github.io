@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>- Daniel y Pamela</title>
+    <title>Daniel y Pamela</title>
     
     <meta property="og:title" content="Daniel & Pamela" />
     <meta property="og:description" content="Queremos compartir la alegría de unir nuestras vidas contigo. Entra para ver los detalles y confirmar tu asistencia." />
@@ -22,68 +22,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
    <style>
-    /* Estilos generales - FONDO CON TEXTURA */
-    body { 
-        font-family: 'Cormorant Garamond', serif; 
-        color: #5d5d5d; 
-        min-height: 100vh; 
-        display: flex; flex-direction: column; justify-content: center; align-items: center; 
-        padding: 2rem 1rem; 
-        position: relative; overflow-x: hidden; overflow-y: hidden;
-        background-color: #FAF7F5; 
-        background-image: radial-gradient(#e8dada 1px, transparent 0);
-        background-size: 40px 40px; 
-    }
+    /* Estilos generales */
+    body { font-family: 'Cormorant Garamond', serif; background-color: #FAF7F5; color: #5d5d5d; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 2rem; padding-bottom: 2rem; padding-left: 0; padding-right: 0; position: relative; overflow-x: hidden; overflow-y: hidden; 
+    background-image: radial-gradient(#e8dada 1px, transparent 0); background-size: 40px 40px; }
     
-    /* PÉTALOS */
     #petals-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; overflow: hidden; }
     .petal { position: absolute; top: -10%; background-color: #722F37; opacity: 0.6; border-radius: 10% 70%; animation: fall linear infinite; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     @keyframes fall { 0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; } }
 
-    /* FLECHA DESLIZA (Animación) */
-    .scroll-indicator {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-        z-index: 20;
-        animation: bounce 2s infinite;
-        cursor: pointer;
-    }
-    .scroll-text {
-        font-size: 0.8rem;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #722F37;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-    @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-        40% { transform: translateX(-50%) translateY(-10px); }
-        60% { transform: translateX(-50%) translateY(-5px); }
-    }
-
-    /* Contenedor Principal */
-    .main-container { 
-        position: relative; z-index: 10; width: 100%; max-width: 1200px; text-align: center; 
-        opacity: 0; transition: opacity 1s ease-in-out 1.5s; pointer-events: none; padding: 0 1rem;
-        border: 2px solid #dcd0c0; outline: 1px solid #dcd0c0; outline-offset: 5px;
-        margin: 20px; padding: 20px; background-color: rgba(255, 255, 255, 0.3); border-radius: 5px;
-    }
+    .main-container { position: relative; z-index: 10; width: 100%; max-width: 1200px; text-align: center; opacity: 0; transition: opacity 1s ease-in-out 1.5s; pointer-events: none; padding: 0 1rem; border: 2px solid #dcd0c0; outline: 1px solid #dcd0c0; outline-offset: 5px; margin: 20px; padding: 20px; background-color: rgba(255, 255, 255, 0.3); border-radius: 5px; }
     @media (max-width: 767px) { body { padding-top: 4rem; padding-bottom: 4rem; } .main-container { padding: 10px; margin: 10px; outline: none; } }
     body.invitation-visible .main-container { opacity: 1; pointer-events: auto; }
     body.invitation-visible { overflow-y: auto; }
 
-    /* Cajón Principal */
-    main.content-box {
-        border: 1px solid #e0d0d5; padding: 3rem 1rem; background-color: #FFFFFF; 
-        box-shadow: 0 15px 35px rgba(114, 47, 55, 0.1); position: relative; z-index: 10; 
-        overflow: hidden; border-radius: 8px; min-height: 85vh; /* Más alto para llenar pantalla */
-        display: flex; flex-direction: column; justify-content: center; align-items: center;
-    }
-    @media (min-width: 768px) { main.content-box { padding: 4rem 4rem; min-height: 90vh; } }
+    main.content-box { border: 1px solid #e0d0d5; padding: 3rem 1rem; background-color: #FFFFFF; box-shadow: 0 15px 35px rgba(114, 47, 55, 0.1); position: relative; z-index: 10; overflow: hidden; border-radius: 8px; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    @media (min-width: 768px) { main.content-box { padding: 4rem 4rem; min-height: 70vh; } }
 
     .hero-image-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; z-index: 0; pointer-events: none; filter: brightness(0.9) sepia(0.1); }
 
@@ -101,20 +54,10 @@
     .countdown-label { font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: #5d5d5d; font-weight: 700; }
     @media (min-width: 768px) { .countdown-label { font-size: .9rem; } }
     
-    /* SOBRE - CLICK EN CUALQUIER PARTE */
-    #envelope-container { 
-        position: fixed; inset: 0; background-color: #FAF7F5; 
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-        z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease-in-out; 
-        cursor: pointer; 
-    }
+    #envelope-container { position: fixed; inset: 0; background-color: #FAF7F5; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E"); z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease-in-out; cursor: pointer; }
     .envelope-wrapper-simple { position: relative; width: 90vw; max-width: 500px; aspect-ratio: 1.5 / 1; pointer-events: none; }
     .envelope-image { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15)); transition: transform 1s ease; }
-    .envelope-seal-simple { 
-        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-        width: 20%; max-width: 80px; 
-        transition: transform 0.4s ease, filter 0.4s ease; z-index: 20; 
-    }
+    .envelope-seal-simple { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20%; max-width: 80px; transition: transform 0.4s ease, filter 0.4s ease; z-index: 20; }
     
     .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 90; transition: transform 0.3s ease; text-decoration: none; }
     .whatsapp-btn:hover { transform: scale(1.1); background-color: #20BA5A; }
@@ -162,11 +105,6 @@
                     <a href="#etiqueta-section" class="uppercase bg-[#903b46] py-3 px-6 rounded-full shadow-lg hover:bg-[#722F37]">Etiqueta</a>
                 </nav>
             </div>
-            
-            <div class="scroll-indicator">
-                <p class="scroll-text">Desliza</p>
-                <i class="fas fa-chevron-down text-[#722F37] text-2xl"></i>
-            </div>
         </main>
 
         <div id="countdown-section" class="w-full mt-8 text-center secondary-box reveal">
@@ -182,7 +120,7 @@
         <div id="itinerary-section" class="w-full mt-8 text-center secondary-box reveal">
             <h2 class="font-script text-4xl md:text-5xl text-[#7A2E39] mb-12">Programa</h2>
             <div class="space-y-10 px-2 md:px-6">
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">2:15 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Discurso</p><p class="text-sm md:text-lg text-gray-700">Salón de fiestas "El Jardín"</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">2:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Discurso</p><p class="text-sm md:text-lg text-gray-700">Salón de fiestas "El Jardín"</p></div></div>
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-heart fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">3:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Felicitaciones</p></div></div>
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-utensils fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">3:30 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Comida</p></div></div>
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-music fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">4:30 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Inicio de Baile</p><p class="text-sm md:text-lg text-gray-700">Baile de los Novios</p></div></div>
@@ -195,9 +133,9 @@
         <div id="etiqueta-section" class="w-full mt-12 text-center secondary-box reveal">
             <h2 class="font-script text-4xl md:text-5xl text-[#7A2E39] mb-12">Detalles Adicionales</h2>
             <div class="space-y-10 px-2 md:px-6">
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-user-tie fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Código de Vestimenta</p><p class="text-sm md:text-lg text-gray-700">Agradecemos su presencia con atuendo **formal**.</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-smoking-ban fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Espacio Libre de Humo</p><p class="text-sm md:text-lg text-gray-700">Para la comodidad de todos, el evento es **libre de humo**.</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-parking fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Estacionamiento</p><p class="text-sm md:text-lg text-gray-700">Contamos con **estacionamiento gratuito** dentro del establecimiento.</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-user-tie fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Código de Vestimenta</p><p class="text-sm md:text-lg text-gray-700">Tu elegancia dará brillo a nuestra celebración. <br><strong>Atuendo Formal.</strong></p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-smoking-ban fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Espacio Libre de Humo</p><p class="text-sm md:text-lg text-gray-700">Queremos un ambiente fresco para todos. El evento es <strong>libre de humo</strong>.</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-parking fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Estacionamiento</p><p class="text-sm md:text-lg text-gray-700">Disfruta sin preocupaciones, contamos con <strong>estacionamiento gratuito</strong>.</p></div></div>
             </div>
         </div>
         
@@ -260,17 +198,6 @@
         </div>
     </div>
 
-    <div id="ticket-template" style="position: absolute; left: -9999px; top: 0; width: 600px; height: 850px; overflow: hidden;">
-        <img src="plantilla-boleto.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
-        <div style="position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <div style="margin-top: 350px; text-align: center;"> 
-                <h1 id="ticket-guest-name" style="font-family: 'Times New Roman', serif; font-style: italic; font-size: 50px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin: 0;">Nombre Invitado</h1>
-                <p id="ticket-guest-count" style="font-family: 'Arial', sans-serif; font-weight: bold; font-size: 70px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-top: 10px;">3</p>
-            </div>
-            <img id="ticket-barcode" src="" style="position: absolute; bottom: 40px; left: 40px; width: 130px; height: 40px; background: white; padding: 5px; border-radius: 5px;">
-        </div>
-    </div>
-
     <script>
         const envelopeContainer = document.getElementById('envelope-container');
         const envelopeWrapper = document.querySelector('.envelope-wrapper-simple');
@@ -287,7 +214,7 @@
                 const petal = document.createElement('div'); petal.classList.add('petal');
                 const size = Math.random() * 15 + 10; petal.style.width = `${size}px`; petal.style.height = `${size}px`;
                 petal.style.left = `${Math.random() * 100}vw`; petal.style.animationDuration = `${Math.random() * 5 + 5}s`; petal.style.animationDelay = `${Math.random() * 5}s`;
-                const colors = ['#722F37', '#9C4E59', '#C27E88', '#E3B5BC']; 
+                const colors = ['#7A2E39', '#9C4E59', '#C27E88', '#E3B5BC']; 
                 petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; container.appendChild(petal);
             }
         }
@@ -335,7 +262,7 @@
         const countdownDate = new Date("March 15, 2026 13:00:00").getTime();
         const countdownFunction = setInterval(() => {
             const now = new Date().getTime(); const distance = countdownDate - now;
-            if (distance < 0) { clearInterval(countdownFunction); document.getElementById("countdown").innerHTML = "<div class='text-center w-full'><p class='font-script text-4xl text-[#722F37]'>¡El gran día ha llegado!</p></div>"; return; }
+            if (distance < 0) { clearInterval(countdownFunction); document.getElementById("countdown").innerHTML = "<div class='text-center w-full'><p class='font-script text-4xl text-[#7A2E39]'>¡El gran día ha llegado!</p></div>"; return; }
             const d = document.getElementById("days"), h = document.getElementById("hours"), m = document.getElementById("minutes"), s = document.getElementById("seconds");
             if (d) d.innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
             if (h) h.innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -430,290 +357,21 @@
         }
 
         window.generateAndDownloadTicket = function(guestName, guestCount, guestId) {
-            document.getElementById('ticket-guest-name').innerText = guestName;
-            document.getElementById('ticket-guest-count').innerText = guestCount;
-            
-            const canvas = document.createElement("canvas");
-            const barcodeValue = guestId.substring(0, 8).toUpperCase();
-            JsBarcode(canvas, barcodeValue, { 
-                format: "CODE128", displayValue: true, lineColor: "#000", width: 2, height: 50, margin: 0, fontSize: 14, background: "#ffffff"
-            });
-            document.getElementById('ticket-barcode').src = canvas.toDataURL("image/png");
-
-            html2canvas(document.getElementById('ticket-template'), { scale: 4, useCORS: true }).then(canvas => {
-                const imgData = canvas.toDataURL('image/jpeg', 1.0);
-                const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
-                doc.addImage(imgData, 'JPEG', 0, 0, 600, 850);
-                doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
-            });
-        }
-    </script>
-</body>
-</html>
-
-        <div id="recepcion-mapa-section" class="w-full mt-12 text-center secondary-box reveal">
-             <h2 class="font-script text-4xl md:text-5xl text-[#7A2E39] mb-8">Ubicación</h2>
-             <p class="text-lg font-bold">Salón "El Jardín"</p>
-             <p class="text-md text-gray-600">Prol. José Ma. Morelos 1, Centro, 56530 Ixtapaluca, Méx., México</p><p class="text-md font-bold mt-2">2:15 pm</p>
-             <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#e0d0d5] mt-4"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.155394961366!2d-98.87525292520483!3d19.37501384514278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f17c3c0d8c9b%3A0x5b55b5e75bba1d12!2sProl.%20Jos%C3%A9%20Ma.%20Morelos%201%2C%20Centro%2C%2056530%20Ixtapaluca%2C%20M%C3%A9x.%2C%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1730053554382!5m2!1ses-419!2smx" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
-         </div>
-        <footer class="mt-8 text-xs text-gray-500"><p>© 2025 Daniel & Pamela</p></footer>
-    </div>
-    
-    <div id="rsvpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300">
-        <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center relative">
-            <button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button>
-            <h3 class="font-script text-4xl text-[#7A2E39] mb-2">Confirmar Asistencia</h3>
-            <form id="rsvpForm" class="space-y-5 mt-6">
-                <div class="text-left">
-                    <label class="block text-gray-700 text-sm font-bold mb-1" for="guestName">Familia o Nombre Completo</label>
-                    <input type="text" id="guestName" placeholder="Ej. Familia Pérez López o Juan Soto" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#903b46]" required>
-                </div>
-                <button type="submit" id="submitRsvpBtn" class="w-full bg-[#903b46] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105 hover:bg-[#722F37]">
-                    Buscar mi Invitación
-                </button>
-            </form>
-        </div>
-    </div>
-    
-    <div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300">
-        <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center">
-            <h3 class="font-script text-4xl text-[#7A2E39] mb-4">¡Gracias!</h3>
-            <p class="mb-6 text-gray-600">Tu asistencia ha sido confirmada. Tu pase personal se está descargando.</p>
-            <p class="mb-4 text-gray-600 font-bold">Espera la descarga para agregar a tu agenda...</p>
-            <div class="flex flex-col space-y-3 mb-6">
-                <button id="addToGoogleCalendarBtn" class="bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center shadow-md">
-                    <i class="fab fa-google mr-2"></i> Agregar a Google Calendar
-                </button>
-                <button id="addToIcsBtn" class="bg-gray-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-gray-700 transition flex items-center justify-center shadow-md">
-                    <i class="far fa-calendar-alt mr-2"></i> Agregar a Outlook/Apple
-                </button>
-            </div>
-            <button id="closeThankYouModal" class="text-gray-500 underline text-sm mt-2">Cerrar</button>
-        </div>
-    </div>
-
-    <div id="ticket-template" style="position: absolute; left: -9999px; top: 0; width: 600px; height: 850px; overflow: hidden;">
-        <img src="plantilla-boleto.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
-        <div style="position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <div style="margin-top: 350px; text-align: center;"> 
-                <h1 id="ticket-guest-name" style="font-family: 'Times New Roman', serif; font-style: italic; font-size: 50px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin: 0;">Nombre Invitado</h1>
-                <p id="ticket-guest-count" style="font-family: 'Arial', sans-serif; font-weight: bold; font-size: 50px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-top: 10px;">3</p>
-            </div>
-            <img id="ticket-barcode" src="" style="position: absolute; bottom: 40px; left: 40px; width: 130px; height: 40px; background: white; padding: 5px; border-radius: 5px;">
-        </div>
-    </div>
-
-    <script>
-        const envelopeContainer = document.getElementById('envelope-container');
-        const envelopeWrapper = document.querySelector('.envelope-wrapper-simple');
-        const rsvpModal = document.getElementById("rsvpModal");
-        const thankYouModal = document.getElementById("thankYouModal");
-        const openRsvpModalBtn = document.getElementById("openRsvpModal");
-        const closeRsvpModalBtn = document.getElementById("closeRsvpModal");
-        const closeThankYouModalBtn = document.getElementById("closeThankYouModal");
-        
-        function createPetals() {
-            const container = document.createElement('div'); container.id = 'petals-container'; document.body.appendChild(container);
-            for (let i = 0; i < 20; i++) {
-                const petal = document.createElement('div'); petal.classList.add('petal');
-                const size = Math.random() * 15 + 10; petal.style.width = `${size}px`; petal.style.height = `${size}px`;
-                petal.style.left = `${Math.random() * 100}vw`; petal.style.animationDuration = `${Math.random() * 5 + 5}s`; petal.style.animationDelay = `${Math.random() * 5}s`;
-                const colors = ['#7A2E39', '#9C4E59', '#C27E88', '#E3B5BC']; 
-                petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; container.appendChild(petal);
-            }
-        }
-
-        function revealOnScroll() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
-            }
-        }
-        window.addEventListener("scroll", revealOnScroll);
-
-        let player; let isPlayerReady = false;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', { height: '1', width: '1', videoId: 'kgUVq-ICt_Y', playerVars: { 'playsinline': 1, 'controls': 0, 'showinfo': 0, 'rel': 0 }, events: { 'onReady': onPlayerReady } });
-        }
-        function onPlayerReady(event) { isPlayerReady = true; }
-
-        // ABRIR SOBRE AL CLIC EN CUALQUIER PARTE
-        function openEnvelopeAction() {
-            // Reproducir música
-            try { if (isPlayerReady && player && typeof player.playVideo === 'function') { player.playVideo(); } else { setTimeout(() => { if(player && player.playVideo) player.playVideo(); }, 1000); } } catch (e) {}
-            
-            // Animar
-            if(envelopeWrapper) envelopeWrapper.style.transform = 'scale(1.05)';
-            envelopeContainer.style.transition = 'opacity 1.2s ease-in-out';
-            
-            setTimeout(() => {
-                if(envelopeContainer) envelopeContainer.style.opacity = '0';
-                document.body.classList.add('invitation-visible');
-                setTimeout(() => { 
-                    if(envelopeContainer) envelopeContainer.style.display = 'none'; 
-                    createPetals(); 
-                    revealOnScroll(); 
-                }, 1200);
-            }, 400);
-        }
-
-        // Asignar evento de clic al contenedor del sobre (para que funcione en cualquier parte)
-        if (envelopeContainer) envelopeContainer.addEventListener('click', function(e) {
-            // Evitamos que se dispare múltiples veces si ya se está abriendo
-            if (envelopeContainer.style.opacity === '0') return;
-            openEnvelopeAction();
-        });
-
-        const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
-        const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
-        if (openRsvpModalBtn) openRsvpModalBtn.addEventListener("click", () => openModal(rsvpModal));
-        if (closeRsvpModalBtn) closeRsvpModalBtn.addEventListener("click", () => closeModal(rsvpModal));
-        if (closeThankYouModalBtn) closeThankYouModalBtn.addEventListener("click", () => closeModal(thankYouModal));
-
-        const countdownDate = new Date("March 15, 2026 13:00:00").getTime();
-        const countdownFunction = setInterval(() => {
-            const now = new Date().getTime(); const distance = countdownDate - now;
-            if (distance < 0) { clearInterval(countdownFunction); document.getElementById("countdown").innerHTML = "<div class='text-center w-full'><p class='font-script text-4xl text-[#7A2E39]'>¡El gran día ha llegado!</p></div>"; return; }
-            const d = document.getElementById("days"), h = document.getElementById("hours"), m = document.getElementById("minutes"), s = document.getElementById("seconds");
-            if (d) d.innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-            if (h) h.innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            if (m) m.innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            if (s) s.innerText = Math.floor((distance % (1000 * 60)) / 1000);
-        }, 1000);
-    </script>
-
-    <script src="https://www.youtube.com/iframe_api"></script>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp, query, where, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyCEFg3H7spJXUBvjNRc-QRocIHk3Hd6dho",
-            authDomain: "lista-de-asistencia-8cfc5.firebaseapp.com",
-            projectId: "lista-de-asistencia-8cfc5",
-            storageBucket: "lista-de-asistencia-8cfc5.firebasestorage.app",
-            messagingSenderId: "276452664903",
-            appId: "1:276452664903:web:8b060bdeef2e70852bf362"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        
-        const rsvpForm = document.getElementById("rsvpForm");
-        const submitRsvpBtn = document.getElementById("submitRsvpBtn");
-        const rsvpModal = document.getElementById("rsvpModal");
-        const thankYouModal = document.getElementById("thankYouModal");
-        const addToGoogleCalendarBtn = document.getElementById("addToGoogleCalendarBtn");
-        const addToIcsBtn = document.getElementById("addToIcsBtn");
-
-        const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
-        const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
-
-        // CALENDARIO
-        if (addToGoogleCalendarBtn) {
-            addToGoogleCalendarBtn.addEventListener("click", () => {
-                const title = encodeURIComponent("Boda de Daniel & Pamela");
-                const details = encodeURIComponent("¡Estás invitado a nuestra boda! Recuerda llevar tu pase.");
-                const location = encodeURIComponent("Salón 'El Jardín', Prolongacion Jose Maria Morelos 1, Centro, 56530 Ixtapaluca, Méx.");
-                const startDate = "20260315T130000"; const endDate = "20260315T220000";
-                window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`, '_blank');
-            });
-        }
-        if (addToIcsBtn) {
-            addToIcsBtn.addEventListener("click", () => {
-                const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Daniel y Pamela//Boda//ES\nBEGIN:VEVENT\nSUMMARY:Boda Daniel y Pamela\nDTSTART:20260315T130000\nDTEND:20260315T220000\nLOCATION:Salón El Jardín\nEND:VEVENT\nEND:VCALENDAR`;
-                const link = document.createElement('a'); link.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsContent);
-                link.setAttribute('download', 'Boda_Daniel_y_Pamela.ics'); document.body.appendChild(link); link.click();
-            });
-        }
-
-        // CONFIRMACIÓN SEGURA
-        if (rsvpForm) {
-            rsvpForm.addEventListener("submit", async e => {
-                e.preventDefault(); 
-                if(submitRsvpBtn) { submitRsvpBtn.disabled = true; submitRsvpBtn.innerText = "Buscando invitación..."; }
-                
-                const guestNameInput = document.getElementById("guestName").value.toLowerCase().trim();
-                
-                try {
-                    const q = query(collection(db, "lista_invitados"), where("nombre", "==", guestNameInput));
-                    const querySnapshot = await getDocs(q);
-
-                    if (querySnapshot.empty) {
-                        alert("No encontramos una invitación con ese nombre exacto. Verifica mayúsculas y acentos.");
-                        submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación";
-                        return;
-                    }
-
-                    const guestDoc = querySnapshot.docs[0];
-                    const guestData = guestDoc.data();
-                    const guestId = guestDoc.id;
-                    
-                    if (guestData.confirmado === true) {
-                        alert(`Hola ${guestData.nombre}, ya habías confirmado tu asistencia.`);
-                        submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación";
-                        return;
-                    }
-
-                    const confirmedCount = guestData.boletos || 1;
-                    await addDoc(collection(db, "invitados_confirmados"), { nombre: guestData.nombre, asistentes: Number(confirmedCount), fecha_confirmacion: serverTimestamp() });
-                    const guestRef = doc(db, "lista_invitados", guestId);
-                    await updateDoc(guestRef, { confirmado: true });
-                    
-                    submitRsvpBtn.innerText = "Espera la descarga para agregar a tu agenda...";
-                    
-                    const nombreParaPDF = guestData.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
-                    generateAndDownloadTicket(nombreParaPDF, confirmedCount, guestId); 
-                    
-                    closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
-
-                } catch (err) { console.error("Error:", err); alert("Hubo un error."); } 
-                finally { 
-                    // Botón se queda en "Espera..." hasta recarga o cierre manual para evitar doble clic
-                }
-            });
-        }
-
-        // --- FUNCIÓN PDF AJUSTADA PARA TU NUEVA IMAGEN ---
-        window.generateAndDownloadTicket = function(guestName, guestCount, guestId) {
             const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
             
-            // 1. Poner tu imagen de fondo (Asegúrate que se llame 'pase_boletos.jpg' en GitHub)
             doc.addImage("pase_boletos.jpg", "JPEG", 0, 0, 600, 850);
-
-            // 2. Configuración de Texto
-            doc.setTextColor(255, 255, 255); // Color Blanco para que resalte
-            // Si quieres color dorado/crema usa: doc.setTextColor(242, 229, 191); 
-
-            // --- AJUSTE DEL NOMBRE ---
-            doc.setFont("times", "italic"); 
-            doc.setFontSize(30); 
-            // Coordenada X=300 (Centro), Y=640 (Ajusta este número para subir/bajar el nombre)
+            doc.setTextColor(255, 255, 255); 
+            doc.setFont("times", "italic"); doc.setFontSize(30); 
             doc.text(guestName, 300, 640, { align: "center" }); 
-
-            // --- AJUSTE DEL NÚMERO ---
-            doc.setFont("helvetica", "bold"); 
-            doc.setFontSize(24); 
-            // Coordenada X=335 (Mover a izq/der), Y=685 (Subir/bajar)
-            // Ajusta el 335 para que caiga justo en el espacio de [ ]
+            doc.setFont("helvetica", "bold"); doc.setFontSize(24); 
             doc.text(`${guestCount}`, 335, 685, { align: "center" }); 
 
-            // 4. Código de Barras (Esquina Inferior Izquierda)
             const canvas = document.createElement("canvas");
-            // Usamos el ID real si existe, o un default
             const barcodeValue = guestId ? guestId.substring(0, 8).toUpperCase() : "BODA2026";
-            
             JsBarcode(canvas, barcodeValue, { 
-                format: "CODE128", displayValue: true, lineColor: "#000", 
-                width: 1.5, height: 30, margin: 5, fontSize: 10, background: "#ffffff" 
+                format: "CODE128", displayValue: true, lineColor: "#000", width: 1.5, height: 30, margin: 5, fontSize: 10, background: "#ffffff" 
             });
             const barcodeImg = canvas.toDataURL("image/png");
-
-            // Pegar Código de Barras (X=30, Y=760)
             doc.addImage(barcodeImg, "PNG", 30, 760, 130, 50); 
 
             doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
@@ -721,5 +379,3 @@
     </script>
 </body>
 </html>
-
-
