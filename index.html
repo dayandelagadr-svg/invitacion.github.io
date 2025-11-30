@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuestra Boda - Daniel y Pamela</title>
     
-    <meta property="og:title" content="Nuestra Boda - Daniel & Pamela" />
+    <meta property="og:title" content="Daniel & Pamela" />
     <meta property="og:description" content="Queremos compartir la alegría de unir nuestras vidas contigo. Entra para ver los detalles y confirmar tu asistencia." />
     <meta property="og:image" content="https://dayandelagadr-svg.github.io/invitacion.github.io/novios.jpeg" />
 
@@ -18,6 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -102,7 +103,7 @@
             <img src="novios.jpeg" alt="Novios Daniel y Pamela" class="hero-image-overlay">
             
             <div class="relative z-10 w-full">
-                <p class="tracking-widest text-sm mb-4 font-bold text-gray-600">LA BODA DE</p>
+                <p class="tracking-widest text-sm mb-4 font-bold text-gray-600"/p
                 <h1 class="font-script text-6xl md:text-9xl text-[#8C6B6B] mb-6 drop-shadow-sm">Daniel & Pamela</h1>
                 
                 <div class="my-8 text-center px-2 md:px-12">
@@ -135,15 +136,75 @@
         </div>
         
         <div id="itinerary-section" class="w-full mt-8 text-center secondary-box">
-            <h2 class="font-script text-4xl md:text-5xl text-[#8C6B6B] mb-12">Itinerario</h2>
+            <h2 class="font-script text-4xl md:text-5xl text-[#8C6B6B] mb-12">Programa</h2>
             <div class="space-y-10 px-2 md:px-6">
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">1:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Discurso</p><p class="text-sm md:text-lg text-gray-700">Salón del Reino de los Testigos de Jehová</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-glass-cheers fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">1:30 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Recepción</p><p class="text-sm md:text-lg text-gray-700">Salón "El Jardín"</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-music fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">2:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Baile</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-moon fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">10:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Fin de la Celebración</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6">
+                    <div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md">
+                        <i class="fas fa-book-open fa-2x md:fa-3x"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">2:15 pm</p>
+                        <p class="text-lg md:text-2xl font-bold text-gray-800">Discurso</p>
+                        <p class="text-sm md:text-lg text-gray-700">Salón de fiestas "El Jardín"</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 md:space-x-6">
+                    <div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md">
+                        <i class="fas fa-heart fa-2x md:fa-3x"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">3:00 pm</p>
+                        <p class="text-lg md:text-2xl font-bold text-gray-800">Felicitaciones</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 md:space-x-6">
+                    <div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md">
+                        <i class="fas fa-utensils fa-2x md:fa-3x"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">3:30 pm</p>
+                        <p class="text-lg md:text-2xl font-bold text-gray-800">Comida</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 md:space-x-6">
+                    <div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md">
+                        <i class="fas fa-music fa-2x md:fa-3x"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">4:30 pm</p>
+                        <p class="text-lg md:text-2xl font-bold text-gray-800">Inicio de Baile</p>
+                        <p class="text-sm md:text-lg text-gray-700">Baile de los Novios</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 md:space-x-6">
+                    <div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md">
+                        <i class="fas fa-birthday-cake fa-2x md:fa-3x"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">8:00 pm</p>
+                        <p class="text-lg md:text-2xl font-bold text-gray-800">Pastel</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 md:space-x-6">
+                    <div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md">
+                        <i class="fas fa-glass-cheers fa-2x md:fa-3x"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">8:15 pm</p>
+                        <p class="text-lg md:text-2xl font-bold text-gray-800">Continuación de Baile</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 md:space-x-6">
+                    <div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md">
+                        <i class="fas fa-moon fa-2x md:fa-3x"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">10:00 pm</p>
+                        <p class="text-lg md:text-2xl font-bold text-gray-800">Fin de la Celebración</p>
+                    </div>
+                </div>
             </div>
         </div>
-
         <div id="etiqueta-section" class="w-full mt-8 text-center secondary-box">
             <h2 class="font-script text-4xl md:text-5xl text-[#8C6B6B] mb-12">Detalles Adicionales</h2>
             <div class="space-y-10 px-2 md:px-6">
@@ -152,27 +213,17 @@
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-parking fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Estacionamiento</p><p class="text-sm md:text-lg text-gray-700">Contamos con **estacionamiento gratuito** dentro del establecimiento.</p></div></div>
             </div>
         </div>
-
-        <div id="social-section" class="w-full mt-8 text-center secondary-box">
-            <h2 class="font-script text-4xl md:text-5xl text-[#8C6B6B] mb-8">Captura el Momento</h2>
-            
-            <div class="space-y-8">
-                <div>
-                    <i class="fab fa-instagram text-5xl text-[#C6A9A9] mb-4"></i>
-                    <p class="text-lg text-gray-600 mb-2">Sube tus fotos a Instagram usando nuestro hashtag:</p>
-                    <p class="text-3xl font-bold text-[#5d5d5d] my-4 font-serif tracking-wide">#pameydani</p>
-                    <a href="https://www.instagram.com/explore/tags/pameydani/" target="_blank" class="inline-block uppercase bg-[#C6A9A9] text-white py-2 px-6 rounded-full shadow-md hover:bg-[#b08e8e] transition-transform transform hover:scale-105 text-sm">
-                        Ver en Instagram
-                    </a>
-                </div>
-
-                <div class="border-t border-[#dcd0c0] pt-8">
-                    <i class="fas fa-camera text-4xl text-[#8C6B6B] mb-4"></i>
-                    <p class="text-lg text-gray-600 mb-4">¿Tomaste videos o fotos increíbles?<br>Compártelos con nosotros aquí:</p>
-                    
-                    <a href="#" target="_blank" class="inline-flex items-center uppercase bg-[#8C6B6B] text-white py-3 px-6 rounded-full shadow-lg hover:bg-[#7a5a5a] transition-transform transform hover:scale-105 text-sm">
-                        <i class="fas fa-cloud-upload-alt mr-2"></i> Subir mis Fotos
-                    </a>
+        
+        <div id="social-section" class="w-full mt-12 text-center secondary-box relative overflow-hidden">
+            <h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-12 relative z-10">Comparte el Amor</h2>
+            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 mx-auto max-w-2xl relative z-10 border border-[#eadada]">
+                <div class="flex justify-center mb-6"><div class="bg-[#F7EBEB] p-4 rounded-full"><i class="fab fa-instagram text-5xl text-[#C6A9A9]"></i></div></div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Ayúdanos a capturar cada momento</h3>
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed">Usa nuestro hashtag oficial en tus publicaciones o sube tus fotos y videos directamente a nuestro álbum compartido.</p>
+                <div class="bg-[#F7EBEB] py-4 px-8 rounded-lg mb-8 inline-block transform rotate-1 hover:rotate-0 transition-transform duration-300"><p class="text-3xl md:text-4xl font-bold text-[#8C6B6B] font-serif tracking-wide">#pameydani</p></div>
+                <div class="flex flex-col md:flex-row justify-center gap-4 mt-4">
+                    <a href="https://www.instagram.com/explore/tags/pameydani/" target="_blank" class="flex items-center justify-center uppercase bg-[#C6A9A9] text-white py-3 px-6 rounded-full shadow-md hover:bg-[#b08e8e] transition-all transform hover:-translate-y-1"><i class="fab fa-instagram mr-2"></i> Ver Hashtag</a>
+                    <a href="https://photos.app.goo.gl/TU_ENLACE_DE_GOOGLE_PHOTOS" target="_blank" class="flex items-center justify-center uppercase bg-[#8C6B6B] text-white py-3 px-6 rounded-full shadow-md hover:bg-[#7a5a5a] transition-all transform hover:-translate-y-1"><i class="fas fa-cloud-upload-alt mr-2"></i> Subir Fotos</a>
                 </div>
             </div>
         </div>
@@ -180,43 +231,31 @@
         <div id="recepcion-mapa-section" class="w-full mt-8 text-center secondary-box">
              <h2 class="font-script text-4xl md:text-5xl text-[#8C6B6B] mb-8">Ubicación</h2>
              <p class="text-lg font-bold">Salón "El Jardín"</p>
-             <p class="text-md text-gray-600">Prol. José Ma. Morelos 1, Centro, 56530 Ixtapaluca, Méx., México</p><p class="text-md font-bold mt-2">3:00 pm</p>
+             <p class="text-md text-gray-600">Prol. José Ma. Morelos 1, Centro, 56530 Ixtapaluca, Méx., México</p><p class="text-md font-bold mt-2">2:15 pm</p>
              <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#dcd0c0] mt-4"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.155394961366!2d-98.87525292520483!3d19.37501384514278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f17c3c0d8c9b%3A0x5b55b5e75bba1d12!2sProl.%20Jos%C3%A9%20Ma.%20Morelos%201%2C%20Centro%2C%2056530%20Ixtapaluca%2C%20M%C3%A9x.%2C%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1730053554382!5m2!1ses-419!2smx" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
          </div>
         <footer class="mt-8 text-xs text-gray-500"><p>© 2025 Daniel & Pamela</p></footer>
     </div>
     
-    <div id="rsvpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300">
-        <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center relative">
-            <button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button>
-            <h3 class="font-script text-4xl text-[#8C6B6B] mb-2">Confirmar Asistencia</h3>
-            <p class="mb-6 text-gray-600 text-sm">Ingresa los datos tal como aparecen en tu invitación.</p>
-            <form id="rsvpForm" class="space-y-5">
-                <div class="text-left">
-                    <label class="block text-gray-700 text-sm font-bold mb-1" for="guestName">Familia o Nombre Completo</label>
-                    <input type="text" id="guestName" placeholder="Ej. Familia Pérez López o Juan Soto" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required>
-                    <p class="text-xs text-gray-400 mt-1">Escribe los apellidos o tu nombre completo.</p>
-                </div>
-                <button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">
-                    Buscar mi Invitación
-                </button>
-            </form>
-        </div>
-    </div>
+    <div id="rsvpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center relative"><button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button><h3 class="font-script text-4xl text-[#8C6B6B] mb-2">Confirmar Asistencia</h3><p class="mb-6 text-gray-600 text-sm">Ingresa los datos tal como aparecen en tu invitación.</p><form id="rsvpForm" class="space-y-5"><div class="text-left"><label class="block text-gray-700 text-sm font-bold mb-1" for="guestName">Familia o Nombre Completo</label><input type="text" id="guestName" placeholder="Ej. Familia Pérez López" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required></div><button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">Buscar mi Invitación</button></form></div></div>
     
     <div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300">
         <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center">
             <h3 class="font-script text-4xl text-[#8C6B6B] mb-4">¡Gracias!</h3>
             <p class="mb-6 text-gray-600">Tu asistencia ha sido confirmada. Tu pase personal se está descargando.</p>
-            <div class="flex flex-col space-y-3 mb-6">
-                <button id="addToGoogleCalendarBtn" class="bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center shadow-md">
-                    <i class="fab fa-google mr-2"></i> Agregar a Google Calendar
-                </button>
-                <button id="addToIcsBtn" class="bg-gray-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-gray-700 transition flex items-center justify-center shadow-md">
-                    <i class="far fa-calendar-alt mr-2"></i> Agregar a Outlook/Apple
-                </button>
-            </div>
+            <div class="flex flex-col space-y-3 mb-6"><button id="addToGoogleCalendarBtn" class="bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center shadow-md"><i class="fab fa-google mr-2"></i> Agregar a Google Calendar</button><button id="addToIcsBtn" class="bg-gray-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-gray-700 transition flex items-center justify-center shadow-md"><i class="far fa-calendar-alt mr-2"></i> Agregar a Outlook/Apple</button></div>
             <button id="closeThankYouModal" class="text-gray-500 underline text-sm mt-2">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="ticket-template" style="position: absolute; left: -9999px; top: 0; width: 600px; height: 850px; overflow: hidden;">
+        <img src="plantilla-boleto.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+        <div style="position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div style="margin-top: 350px; text-align: center;"> 
+                <h1 id="ticket-guest-name" style="font-family: 'Times New Roman', serif; font-style: italic; font-size: 50px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin: 0;">Nombre Invitado</h1>
+                <p id="ticket-guest-count" style="font-family: 'Arial', sans-serif; font-weight: bold; font-size: 30px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-top: 20px;">3</p>
+            </div>
+            <img id="ticket-barcode" src="" style="position: absolute; bottom: 40px; left: 40px; width: 200px; height: 60px; background: white; padding: 5px; border-radius: 5px;">
         </div>
     </div>
 
@@ -230,20 +269,13 @@
         const closeRsvpModalBtn = document.getElementById("closeRsvpModal");
         const closeThankYouModalBtn = document.getElementById("closeThankYouModal");
         
-        // PÉTALOS
         function createPetals() {
-            const container = document.createElement('div');
-            container.id = 'petals-container';
-            document.body.appendChild(container);
+            const container = document.createElement('div'); container.id = 'petals-container'; document.body.appendChild(container);
             for (let i = 0; i < 20; i++) {
-                const petal = document.createElement('div');
-                petal.classList.add('petal');
+                const petal = document.createElement('div'); petal.classList.add('petal');
                 const size = Math.random() * 15 + 10; petal.style.width = `${size}px`; petal.style.height = `${size}px`;
-                petal.style.left = `${Math.random() * 100}vw`;
-                petal.style.animationDuration = `${Math.random() * 5 + 5}s`; petal.style.animationDelay = `${Math.random() * 5}s`;
-                const colors = ['#FADadd', '#FFC0CB', '#FFF0F5', '#E6E6FA'];
-                petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                container.appendChild(petal);
+                petal.style.left = `${Math.random() * 100}vw`; petal.style.animationDuration = `${Math.random() * 5 + 5}s`; petal.style.animationDelay = `${Math.random() * 5}s`;
+                const colors = ['#FADadd', '#FFC0CB', '#FFF0F5', '#E6E6FA']; petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; container.appendChild(petal);
             }
         }
 
@@ -313,7 +345,6 @@
         const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
         const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
 
-        // CALENDARIO
         if (addToGoogleCalendarBtn) {
             addToGoogleCalendarBtn.addEventListener("click", () => {
                 const title = encodeURIComponent("Boda de Daniel & Pamela");
@@ -331,34 +362,25 @@
             });
         }
 
-        // CONFIRMACIÓN SEGURA
         if (rsvpForm) {
             rsvpForm.addEventListener("submit", async e => {
                 e.preventDefault(); 
                 if(submitRsvpBtn) { submitRsvpBtn.disabled = true; submitRsvpBtn.innerText = "Buscando invitación..."; }
-                
                 const guestNameInput = document.getElementById("guestName").value.toLowerCase().trim();
-                
                 try {
                     const q = query(collection(db, "lista_invitados"), where("nombre", "==", guestNameInput));
                     const querySnapshot = await getDocs(q);
-
                     if (querySnapshot.empty) {
                         alert("No encontramos una invitación con ese nombre exacto. Verifica mayúsculas y acentos.");
-                        submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación";
-                        return;
+                        submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación"; return;
                     }
-
                     const guestDoc = querySnapshot.docs[0];
                     const guestData = guestDoc.data();
                     const guestId = guestDoc.id;
-                    
                     if (guestData.confirmado === true) {
                         alert(`Hola ${guestData.nombre}, ya habías confirmado tu asistencia.`);
-                        submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación";
-                        return;
+                        submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación"; return;
                     }
-
                     const confirmedCount = guestData.boletos || 1;
                     await addDoc(collection(db, "invitados_confirmados"), { nombre: guestData.nombre, asistentes: Number(confirmedCount), fecha_confirmacion: serverTimestamp() });
                     const guestRef = doc(db, "lista_invitados", guestId);
@@ -366,48 +388,31 @@
                     
                     const nombreParaPDF = guestData.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
                     generateAndDownloadTicket(nombreParaPDF, confirmedCount, guestId); 
-                    
                     closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
-
                 } catch (err) { console.error("Error:", err); alert("Hubo un error."); } 
                 finally { if(submitRsvpBtn) { if (submitRsvpBtn.innerText !== "Buscando invitación...") { submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación"; } } }
             });
         }
 
-        // GENERAR PDF CON CÓDIGO DE BARRAS (AJUSTADO)
         window.generateAndDownloadTicket = function(guestName, guestCount, guestId) {
-            const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
+            document.getElementById('ticket-guest-name').innerText = guestName;
+            document.getElementById('ticket-guest-count').innerText = guestCount;
             
-            // 1. Fondo
-            doc.addImage("plantilla-boleto.png", "PNG", 0, 0, 600, 850);
-
-            // 2. Texto Blanco
-            doc.setTextColor(255, 255, 255); 
-
-            // 3. Nombre (Y=510 - Más arriba)
-            doc.setFont("times", "italic"); doc.setFontSize(32); 
-            doc.text(guestName, 300, 510, { align: "center" }); 
-
-            // 4. Cantidad (Solo número, Y=560 - Más arriba)
-            doc.setFont("helvetica", "bold"); doc.setFontSize(40); 
-            doc.text(`${guestCount}`, 370, 560, { align: "center" }); 
-
-            // 5. Código de Barras (Pequeño, Esquina Inferior IZQUIERDA)
+            // Generar Barcode en el canvas oculto
             const canvas = document.createElement("canvas");
             const barcodeValue = guestId.substring(0, 8).toUpperCase();
             JsBarcode(canvas, barcodeValue, { 
-                format: "CODE128", displayValue: true, lineColor: "#000", 
-                width: 1.5, height: 30, margin: 5, fontSize: 10, background: "#ffffff" 
+                format: "CODE128", displayValue: true, lineColor: "#000", width: 2, height: 50, margin: 0, fontSize: 14, background: "#ffffff"
             });
-            const barcodeImg = canvas.toDataURL("image/png");
+            document.getElementById('ticket-qr').src = canvas.toDataURL("image/png");
 
-            // 6. Pegar Código de Barras (X=40, Y=730)
-            doc.addImage(barcodeImg, "PNG", 40, 730, 150, 60); 
-
-            doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
+            html2canvas(document.getElementById('ticket-template'), { scale: 2, useCORS: true }).then(canvas => {
+                const imgData = canvas.toDataURL('image/jpeg', 1.0);
+                const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
+                doc.addImage(imgData, 'JPEG', 0, 0, 600, 850);
+                doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
+            });
         }
     </script>
 </body>
 </html>
-
-
