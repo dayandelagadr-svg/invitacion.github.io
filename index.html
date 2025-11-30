@@ -31,6 +31,15 @@
     .petal { position: absolute; top: -10%; background-color: #FFC0CB; opacity: 0.8; border-radius: 10% 70%; animation: fall linear infinite; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
     @keyframes fall { 0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; } }
 
+    /* Flores esquinas */
+    .corner-flower { position: fixed; width: 120px; height: auto; z-index: 5; opacity: 0; transition: opacity 1s ease-in-out; }
+    @media (min-width: 768px) { .corner-flower { width: 180px; } }
+    #top-left { top: 10px; left: 10px; }
+    #top-right { top: 10px; right: 10px; transform: scaleX(-1); }
+    #bottom-left { bottom: 10px; left: 10px; transform: scaleY(-1); }
+    #bottom-right { bottom: 10px; right: 10px; transform: scale(-1,-1); }
+    body.invitation-visible .corner-flower { opacity: 1; }
+
     /* Contenedor Alargado */
     .main-container { position: relative; z-index: 10; width: 100%; max-width: 1200px; text-align: center; opacity: 0; transition: opacity 1s ease-in-out 1.5s; pointer-events: none; padding: 0 1rem; }
     @media (max-width: 767px) { body { padding-top: 4rem; padding-bottom: 4rem; } .main-container { padding: 0 0.5rem; } }
@@ -63,12 +72,7 @@
     #envelope-container { position: fixed; inset: 0; background-color: #F7EBEB; z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease-in-out; }
     .envelope-wrapper-simple { position: relative; width: 90vw; max-width: 500px; aspect-ratio: 1.5 / 1; }
     .envelope-image { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15)); transition: transform 1s ease; }
-    .envelope-seal-simple {
-        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-        width: 20%; max-width: 80px; cursor: pointer;
-        transition: transform 0.4s ease, filter 0.4s ease;
-        z-index: 20;
-    }
+    .envelope-seal-simple { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20%; max-width: 80px; cursor: pointer; transition: transform 0.4s ease, filter 0.4s ease; z-index: 20; }
     .envelope-seal-simple:hover { transform: translate(-50%, -50%) scale(1.15); filter: brightness(1.2); }
     .envelope-seal-simple:active { transform: translate(-50%, -50%) scale(0.95); filter: brightness(0.9); }
     
@@ -97,14 +101,18 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="top-left">
+    <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="top-right">
+    <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="bottom-left">
+    <img src="flores nuevas.jpeg" alt="Decoración floral" class="corner-flower" id="bottom-right">
+
     <div class="main-container">
         <header></header>
         <main class="content-box">
             <img src="novios.jpeg" alt="Novios Daniel y Pamela" class="hero-image-overlay">
             
             <div class="relative z-10 w-full">
-                <p class="tracking-widest text-sm mb-4 font-bold text-gray-600"/p
-                <h1 class="font-script text-6xl md:text-9xl text-[#8C6B6B] mb-6 drop-shadow-sm">Daniel & Pamela</h1>
+                <h1 class="font-script text-7xl md:text-9xl text-[#8C6B6B] mb-6 drop-shadow-sm mt-12">Daniel & Pamela</h1>
                 
                 <div class="my-8 text-center px-2 md:px-12">
                     <p class="text-lg md:text-2xl italic text-[#7a6a6a] leading-relaxed">
@@ -205,6 +213,7 @@
                 </div>
             </div>
         </div>
+
         <div id="etiqueta-section" class="w-full mt-8 text-center secondary-box">
             <h2 class="font-script text-4xl md:text-5xl text-[#8C6B6B] mb-12">Detalles Adicionales</h2>
             <div class="space-y-10 px-2 md:px-6">
@@ -214,20 +223,23 @@
             </div>
         </div>
         
-        <div id="social-section" class="w-full mt-12 text-center secondary-box relative overflow-hidden">
-            <h2 class="font-script text-5xl md:text-6xl text-[#8C6B6B] mb-12 relative z-10">Comparte el Amor</h2>
-            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 mx-auto max-w-2xl relative z-10 border border-[#eadada]">
-                <div class="flex justify-center mb-6"><div class="bg-[#F7EBEB] p-4 rounded-full"><i class="fab fa-instagram text-5xl text-[#C6A9A9]"></i></div></div>
-                <h3 class="text-2xl font-bold text-gray-800 mb-4">Ayúdanos a capturar cada momento</h3>
-                <p class="text-lg text-gray-600 mb-8 leading-relaxed">Usa nuestro hashtag oficial en tus publicaciones o sube tus fotos y videos directamente a nuestro álbum compartido.</p>
-                <div class="bg-[#F7EBEB] py-4 px-8 rounded-lg mb-8 inline-block transform rotate-1 hover:rotate-0 transition-transform duration-300"><p class="text-3xl md:text-4xl font-bold text-[#8C6B6B] font-serif tracking-wide">#pameydani</p></div>
-                <div class="flex flex-col md:flex-row justify-center gap-4 mt-4">
-                    <a href="https://www.instagram.com/explore/tags/pameydani/" target="_blank" class="flex items-center justify-center uppercase bg-[#C6A9A9] text-white py-3 px-6 rounded-full shadow-md hover:bg-[#b08e8e] transition-all transform hover:-translate-y-1"><i class="fab fa-instagram mr-2"></i> Ver Hashtag</a>
-                    <a href="https://photos.app.goo.gl/TU_ENLACE_DE_GOOGLE_PHOTOS" target="_blank" class="flex items-center justify-center uppercase bg-[#8C6B6B] text-white py-3 px-6 rounded-full shadow-md hover:bg-[#7a5a5a] transition-all transform hover:-translate-y-1"><i class="fas fa-cloud-upload-alt mr-2"></i> Subir Fotos</a>
+        <div id="social-section" class="w-full mt-8 text-center secondary-box">
+            <h2 class="font-script text-4xl md:text-5xl text-[#8C6B6B] mb-8">Captura el Momento</h2>
+            <div class="space-y-8">
+                <div>
+                    <i class="fab fa-instagram text-5xl text-[#C6A9A9] mb-4"></i>
+                    <p class="text-lg text-gray-600 mb-2">Sube tus fotos a Instagram usando nuestro hashtag:</p>
+                    <p class="text-3xl font-bold text-[#5d5d5d] my-4 font-serif tracking-wide">#pameydani</p>
+                    <a href="https://www.instagram.com/explore/tags/pameydani/" target="_blank" class="inline-block uppercase bg-[#C6A9A9] text-white py-2 px-6 rounded-full shadow-md hover:bg-[#b08e8e] transition-all text-sm">Ver en Instagram</a>
+                </div>
+                <div class="border-t border-[#dcd0c0] pt-8">
+                    <i class="fas fa-camera text-4xl text-[#8C6B6B] mb-4"></i>
+                    <p class="text-lg text-gray-600 mb-4">¿Tomaste fotos increíbles? Compártelas aquí:</p>
+                    <a href="#" target="_blank" class="inline-flex items-center uppercase bg-[#8C6B6B] text-white py-3 px-6 rounded-full shadow-lg hover:bg-[#7a5a5a] transition-all text-sm"><i class="fas fa-cloud-upload-alt mr-2"></i> Subir mis Fotos</a>
                 </div>
             </div>
         </div>
-        
+
         <div id="recepcion-mapa-section" class="w-full mt-8 text-center secondary-box">
              <h2 class="font-script text-4xl md:text-5xl text-[#8C6B6B] mb-8">Ubicación</h2>
              <p class="text-lg font-bold">Salón "El Jardín"</p>
@@ -237,13 +249,37 @@
         <footer class="mt-8 text-xs text-gray-500"><p>© 2025 Daniel & Pamela</p></footer>
     </div>
     
-    <div id="rsvpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300"><div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center relative"><button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button><h3 class="font-script text-4xl text-[#8C6B6B] mb-2">Confirmar Asistencia</h3><p class="mb-6 text-gray-600 text-sm">Ingresa los datos tal como aparecen en tu invitación.</p><form id="rsvpForm" class="space-y-5"><div class="text-left"><label class="block text-gray-700 text-sm font-bold mb-1" for="guestName">Familia o Nombre Completo</label><input type="text" id="guestName" placeholder="Ej. Familia Pérez López" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required></div><button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">Buscar mi Invitación</button></form></div></div>
+    <div id="rsvpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300">
+        <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center relative">
+            <button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button>
+            <h3 class="font-script text-4xl text-[#8C6B6B] mb-2">Confirmar Asistencia</h3>
+            <p class="mb-6 text-gray-600 text-sm"></p>
+            
+            <form id="rsvpForm" class="space-y-5">
+                <div class="text-left">
+                    <label class="block text-gray-700 text-sm font-bold mb-1" for="guestName">Familia o Nombre Completo</label>
+                    <input type="text" id="guestName" placeholder="Ej. Familia Pérez López o Juan Soto" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required>
+                </div>
+                <button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">
+                    Buscar mi Invitación
+                </button>
+            </form>
+        </div>
+    </div>
     
     <div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300">
         <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center">
             <h3 class="font-script text-4xl text-[#8C6B6B] mb-4">¡Gracias!</h3>
             <p class="mb-6 text-gray-600">Tu asistencia ha sido confirmada. Tu pase personal se está descargando.</p>
-            <div class="flex flex-col space-y-3 mb-6"><button id="addToGoogleCalendarBtn" class="bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center shadow-md"><i class="fab fa-google mr-2"></i> Agregar a Google Calendar</button><button id="addToIcsBtn" class="bg-gray-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-gray-700 transition flex items-center justify-center shadow-md"><i class="far fa-calendar-alt mr-2"></i> Agregar a Outlook/Apple</button></div>
+            
+            <div class="flex flex-col space-y-3 mb-6">
+                <button id="addToGoogleCalendarBtn" class="bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center shadow-md">
+                    <i class="fab fa-google mr-2"></i> Agregar a Google Calendar
+                </button>
+                <button id="addToIcsBtn" class="bg-gray-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-gray-700 transition flex items-center justify-center shadow-md">
+                    <i class="far fa-calendar-alt mr-2"></i> Agregar a Outlook/Apple
+                </button>
+            </div>
             <button id="closeThankYouModal" class="text-gray-500 underline text-sm mt-2">Cerrar</button>
         </div>
     </div>
@@ -253,7 +289,7 @@
         <div style="position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <div style="margin-top: 350px; text-align: center;"> 
                 <h1 id="ticket-guest-name" style="font-family: 'Times New Roman', serif; font-style: italic; font-size: 50px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin: 0;">Nombre Invitado</h1>
-                <p id="ticket-guest-count" style="font-family: 'Arial', sans-serif; font-weight: bold; font-size: 30px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-top: 20px;">3</p>
+                <p id="ticket-guest-count" style="font-family: 'Arial', sans-serif; font-weight: bold; font-size: 70px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-top: 10px;">3</p>
             </div>
             <img id="ticket-barcode" src="" style="position: absolute; bottom: 40px; left: 40px; width: 200px; height: 60px; background: white; padding: 5px; border-radius: 5px;">
         </div>
@@ -270,7 +306,9 @@
         const closeThankYouModalBtn = document.getElementById("closeThankYouModal");
         
         function createPetals() {
-            const container = document.createElement('div'); container.id = 'petals-container'; document.body.appendChild(container);
+            const container = document.createElement('div');
+            container.id = 'petals-container';
+            document.body.appendChild(container);
             for (let i = 0; i < 20; i++) {
                 const petal = document.createElement('div'); petal.classList.add('petal');
                 const size = Math.random() * 15 + 10; petal.style.width = `${size}px`; petal.style.height = `${size}px`;
@@ -345,6 +383,7 @@
         const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
         const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
 
+        // CALENDARIO
         if (addToGoogleCalendarBtn) {
             addToGoogleCalendarBtn.addEventListener("click", () => {
                 const title = encodeURIComponent("Boda de Daniel & Pamela");
@@ -362,33 +401,46 @@
             });
         }
 
+        // CONFIRMACIÓN SEGURA
         if (rsvpForm) {
             rsvpForm.addEventListener("submit", async e => {
                 e.preventDefault(); 
                 if(submitRsvpBtn) { submitRsvpBtn.disabled = true; submitRsvpBtn.innerText = "Buscando invitación..."; }
+                
                 const guestNameInput = document.getElementById("guestName").value.toLowerCase().trim();
+                
                 try {
                     const q = query(collection(db, "lista_invitados"), where("nombre", "==", guestNameInput));
                     const querySnapshot = await getDocs(q);
+
                     if (querySnapshot.empty) {
                         alert("No encontramos una invitación con ese nombre exacto. Verifica mayúsculas y acentos.");
-                        submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación"; return;
+                        submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación";
+                        return;
                     }
+
                     const guestDoc = querySnapshot.docs[0];
                     const guestData = guestDoc.data();
                     const guestId = guestDoc.id;
+                    
                     if (guestData.confirmado === true) {
                         alert(`Hola ${guestData.nombre}, ya habías confirmado tu asistencia.`);
-                        submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación"; return;
+                        submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación";
+                        return;
                     }
+
                     const confirmedCount = guestData.boletos || 1;
                     await addDoc(collection(db, "invitados_confirmados"), { nombre: guestData.nombre, asistentes: Number(confirmedCount), fecha_confirmacion: serverTimestamp() });
                     const guestRef = doc(db, "lista_invitados", guestId);
                     await updateDoc(guestRef, { confirmado: true });
                     
                     const nombreParaPDF = guestData.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+                    
+                    // Pasamos el ID para generar el código de barras
                     generateAndDownloadTicket(nombreParaPDF, confirmedCount, guestId); 
+                    
                     closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
+
                 } catch (err) { console.error("Error:", err); alert("Hubo un error."); } 
                 finally { if(submitRsvpBtn) { if (submitRsvpBtn.innerText !== "Buscando invitación...") { submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación"; } } }
             });
@@ -404,9 +456,10 @@
             JsBarcode(canvas, barcodeValue, { 
                 format: "CODE128", displayValue: true, lineColor: "#000", width: 2, height: 50, margin: 0, fontSize: 14, background: "#ffffff"
             });
-            document.getElementById('ticket-qr').src = canvas.toDataURL("image/png");
+            document.getElementById('ticket-barcode').src = canvas.toDataURL("image/png");
 
-            html2canvas(document.getElementById('ticket-template'), { scale: 2, useCORS: true }).then(canvas => {
+            // USAR SCALE 4 PARA QUE EL QR SALGA NÍTIDO
+            html2canvas(document.getElementById('ticket-template'), { scale: 4, useCORS: true }).then(canvas => {
                 const imgData = canvas.toDataURL('image/jpeg', 1.0);
                 const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
                 doc.addImage(imgData, 'JPEG', 0, 0, 600, 850);
