@@ -6,7 +6,7 @@
     <title>Nuestra Boda - Daniel y Pamela</title>
     
     <meta property="og:title" content="Daniel & Pamela" />
-    <meta property="og:description" content="Queremos compartir la alegría de unir nuestras vidas contigo. Entra para ver los detalles y confirmar tu asistencia." />
+    <meta property="og:description" content="Queremos compartir la alegría de unir nuestras vidas contigo." />
     <meta property="og:image" content="https://dayandelagadr-svg.github.io/invitacion.github.io/novios.jpeg" />
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,62 +19,93 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
    <style>
-    /* Estilos generales - FONDO CREMA (Para combinar con el sobre) */
-    body { font-family: 'Cormorant Garamond', serif; background-color: #FAF7F5; color: #5d5d5d; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 2rem; padding-bottom: 2rem; padding-left: 0; padding-right: 0; position: relative; overflow-x: hidden; overflow-y: hidden; }
+    /* --- MEJORA 1: FONDO CON TEXTURA (Efecto Papel) --- */
+    body { 
+        font-family: 'Cormorant Garamond', serif; 
+        color: #5d5d5d; 
+        min-height: 100vh; 
+        display: flex; flex-direction: column; justify-content: center; align-items: center; 
+        padding-top: 2rem; padding-bottom: 2rem; padding-left: 0; padding-right: 0; 
+        position: relative; overflow-x: hidden; overflow-y: hidden;
+        
+        /* Fondo con gradiente sutil y color base */
+        background-color: #FAF7F5; 
+        background-image: radial-gradient(#e8dada 1px, transparent 0);
+        background-size: 40px 40px; /* Pequeños puntos sutiles tipo papel */
+    }
     
-    /* PÉTALOS (Tonos Vino/Burdeos) */
+    /* PÉTALOS */
     #petals-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; overflow: hidden; }
-    .petal { position: absolute; top: -10%; background-color: #722F37; opacity: 0.8; border-radius: 10% 70%; animation: fall linear infinite; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+    .petal { position: absolute; top: -10%; background-color: #722F37; opacity: 0.6; border-radius: 10% 70%; animation: fall linear infinite; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     @keyframes fall { 0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; } }
 
-    /* Contenedor Alargado */
     .main-container { position: relative; z-index: 10; width: 100%; max-width: 1200px; text-align: center; opacity: 0; transition: opacity 1s ease-in-out 1.5s; pointer-events: none; padding: 0 1rem; }
     @media (max-width: 767px) { body { padding-top: 4rem; padding-bottom: 4rem; } .main-container { padding: 0 0.5rem; } }
     body.invitation-visible .main-container { opacity: 1; pointer-events: auto; }
     body.invitation-visible { overflow-y: auto; }
 
-    /* Cajón Principal - Fondo Crema, Sombra Suave */
+    /* --- MEJORA 2: CAJAS FLOTANTES CON SOMBRA --- */
     main.content-box {
-        border: 1px solid #DCC5C5; padding: 3rem 1rem; background-color: #FAF7F5; box-shadow: 0 10px 25px rgba(0, 0, 0, .05); position: relative; z-index: 10; overflow: hidden; border-radius: 20px; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+        border: 1px solid rgba(220, 197, 197, 0.5); /* Borde más sutil */
+        padding: 3rem 1rem; 
+        background-color: rgba(255, 253, 252, 0.95); /* Fondo casi blanco semi-transparente */
+        /* Sombra elegante y difuminada para dar profundidad */
+        box-shadow: 0 20px 40px -10px rgba(122, 46, 57, 0.15); 
+        position: relative; z-index: 10; overflow: hidden; border-radius: 20px; min-height: 60vh; 
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
+        backdrop-filter: blur(5px); /* Efecto cristal */
     }
     @media (min-width: 768px) { main.content-box { padding: 4rem 4rem; min-height: 70vh; } }
 
-    .hero-image-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; z-index: 0; pointer-events: none; filter: brightness(0.9) sepia(0.2); }
+    .hero-image-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.20; z-index: 0; pointer-events: none; filter: brightness(0.9) sepia(0.1); }
 
     .font-script { font-family: 'Parisienne', cursive; }
     
     nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%; }
-    nav a, nav button { letter-spacing: .1em; font-size: .7rem; color: white; margin: 0; text-decoration: none; transition: transform .3s, background-color .3s; white-space: nowrap; }
+    nav a, nav button { letter-spacing: .1em; font-size: .75rem; color: white; margin: 0; text-decoration: none; transition: all .3s ease; }
     @media (min-width: 768px) { nav { gap: 20px; } nav a, nav button { font-size: .9rem; padding: 1rem 2rem; } }
-    nav a:hover, nav button:hover { transform: scale(1.05); }
+    nav a:hover, nav button:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(140, 107, 107, 0.4); }
     
-    /* Countdown - Fondo blanco suave, bordes burdeos suave */
-    .countdown-item { background-color: #FFFBFB; border: 1px solid #DCC5C5; border-radius: 8px; padding: .8rem .4rem; min-width: 65px; box-shadow: 0 2px 4px rgba(0, 0, 0, .03); }
+    .countdown-item { background-color: #fff; border: 1px solid #eadadd; border-radius: 12px; padding: .8rem .4rem; min-width: 70px; box-shadow: 0 4px 10px rgba(0, 0, 0, .03); }
     @media (min-width: 768px) { .countdown-item { min-width: 100px; padding: 1.5rem 1rem; } }
-    /* Números en Burdeos */
-    .countdown-number { font-family: 'Parisienne', cursive; font-size: 2rem; color: #722F37; line-height: 1; margin-bottom: .25rem; }
+    .countdown-number { font-family: 'Parisienne', cursive; font-size: 2rem; color: #7A2E39; line-height: 1; margin-bottom: .25rem; }
     @media (min-width: 768px) { .countdown-number { font-size: 4.5rem; } }
     .countdown-label { font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: #5d5d5d; font-weight: 700; }
     @media (min-width: 768px) { .countdown-label { font-size: .9rem; } }
     
-    /* Sobre - Fondo Crema para que se funda */
+    /* Cajas Secundarias mejoradas */
+    .secondary-box { 
+        background-color: #fff; /* Blanco puro para resaltar */
+        border: 1px solid #f0e6e8; 
+        padding: 2rem; border-radius: 15px; margin-top: 3rem; 
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Sombra suave */
+        transition: transform 0.3s ease; /* Animación suave */
+    }
+    .secondary-box:hover { transform: translateY(-5px); } /* Se levanta al pasar el mouse */
+
+    /* --- MEJORA 3: ANIMACIONES DE ENTRADA (Scroll) --- */
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 1s ease;
+    }
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Sobre */
     #envelope-container { position: fixed; inset: 0; background-color: #FAF7F5; z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease-in-out; }
     .envelope-wrapper-simple { position: relative; width: 90vw; max-width: 500px; aspect-ratio: 1.5 / 1; }
-    .envelope-image { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15)); transition: transform 1s ease; }
+    .envelope-image { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); transition: transform 1s ease; }
     .envelope-seal-simple { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20%; max-width: 80px; cursor: pointer; transition: transform 0.4s ease, filter 0.4s ease; z-index: 20; }
-    .envelope-seal-simple:hover { transform: translate(-50%, -50%) scale(1.15); filter: brightness(1.2); }
-    .envelope-seal-simple:active { transform: translate(-50%, -50%) scale(0.95); filter: brightness(0.9); }
+    .envelope-seal-simple:hover { transform: translate(-50%, -50%) scale(1.15); filter: brightness(1.1); }
     
-    /* Botón WhatsApp */
-    .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 35px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 90; transition: transform 0.3s ease; text-decoration: none; }
+    .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 90; transition: transform 0.3s ease; text-decoration: none; }
     .whatsapp-btn:hover { transform: scale(1.1); background-color: #20BA5A; }
-
-    /* Cajas Secundarias */
-    .secondary-box { background-color: #FAF7F5; border: 1px solid #DCC5C5; padding: 2rem; border-radius: 15px; margin-top: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
     
     #rsvpModal, #thankYouModal { z-index: 150; }
     #youtube-player { position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; }
@@ -97,11 +128,11 @@
 
     <div class="main-container">
         <header></header>
-        <main class="content-box">
+        
+        <main class="content-box reveal">
             <img src="novios.jpeg" alt="Novios Daniel y Pamela" class="hero-image-overlay">
-            
             <div class="relative z-10 w-full">
-                <h1 class="font-script text-7xl md:text-9xl text-[#722F37] mb-6 drop-shadow-sm mt-12">Daniel & Pamela</h1>
+                <h1 class="font-script text-7xl md:text-9xl text-[#7A2E39] mb-6 drop-shadow-sm mt-12">Daniel & Pamela</h1>
                 
                 <div class="my-8 text-center px-2 md:px-12">
                     <p class="text-lg md:text-2xl italic text-[#6A5A5A] leading-relaxed">
@@ -111,20 +142,20 @@
                     <p class="text-sm mt-3 text-gray-500 font-bold">Cantar de los Cantares 8:6</p>
                 </div>
                 
-                <p class="text-2xl md:text-4xl font-bold text-[#722F37] mb-2">Domingo, 15 de Marzo de 2026</p>
+                <p class="text-2xl md:text-4xl font-bold text-[#7A2E39] mb-2">Domingo, 15 de Marzo de 2026</p>
                 <p class="text-xl md:text-2xl font-bold text-gray-700 mb-8 px-4">"Queremos compartir la alegría de unir nuestras vidas contigo."</p>
                 
                 <nav class="mt-4">
-                    <a href="#recepcion-mapa-section" class="uppercase bg-[#903b46] py-3 px-4 rounded-full shadow-lg hover:bg-[#722F37]">Ubicación</a>
-                    <button id="openRsvpModal" class="uppercase bg-[#903b46] py-3 px-4 rounded-full shadow-lg hover:bg-[#722F37]">Confirma Asistencia</button>
-                    <a href="#etiqueta-section" class="uppercase bg-[#903b46] py-3 px-4 rounded-full shadow-lg hover:bg-[#722F37]">Etiqueta</a>
+                    <a href="#recepcion-mapa-section" class="uppercase bg-[#903b46] py-3 px-6 rounded-full shadow-lg hover:bg-[#722F37]">Ubicación</a>
+                    <button id="openRsvpModal" class="uppercase bg-[#903b46] py-3 px-6 rounded-full shadow-lg hover:bg-[#722F37]">Confirma Asistencia</button>
+                    <a href="#etiqueta-section" class="uppercase bg-[#903b46] py-3 px-6 rounded-full shadow-lg hover:bg-[#722F37]">Etiqueta</a>
                 </nav>
             </div>
         </main>
 
-        <div id="countdown-section" class="w-full mt-8 text-center secondary-box">
-            <h2 class="font-script text-4xl md:text-5xl text-[#722F37] mb-8">El Gran Día Se Acerca...</h2>
-            <div id="countdown" class="flex justify-center space-x-2 md:space-x-6">
+        <div id="countdown-section" class="w-full mt-12 text-center secondary-box reveal">
+            <h2 class="font-script text-4xl md:text-5xl text-[#7A2E39] mb-8">El Gran Día Se Acerca...</h2>
+            <div id="countdown" class="flex justify-center space-x-3 md:space-x-6">
                 <div class="countdown-item flex flex-col items-center"><span id="days" class="countdown-number">0</span><span class="countdown-label">Días</span></div>
                 <div class="countdown-item flex flex-col items-center"><span id="hours" class="countdown-number">0</span><span class="countdown-label">Horas</span></div>
                 <div class="countdown-item flex flex-col items-center"><span id="minutes" class="countdown-number">0</span><span class="countdown-label">Minutos</span></div>
@@ -132,8 +163,8 @@
             </div>
         </div>
         
-        <div id="itinerary-section" class="w-full mt-8 text-center secondary-box">
-            <h2 class="font-script text-4xl md:text-5xl text-[#722F37] mb-12">Programa</h2>
+        <div id="itinerary-section" class="w-full mt-12 text-center secondary-box reveal">
+            <h2 class="font-script text-4xl md:text-5xl text-[#7A2E39] mb-12">Programa</h2>
             <div class="space-y-10 px-2 md:px-6">
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">2:15 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Discurso</p><p class="text-sm md:text-lg text-gray-700">Salón de fiestas "El Jardín"</p></div></div>
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-heart fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">3:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Felicitaciones</p></div></div>
@@ -145,8 +176,8 @@
             </div>
         </div>
 
-        <div id="etiqueta-section" class="w-full mt-8 text-center secondary-box">
-            <h2 class="font-script text-4xl md:text-5xl text-[#722F37] mb-12">Detalles Adicionales</h2>
+        <div id="etiqueta-section" class="w-full mt-12 text-center secondary-box reveal">
+            <h2 class="font-script text-4xl md:text-5xl text-[#7A2E39] mb-12">Detalles Adicionales</h2>
             <div class="space-y-10 px-2 md:px-6">
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-user-tie fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Código de Vestimenta</p><p class="text-sm md:text-lg text-gray-700">Agradecemos su presencia con atuendo **formal**.</p></div></div>
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-smoking-ban fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Espacio Libre de Humo</p><p class="text-sm md:text-lg text-gray-700">Para la comodidad de todos, el evento es **libre de humo**.</p></div></div>
@@ -154,8 +185,8 @@
             </div>
         </div>
         
-        <div id="social-section" class="w-full mt-8 text-center secondary-box">
-            <h2 class="font-script text-4xl md:text-5xl text-[#722F37] mb-8">Captura el Momento</h2>
+        <div id="social-section" class="w-full mt-12 text-center secondary-box reveal relative overflow-hidden">
+            <h2 class="font-script text-4xl md:text-5xl text-[#7A2E39] mb-8">Captura el Momento</h2>
             <div class="space-y-8">
                 <div>
                     <i class="fab fa-instagram text-5xl text-[#903b46] mb-4"></i>
@@ -164,15 +195,15 @@
                     <a href="https://www.instagram.com/explore/tags/pameydani/" target="_blank" class="inline-block uppercase bg-[#903b46] text-white py-2 px-6 rounded-full shadow-md hover:bg-[#722F37] transition-all text-sm">Ver en Instagram</a>
                 </div>
                 <div class="border-t border-[#e0d0d5] pt-8">
-                    <i class="fas fa-camera text-4xl text-[#722F37] mb-4"></i>
+                    <i class="fas fa-camera text-4xl text-[#7A2E39] mb-4"></i>
                     <p class="text-lg text-gray-600 mb-4">¿Tomaste fotos increíbles? Compártelas aquí:</p>
-                    <a href="#" target="_blank" class="inline-flex items-center uppercase bg-[#722F37] text-white py-3 px-6 rounded-full shadow-lg hover:bg-[#561e26] transition-all text-sm"><i class="fas fa-cloud-upload-alt mr-2"></i> Subir mis Fotos</a>
+                    <a href="#" target="_blank" class="inline-flex items-center uppercase bg-[#7A2E39] text-white py-3 px-6 rounded-full shadow-lg hover:bg-[#561e26] transition-all text-sm"><i class="fas fa-cloud-upload-alt mr-2"></i> Subir mis Fotos</a>
                 </div>
             </div>
         </div>
 
-        <div id="recepcion-mapa-section" class="w-full mt-8 text-center secondary-box">
-             <h2 class="font-script text-4xl md:text-5xl text-[#722F37] mb-8">Ubicación</h2>
+        <div id="recepcion-mapa-section" class="w-full mt-12 text-center secondary-box reveal">
+             <h2 class="font-script text-4xl md:text-5xl text-[#7A2E39] mb-8">Ubicación</h2>
              <p class="text-lg font-bold">Salón "El Jardín"</p>
              <p class="text-md text-gray-600">Prol. José Ma. Morelos 1, Centro, 56530 Ixtapaluca, Méx., México</p><p class="text-md font-bold mt-2">2:15 pm</p>
              <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#e0d0d5] mt-4"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.155394961366!2d-98.87525292520483!3d19.37501384514278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f17c3c0d8c9b%3A0x5b55b5e75bba1d12!2sProl.%20Jos%C3%A9%20Ma.%20Morelos%201%2C%20Centro%2C%2056530%20Ixtapaluca%2C%20M%C3%A9x.%2C%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1730053554382!5m2!1ses-419!2smx" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
@@ -183,7 +214,7 @@
     <div id="rsvpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300">
         <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center relative">
             <button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button>
-            <h3 class="font-script text-4xl text-[#722F37] mb-2">Confirmar Asistencia</h3>
+            <h3 class="font-script text-4xl text-[#7A2E39] mb-2">Confirmar Asistencia</h3>
             <form id="rsvpForm" class="space-y-5 mt-6">
                 <div class="text-left">
                     <label class="block text-gray-700 text-sm font-bold mb-1" for="guestName">Familia o Nombre Completo</label>
@@ -198,9 +229,8 @@
     
     <div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300">
         <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center">
-            <h3 class="font-script text-4xl text-[#722F37] mb-4">¡Gracias!</h3>
+            <h3 class="font-script text-4xl text-[#7A2E39] mb-4">¡Gracias!</h3>
             <p class="mb-6 text-gray-600">Tu asistencia ha sido confirmada. Tu pase personal se está descargando.</p>
-            <p class="mb-4 text-gray-600 font-bold">Espera la descarga para agregar a tu agenda...</p>
             <div class="flex flex-col space-y-3 mb-6">
                 <button id="addToGoogleCalendarBtn" class="bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center shadow-md">
                     <i class="fab fa-google mr-2"></i> Agregar a Google Calendar
@@ -220,7 +250,7 @@
                 <h1 id="ticket-guest-name" style="font-family: 'Times New Roman', serif; font-style: italic; font-size: 50px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin: 0;">Nombre Invitado</h1>
                 <p id="ticket-guest-count" style="font-family: 'Arial', sans-serif; font-weight: bold; font-size: 70px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-top: 10px;">3</p>
             </div>
-            <img id="ticket-barcode" src="" style="position: absolute; bottom: 40px; left: 40px; width: 200px; height: 60px; background: white; padding: 5px; border-radius: 5px;">
+            <img id="ticket-barcode" src="" style="position: absolute; bottom: 40px; left: 40px; width: 130px; height: 40px; background: white; padding: 5px; border-radius: 5px;">
         </div>
     </div>
 
@@ -228,26 +258,31 @@
         const envelopeContainer = document.getElementById('envelope-container');
         const envelopeWrapper = document.querySelector('.envelope-wrapper-simple');
         const seal = document.getElementById('seal');
-        const rsvpModal = document.getElementById("rsvpModal");
-        const thankYouModal = document.getElementById("thankYouModal");
-        const openRsvpModalBtn = document.getElementById("openRsvpModal");
-        const closeRsvpModalBtn = document.getElementById("closeRsvpModal");
-        const closeThankYouModalBtn = document.getElementById("closeThankYouModal");
         
-        // FUNCIÓN PÉTALOS (COLORES BURDEOS/VINO)
         function createPetals() {
-            const container = document.createElement('div');
-            container.id = 'petals-container';
-            document.body.appendChild(container);
+            const container = document.createElement('div'); container.id = 'petals-container'; document.body.appendChild(container);
             for (let i = 0; i < 20; i++) {
                 const petal = document.createElement('div'); petal.classList.add('petal');
                 const size = Math.random() * 15 + 10; petal.style.width = `${size}px`; petal.style.height = `${size}px`;
                 petal.style.left = `${Math.random() * 100}vw`; petal.style.animationDuration = `${Math.random() * 5 + 5}s`; petal.style.animationDelay = `${Math.random() * 5}s`;
-                // Nueva paleta de colores para los pétalos
                 const colors = ['#7A2E39', '#9C4E59', '#C27E88', '#E3B5BC']; 
                 petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; container.appendChild(petal);
             }
         }
+
+        // Animación de Scroll (Reveal)
+        function revealOnScroll() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", revealOnScroll);
 
         let player; let firstClickDone = false; let isPlayerReady = false;
         function onYouTubeIframeAPIReady() {
@@ -264,13 +299,19 @@
                 setTimeout(() => {
                     if(envelopeContainer) envelopeContainer.style.opacity = '0';
                     document.body.classList.add('invitation-visible');
-                    setTimeout(() => { if(envelopeContainer) envelopeContainer.style.display = 'none'; createPetals(); }, 1200);
+                    setTimeout(() => { if(envelopeContainer) envelopeContainer.style.display = 'none'; createPetals(); revealOnScroll(); }, 1200);
                 }, 400);
             });
         }
 
         const openModal = e => { e.classList.remove("hidden"); setTimeout(() => e.classList.remove("opacity-0"), 10); };
         const closeModal = e => { e.classList.add("opacity-0"); setTimeout(() => e.classList.add("hidden"), 300); };
+        const openRsvpModalBtn = document.getElementById("openRsvpModal");
+        const closeRsvpModalBtn = document.getElementById("closeRsvpModal");
+        const closeThankYouModalBtn = document.getElementById("closeThankYouModal");
+        const rsvpModal = document.getElementById("rsvpModal");
+        const thankYouModal = document.getElementById("thankYouModal");
+
         if (openRsvpModalBtn) openRsvpModalBtn.addEventListener("click", () => openModal(rsvpModal));
         if (closeRsvpModalBtn) closeRsvpModalBtn.addEventListener("click", () => closeModal(rsvpModal));
         if (closeThankYouModalBtn) closeThankYouModalBtn.addEventListener("click", () => closeModal(thankYouModal));
@@ -362,12 +403,9 @@
                     }
 
                     const confirmedCount = guestData.boletos || 1;
-
                     await addDoc(collection(db, "invitados_confirmados"), { nombre: guestData.nombre, asistentes: Number(confirmedCount), fecha_confirmacion: serverTimestamp() });
                     const guestRef = doc(db, "lista_invitados", guestId);
                     await updateDoc(guestRef, { confirmado: true });
-                    
-                    submitRsvpBtn.innerText = "Espera la descarga para agregar a tu agenda...";
                     
                     const nombreParaPDF = guestData.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
                     generateAndDownloadTicket(nombreParaPDF, confirmedCount, guestId); 
@@ -375,9 +413,7 @@
                     closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
 
                 } catch (err) { console.error("Error:", err); alert("Hubo un error."); } 
-                finally { 
-                    // No reactivamos el botón inmediatamente si fue éxito para dar tiempo a leer
-                }
+                finally { if(submitRsvpBtn) { if (submitRsvpBtn.innerText !== "Buscando invitación...") { submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación"; } } }
             });
         }
 
