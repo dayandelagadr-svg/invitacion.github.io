@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuestra Boda - Daniel y Pamela</title>
     
-    <meta property="og:title" content="Nuestra Boda - Daniel & Pamela" />
+    <meta property="og:title" content="Daniel & Pamela" />
     <meta property="og:description" content="Queremos compartir la alegría de unir nuestras vidas contigo. Entra para ver los detalles y confirmar tu asistencia." />
     <meta property="og:image" content="https://dayandelagadr-svg.github.io/invitacion.github.io/novios.jpeg" />
 
@@ -18,16 +18,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
    <style>
-    /* Estilos generales */
-    body { font-family: 'Cormorant Garamond', serif; background-color: #F7EBEB; color: #5d5d5d; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 2rem; padding-bottom: 2rem; padding-left: 0; padding-right: 0; position: relative; overflow-x: hidden; overflow-y: hidden; }
+    /* Estilos generales - FONDO CREMA (Para combinar con el sobre) */
+    body { font-family: 'Cormorant Garamond', serif; background-color: #FAF7F5; color: #5d5d5d; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 2rem; padding-bottom: 2rem; padding-left: 0; padding-right: 0; position: relative; overflow-x: hidden; overflow-y: hidden; }
     
-    /* PÉTALOS */
+    /* PÉTALOS (Tonos Vino/Burdeos) */
     #petals-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; overflow: hidden; }
-    .petal { position: absolute; top: -10%; background-color: #FFC0CB; opacity: 0.8; border-radius: 10% 70%; animation: fall linear infinite; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+    .petal { position: absolute; top: -10%; background-color: #722F37; opacity: 0.8; border-radius: 10% 70%; animation: fall linear infinite; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
     @keyframes fall { 0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; } }
 
     /* Contenedor Alargado */
@@ -36,13 +37,13 @@
     body.invitation-visible .main-container { opacity: 1; pointer-events: auto; }
     body.invitation-visible { overflow-y: auto; }
 
-    /* Cajón Principal */
+    /* Cajón Principal - Fondo Crema, Sombra Suave */
     main.content-box {
-        border: 1px solid #dcd0c0; padding: 3rem 1rem; background-color: #F7EBEB; box-shadow: 0 10px 25px rgba(0, 0, 0, .05); position: relative; z-index: 10; overflow: hidden; border-radius: 20px; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+        border: 1px solid #DCC5C5; padding: 3rem 1rem; background-color: #FAF7F5; box-shadow: 0 10px 25px rgba(0, 0, 0, .05); position: relative; z-index: 10; overflow: hidden; border-radius: 20px; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
     }
     @media (min-width: 768px) { main.content-box { padding: 4rem 4rem; min-height: 70vh; } }
 
-    .hero-image-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; z-index: 0; pointer-events: none; filter: brightness(0.9); }
+    .hero-image-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; z-index: 0; pointer-events: none; filter: brightness(0.9) sepia(0.2); }
 
     .font-script { font-family: 'Parisienne', cursive; }
     
@@ -51,23 +52,20 @@
     @media (min-width: 768px) { nav { gap: 20px; } nav a, nav button { font-size: .9rem; padding: 1rem 2rem; } }
     nav a:hover, nav button:hover { transform: scale(1.05); }
     
-    .countdown-item { background-color: #F8EDEB; border: 1px solid #dcd0c0; border-radius: 8px; padding: .8rem .4rem; min-width: 65px; box-shadow: 0 2px 4px rgba(0, 0, 0, .03); }
+    /* Countdown - Fondo blanco suave, bordes burdeos suave */
+    .countdown-item { background-color: #FFFBFB; border: 1px solid #DCC5C5; border-radius: 8px; padding: .8rem .4rem; min-width: 65px; box-shadow: 0 2px 4px rgba(0, 0, 0, .03); }
     @media (min-width: 768px) { .countdown-item { min-width: 100px; padding: 1.5rem 1rem; } }
-    .countdown-number { font-family: 'Parisienne', cursive; font-size: 2rem; color: #8C6B6B; line-height: 1; margin-bottom: .25rem; }
+    /* Números en Burdeos */
+    .countdown-number { font-family: 'Parisienne', cursive; font-size: 2rem; color: #722F37; line-height: 1; margin-bottom: .25rem; }
     @media (min-width: 768px) { .countdown-number { font-size: 4.5rem; } }
     .countdown-label { font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: #5d5d5d; font-weight: 700; }
     @media (min-width: 768px) { .countdown-label { font-size: .9rem; } }
     
-    /* Sobre */
-    #envelope-container { position: fixed; inset: 0; background-color: #F7EBEB; z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease-in-out; }
+    /* Sobre - Fondo Crema para que se funda */
+    #envelope-container { position: fixed; inset: 0; background-color: #FAF7F5; z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease-in-out; }
     .envelope-wrapper-simple { position: relative; width: 90vw; max-width: 500px; aspect-ratio: 1.5 / 1; }
     .envelope-image { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15)); transition: transform 1s ease; }
-    .envelope-seal-simple {
-        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-        width: 20%; max-width: 80px; cursor: pointer;
-        transition: transform 0.4s ease, filter 0.4s ease;
-        z-index: 20;
-    }
+    .envelope-seal-simple { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20%; max-width: 80px; cursor: pointer; transition: transform 0.4s ease, filter 0.4s ease; z-index: 20; }
     .envelope-seal-simple:hover { transform: translate(-50%, -50%) scale(1.15); filter: brightness(1.2); }
     .envelope-seal-simple:active { transform: translate(-50%, -50%) scale(0.95); filter: brightness(0.9); }
     
@@ -75,7 +73,8 @@
     .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 35px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 90; transition: transform 0.3s ease; text-decoration: none; }
     .whatsapp-btn:hover { transform: scale(1.1); background-color: #20BA5A; }
 
-    .secondary-box { background-color: #F7EBEB; border: 1px solid #dcd0c0; padding: 2rem; border-radius: 15px; margin-top: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+    /* Cajas Secundarias */
+    .secondary-box { background-color: #FAF7F5; border: 1px solid #DCC5C5; padding: 2rem; border-radius: 15px; margin-top: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
     
     #rsvpModal, #thankYouModal { z-index: 150; }
     #youtube-player { position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; }
@@ -102,30 +101,29 @@
             <img src="novios.jpeg" alt="Novios Daniel y Pamela" class="hero-image-overlay">
             
             <div class="relative z-10 w-full">
-                <p class="tracking-widest text-sm mb-4 font-bold text-gray-600">LA BODA DE</p>
-                <h1 class="font-script text-6xl md:text-9xl text-[#8C6B6B] mb-6 drop-shadow-sm">Daniel & Pamela</h1>
+                <h1 class="font-script text-7xl md:text-9xl text-[#722F37] mb-6 drop-shadow-sm mt-12">Daniel & Pamela</h1>
                 
                 <div class="my-8 text-center px-2 md:px-12">
-                    <p class="text-lg md:text-2xl italic text-[#7a6a6a] leading-relaxed">
+                    <p class="text-lg md:text-2xl italic text-[#6A5A5A] leading-relaxed">
                         "Ponme como un sello sobre tu corazón, como un sello sobre tu brazo,<br class="hidden md:block">
                         porque el amor es tan fuerte como la muerte..."
                     </p>
                     <p class="text-sm mt-3 text-gray-500 font-bold">Cantar de los Cantares 8:6</p>
                 </div>
                 
-                <p class="text-2xl md:text-4xl font-bold text-[#8C6B6B] mb-2">Domingo, 15 de Marzo de 2026</p>
+                <p class="text-2xl md:text-4xl font-bold text-[#722F37] mb-2">Domingo, 15 de Marzo de 2026</p>
                 <p class="text-xl md:text-2xl font-bold text-gray-700 mb-8 px-4">"Queremos compartir la alegría de unir nuestras vidas contigo."</p>
                 
                 <nav class="mt-4">
-                    <a href="#recepcion-mapa-section" class="uppercase bg-[#C6A9A9] py-3 px-4 rounded-full shadow-lg">Ubicación</a>
-                    <button id="openRsvpModal" class="uppercase bg-[#C6A9A9] py-3 px-4 rounded-full shadow-lg">Confirma Asistencia</button>
-                    <a href="#etiqueta-section" class="uppercase bg-[#C6A9A9] py-3 px-4 rounded-full shadow-lg">Etiqueta</a>
+                    <a href="#recepcion-mapa-section" class="uppercase bg-[#903b46] py-3 px-4 rounded-full shadow-lg hover:bg-[#722F37]">Ubicación</a>
+                    <button id="openRsvpModal" class="uppercase bg-[#903b46] py-3 px-4 rounded-full shadow-lg hover:bg-[#722F37]">Confirma Asistencia</button>
+                    <a href="#etiqueta-section" class="uppercase bg-[#903b46] py-3 px-4 rounded-full shadow-lg hover:bg-[#722F37]">Etiqueta</a>
                 </nav>
             </div>
         </main>
 
         <div id="countdown-section" class="w-full mt-8 text-center secondary-box">
-            <h2 class="font-script text-4xl md:text-5xl text-[#8C6B6B] mb-8">El Gran Día Se Acerca...</h2>
+            <h2 class="font-script text-4xl md:text-5xl text-[#722F37] mb-8">El Gran Día Se Acerca...</h2>
             <div id="countdown" class="flex justify-center space-x-2 md:space-x-6">
                 <div class="countdown-item flex flex-col items-center"><span id="days" class="countdown-number">0</span><span class="countdown-label">Días</span></div>
                 <div class="countdown-item flex flex-col items-center"><span id="hours" class="countdown-number">0</span><span class="countdown-label">Horas</span></div>
@@ -135,49 +133,49 @@
         </div>
         
         <div id="itinerary-section" class="w-full mt-8 text-center secondary-box">
-            <h2 class="font-script text-4xl md:text-5xl text-[#8C6B6B] mb-12">Programa</h2>
+            <h2 class="font-script text-4xl md:text-5xl text-[#722F37] mb-12">Programa</h2>
             <div class="space-y-10 px-2 md:px-6">
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">2:15 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Discurso</p><p class="text-sm md:text-lg text-gray-700">Salón de fiestas "El Jardín"</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-heart fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">3:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Felicitaciones</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-utensils fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">3:30 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Comida</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-music fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">4:30 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Inicio de Baile</p><p class="text-sm md:text-lg text-gray-700">Baile de los Novios</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-birthday-cake fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">8:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Pastel</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-glass-cheers fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">8:15 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Continuación de Baile</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-moon fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#8C6B6B]">10:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Fin</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">2:15 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Discurso</p><p class="text-sm md:text-lg text-gray-700">Salón de fiestas "El Jardín"</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-heart fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">3:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Felicitaciones</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-utensils fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">3:30 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Comida</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-music fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">4:30 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Inicio de Baile</p><p class="text-sm md:text-lg text-gray-700">Baile de los Novios</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-birthday-cake fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">8:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Pastel</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-glass-cheers fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">8:15 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Continuación de Baile</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-moon fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">10:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Fin</p></div></div>
             </div>
         </div>
 
         <div id="etiqueta-section" class="w-full mt-8 text-center secondary-box">
-            <h2 class="font-script text-4xl md:text-5xl text-[#8C6B6B] mb-12">Detalles Adicionales</h2>
+            <h2 class="font-script text-4xl md:text-5xl text-[#722F37] mb-12">Detalles Adicionales</h2>
             <div class="space-y-10 px-2 md:px-6">
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-user-tie fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Código de Vestimenta</p><p class="text-sm md:text-lg text-gray-700">Agradecemos su presencia con atuendo **formal**.</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-smoking-ban fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Espacio Libre de Humo</p><p class="text-sm md:text-lg text-gray-700">Para la comodidad de todos, el evento es **libre de humo**.</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#C6A9A9] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-parking fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Estacionamiento</p><p class="text-sm md:text-lg text-gray-700">Contamos con **estacionamiento gratuito** dentro del establecimiento.</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-user-tie fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Código de Vestimenta</p><p class="text-sm md:text-lg text-gray-700">Agradecemos su presencia con atuendo **formal**.</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-smoking-ban fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Espacio Libre de Humo</p><p class="text-sm md:text-lg text-gray-700">Para la comodidad de todos, el evento es **libre de humo**.</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-parking fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Estacionamiento</p><p class="text-sm md:text-lg text-gray-700">Contamos con **estacionamiento gratuito** dentro del establecimiento.</p></div></div>
             </div>
         </div>
         
         <div id="social-section" class="w-full mt-8 text-center secondary-box">
-            <h2 class="font-script text-4xl md:text-5xl text-[#8C6B6B] mb-8">Captura el Momento</h2>
+            <h2 class="font-script text-4xl md:text-5xl text-[#722F37] mb-8">Captura el Momento</h2>
             <div class="space-y-8">
                 <div>
-                    <i class="fab fa-instagram text-5xl text-[#C6A9A9] mb-4"></i>
+                    <i class="fab fa-instagram text-5xl text-[#903b46] mb-4"></i>
                     <p class="text-lg text-gray-600 mb-2">Sube tus fotos usando nuestro hashtag:</p>
                     <p class="text-3xl font-bold text-[#5d5d5d] my-4 font-serif tracking-wide">#pameydani</p>
-                    <a href="https://www.instagram.com/explore/tags/pameydani/" target="_blank" class="inline-block uppercase bg-[#C6A9A9] text-white py-2 px-6 rounded-full shadow-md hover:bg-[#b08e8e] transition-all text-sm">Ver en Instagram</a>
+                    <a href="https://www.instagram.com/explore/tags/pameydani/" target="_blank" class="inline-block uppercase bg-[#903b46] text-white py-2 px-6 rounded-full shadow-md hover:bg-[#722F37] transition-all text-sm">Ver en Instagram</a>
                 </div>
-                <div class="border-t border-[#dcd0c0] pt-8">
-                    <i class="fas fa-camera text-4xl text-[#8C6B6B] mb-4"></i>
+                <div class="border-t border-[#e0d0d5] pt-8">
+                    <i class="fas fa-camera text-4xl text-[#722F37] mb-4"></i>
                     <p class="text-lg text-gray-600 mb-4">¿Tomaste fotos increíbles? Compártelas aquí:</p>
-                    <a href="#" target="_blank" class="inline-flex items-center uppercase bg-[#8C6B6B] text-white py-3 px-6 rounded-full shadow-lg hover:bg-[#7a5a5a] transition-all text-sm"><i class="fas fa-cloud-upload-alt mr-2"></i> Subir mis Fotos</a>
+                    <a href="#" target="_blank" class="inline-flex items-center uppercase bg-[#722F37] text-white py-3 px-6 rounded-full shadow-lg hover:bg-[#561e26] transition-all text-sm"><i class="fas fa-cloud-upload-alt mr-2"></i> Subir mis Fotos</a>
                 </div>
             </div>
         </div>
 
         <div id="recepcion-mapa-section" class="w-full mt-8 text-center secondary-box">
-             <h2 class="font-script text-4xl md:text-5xl text-[#8C6B6B] mb-8">Ubicación</h2>
+             <h2 class="font-script text-4xl md:text-5xl text-[#722F37] mb-8">Ubicación</h2>
              <p class="text-lg font-bold">Salón "El Jardín"</p>
              <p class="text-md text-gray-600">Prol. José Ma. Morelos 1, Centro, 56530 Ixtapaluca, Méx., México</p><p class="text-md font-bold mt-2">2:15 pm</p>
-             <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#dcd0c0] mt-4"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.155394961366!2d-98.87525292520483!3d19.37501384514278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f17c3c0d8c9b%3A0x5b55b5e75bba1d12!2sProl.%20Jos%C3%A9%20Ma.%20Morelos%201%2C%20Centro%2C%2056530%20Ixtapaluca%2C%20M%C3%A9x.%2C%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1730053554382!5m2!1ses-419!2smx" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+             <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-[#e0d0d5] mt-4"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.155394961366!2d-98.87525292520483!3d19.37501384514278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f17c3c0d8c9b%3A0x5b55b5e75bba1d12!2sProl.%20Jos%C3%A9%20Ma.%20Morelos%201%2C%20Centro%2C%2056530%20Ixtapaluca%2C%20M%C3%A9x.%2C%20M%C3%A9xico!5e0!3m2!1ses-419!2smx!4v1730053554382!5m2!1ses-419!2smx" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
          </div>
         <footer class="mt-8 text-xs text-gray-500"><p>© 2025 Daniel & Pamela</p></footer>
     </div>
@@ -185,14 +183,13 @@
     <div id="rsvpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300">
         <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center relative">
             <button id="closeRsvpModal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">×</button>
-            <h3 class="font-script text-4xl text-[#8C6B6B] mb-2">Confirmar Asistencia</h3>
-            <form id="rsvpForm" class="space-y-5">
+            <h3 class="font-script text-4xl text-[#722F37] mb-2">Confirmar Asistencia</h3>
+            <form id="rsvpForm" class="space-y-5 mt-6">
                 <div class="text-left">
                     <label class="block text-gray-700 text-sm font-bold mb-1" for="guestName">Familia o Nombre Completo</label>
-                    <input type="text" id="guestName" placeholder="Ej. Familia Pérez López o Juan Soto" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C6A9A9]" required>
-                    <p class="text-xs text-gray-400 mt-1">Escribe los apellidos o tu nombre completo.</p>
+                    <input type="text" id="guestName" placeholder="Ej. Familia Pérez López o Juan Soto" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#903b46]" required>
                 </div>
-                <button type="submit" id="submitRsvpBtn" class="w-full bg-[#C6A9A9] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">
+                <button type="submit" id="submitRsvpBtn" class="w-full bg-[#903b46] text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105 hover:bg-[#722F37]">
                     Buscar mi Invitación
                 </button>
             </form>
@@ -201,7 +198,7 @@
     
     <div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 z-50 transition-opacity duration-300">
         <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center">
-            <h3 class="font-script text-4xl text-[#8C6B6B] mb-4">¡Gracias!</h3>
+            <h3 class="font-script text-4xl text-[#722F37] mb-4">¡Gracias!</h3>
             <p class="mb-6 text-gray-600">Tu asistencia ha sido confirmada. Tu pase personal se está descargando.</p>
             <p class="mb-4 text-gray-600 font-bold">Espera la descarga para agregar a tu agenda...</p>
             <div class="flex flex-col space-y-3 mb-6">
@@ -216,6 +213,17 @@
         </div>
     </div>
 
+    <div id="ticket-template" style="position: absolute; left: -9999px; top: 0; width: 600px; height: 850px; overflow: hidden;">
+        <img src="plantilla-boleto.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+        <div style="position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div style="margin-top: 350px; text-align: center;"> 
+                <h1 id="ticket-guest-name" style="font-family: 'Times New Roman', serif; font-style: italic; font-size: 50px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin: 0;">Nombre Invitado</h1>
+                <p id="ticket-guest-count" style="font-family: 'Arial', sans-serif; font-weight: bold; font-size: 70px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-top: 10px;">3</p>
+            </div>
+            <img id="ticket-barcode" src="" style="position: absolute; bottom: 40px; left: 40px; width: 200px; height: 60px; background: white; padding: 5px; border-radius: 5px;">
+        </div>
+    </div>
+
     <script>
         const envelopeContainer = document.getElementById('envelope-container');
         const envelopeWrapper = document.querySelector('.envelope-wrapper-simple');
@@ -226,14 +234,18 @@
         const closeRsvpModalBtn = document.getElementById("closeRsvpModal");
         const closeThankYouModalBtn = document.getElementById("closeThankYouModal");
         
-        // PÉTALOS
+        // FUNCIÓN PÉTALOS (COLORES BURDEOS/VINO)
         function createPetals() {
-            const container = document.createElement('div'); container.id = 'petals-container'; document.body.appendChild(container);
+            const container = document.createElement('div');
+            container.id = 'petals-container';
+            document.body.appendChild(container);
             for (let i = 0; i < 20; i++) {
                 const petal = document.createElement('div'); petal.classList.add('petal');
                 const size = Math.random() * 15 + 10; petal.style.width = `${size}px`; petal.style.height = `${size}px`;
                 petal.style.left = `${Math.random() * 100}vw`; petal.style.animationDuration = `${Math.random() * 5 + 5}s`; petal.style.animationDelay = `${Math.random() * 5}s`;
-                const colors = ['#FADadd', '#FFC0CB', '#FFF0F5', '#E6E6FA']; petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; container.appendChild(petal);
+                // Nueva paleta de colores para los pétalos
+                const colors = ['#7A2E39', '#9C4E59', '#C27E88', '#E3B5BC']; 
+                petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; container.appendChild(petal);
             }
         }
 
@@ -266,7 +278,7 @@
         const countdownDate = new Date("March 15, 2026 13:00:00").getTime();
         const countdownFunction = setInterval(() => {
             const now = new Date().getTime(); const distance = countdownDate - now;
-            if (distance < 0) { clearInterval(countdownFunction); document.getElementById("countdown").innerHTML = "<div class='text-center w-full'><p class='font-script text-4xl text-[#8C6B6B]'>¡El gran día ha llegado!</p></div>"; return; }
+            if (distance < 0) { clearInterval(countdownFunction); document.getElementById("countdown").innerHTML = "<div class='text-center w-full'><p class='font-script text-4xl text-[#7A2E39]'>¡El gran día ha llegado!</p></div>"; return; }
             const d = document.getElementById("days"), h = document.getElementById("hours"), m = document.getElementById("minutes"), s = document.getElementById("seconds");
             if (d) d.innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
             if (h) h.innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -350,59 +362,42 @@
                     }
 
                     const confirmedCount = guestData.boletos || 1;
+
                     await addDoc(collection(db, "invitados_confirmados"), { nombre: guestData.nombre, asistentes: Number(confirmedCount), fecha_confirmacion: serverTimestamp() });
                     const guestRef = doc(db, "lista_invitados", guestId);
                     await updateDoc(guestRef, { confirmado: true });
                     
-                    // Cambiar texto del botón para avisar que se está generando el PDF
                     submitRsvpBtn.innerText = "Espera la descarga para agregar a tu agenda...";
                     
                     const nombreParaPDF = guestData.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
-                    // Pasamos el ID para generar el código de barras
                     generateAndDownloadTicket(nombreParaPDF, confirmedCount, guestId); 
                     
                     closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
 
                 } catch (err) { console.error("Error:", err); alert("Hubo un error."); } 
                 finally { 
-                    // Solo reactivar si hubo error o si ya terminó todo el proceso y el usuario cerró el modal manualmente
-                    // (En este caso, dejamos que el mensaje se quede hasta que se cierre el modal)
+                    // No reactivamos el botón inmediatamente si fue éxito para dar tiempo a leer
                 }
             });
         }
 
-        // GENERAR PDF CON CÓDIGO DE BARRAS (AJUSTADO)
         window.generateAndDownloadTicket = function(guestName, guestCount, guestId) {
-            const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
+            document.getElementById('ticket-guest-name').innerText = guestName;
+            document.getElementById('ticket-guest-count').innerText = guestCount;
             
-            // 1. Fondo
-            doc.addImage("plantilla-boleto.png", "PNG", 0, 0, 600, 850);
-
-            // 2. Texto Blanco
-            doc.setTextColor(255, 255, 255); 
-
-            // 3. Nombre (Y=510 - Más arriba)
-            doc.setFont("times", "italic"); doc.setFontSize(32); 
-            doc.text(guestName, 300, 490, { align: "center" }); // Subido más (Y=490)
-
-            // 4. Cantidad (Solo número, Y=560 - Más arriba)
-            doc.setFont("helvetica", "bold"); doc.setFontSize(28); // Reducido tamaño (30% menos)
-            // X=370 para desplazar a la izquierda
-            doc.text(`${guestCount}`, 370, 530, { align: "center" }); // Subido más (Y=530)
-
-            // 5. Código de Barras (Pequeño, Esquina Inferior IZQUIERDA)
             const canvas = document.createElement("canvas");
             const barcodeValue = guestId.substring(0, 8).toUpperCase();
             JsBarcode(canvas, barcodeValue, { 
-                format: "CODE128", displayValue: true, lineColor: "#000", 
-                width: 1.5, height: 30, margin: 5, fontSize: 10, background: "#ffffff" 
+                format: "CODE128", displayValue: true, lineColor: "#000", width: 2, height: 50, margin: 0, fontSize: 14, background: "#ffffff"
             });
-            const barcodeImg = canvas.toDataURL("image/png");
+            document.getElementById('ticket-barcode').src = canvas.toDataURL("image/png");
 
-            // 6. Pegar Código de Barras (X=40, Y=730)
-            doc.addImage(barcodeImg, "PNG", 40, 730, 140, 50); 
-
-            doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
+            html2canvas(document.getElementById('ticket-template'), { scale: 4, useCORS: true }).then(canvas => {
+                const imgData = canvas.toDataURL('image/jpeg', 1.0);
+                const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
+                doc.addImage(imgData, 'JPEG', 0, 0, 600, 850);
+                doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
+            });
         }
     </script>
 </body>
