@@ -22,21 +22,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
    <style>
-    /* Estilos generales */
-    body { font-family: 'Cormorant Garamond', serif; background-color: #F7EBEB; color: #5d5d5d; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 2rem; padding-bottom: 2rem; padding-left: 0; padding-right: 0; position: relative; overflow-x: hidden; overflow-y: hidden; 
+    body { font-family: 'Cormorant Garamond', serif; background-color: #FAF7F5; color: #5d5d5d; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 2rem; padding-bottom: 2rem; padding-left: 0; padding-right: 0; position: relative; overflow-x: hidden; overflow-y: hidden; 
     background-image: radial-gradient(#e8dada 1px, transparent 0); background-size: 40px 40px; }
     
     #petals-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; overflow: hidden; }
     .petal { position: absolute; top: -10%; background-color: #722F37; opacity: 0.6; border-radius: 10% 70%; animation: fall linear infinite; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     @keyframes fall { 0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; } }
 
+    .scroll-indicator { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 20; animation: bounce 2s infinite; cursor: pointer; }
+    .scroll-text { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: #722F37; margin-bottom: 5px; font-weight: bold; }
+    @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
+
     .main-container { position: relative; z-index: 10; width: 100%; max-width: 1200px; text-align: center; opacity: 0; transition: opacity 1s ease-in-out 1.5s; pointer-events: none; padding: 0 1rem; border: 2px solid #dcd0c0; outline: 1px solid #dcd0c0; outline-offset: 5px; margin: 20px; padding: 20px; background-color: rgba(255, 255, 255, 0.3); border-radius: 5px; }
     @media (max-width: 767px) { body { padding-top: 4rem; padding-bottom: 4rem; } .main-container { padding: 10px; margin: 10px; outline: none; } }
     body.invitation-visible .main-container { opacity: 1; pointer-events: auto; }
     body.invitation-visible { overflow-y: auto; }
 
-    main.content-box { border: 1px solid #e0d0d5; padding: 3rem 1rem; background-color: #FFFFFF; box-shadow: 0 15px 35px rgba(114, 47, 55, 0.1); position: relative; z-index: 10; overflow: hidden; border-radius: 8px; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-    @media (min-width: 768px) { main.content-box { padding: 4rem 4rem; min-height: 70vh; } }
+    main.content-box { border: 1px solid #e0d0d5; padding: 3rem 1rem; background-color: #FFFFFF; box-shadow: 0 15px 35px rgba(114, 47, 55, 0.1); position: relative; z-index: 10; overflow: hidden; border-radius: 8px; min-height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    @media (min-width: 768px) { main.content-box { padding: 4rem 4rem; min-height: 90vh; } }
 
     .hero-image-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; z-index: 0; pointer-events: none; filter: brightness(0.9) sepia(0.1); }
 
@@ -58,8 +61,6 @@
     .envelope-wrapper-simple { position: relative; width: 90vw; max-width: 500px; aspect-ratio: 1.5 / 1; pointer-events: none; }
     .envelope-image { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15)); transition: transform 1s ease; }
     .envelope-seal-simple { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20%; max-width: 80px; transition: transform 0.4s ease, filter 0.4s ease; z-index: 20; }
-    .envelope-seal-simple:hover { transform: translate(-50%, -50%) scale(1.15); filter: brightness(1.1); }
-    .envelope-seal-simple:active { transform: translate(-50%, -50%) scale(0.95); filter: brightness(0.9); }
     
     .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 90; transition: transform 0.3s ease; text-decoration: none; }
     .whatsapp-btn:hover { transform: scale(1.1); background-color: #20BA5A; }
@@ -78,8 +79,8 @@
 <body>
     <div id="envelope-container" onclick="openEnvelopeAction()">
         <div class="envelope-wrapper-simple">
-            <img src="beige.png" class="envelope-image" alt="Sobre de invitación">
-            <img src="burdeos.png" class="envelope-seal-simple" alt="Sello de apertura">
+            <img src="sobre-con-sello.jpg" class="envelope-image" alt="Sobre de invitación">
+            <img src="sello.png" class="envelope-seal-simple" alt="Sello de apertura">
         </div>
     </div>
 
@@ -93,20 +94,28 @@
         <header></header>
         <main class="content-box reveal">
             <img src="novios.jpeg" alt="Novios Daniel y Pamela" class="hero-image-overlay">
+            
             <div class="relative z-10 w-full">
                 <h1 class="font-script text-7xl md:text-9xl text-[#722F37] mb-6 drop-shadow-sm mt-12">Daniel & Pamela</h1>
+                
                 <div class="my-8 text-center px-2 md:px-12">
-                    <p class="text-lg md:text-2xl italic text-[#6A5A5A] leading-relaxed">"Ponme como un sello sobre tu corazón..."</p>
+                    <p class="text-lg md:text-2xl italic text-[#6A5A5A] leading-relaxed">
+                        "Ponme como un sello sobre tu corazón, como un sello sobre tu brazo,<br class="hidden md:block">
+                        porque el amor es tan fuerte como la muerte..."
+                    </p>
                     <p class="text-sm mt-3 text-gray-500 font-bold">Cantar de los Cantares 8:6</p>
                 </div>
+                
                 <p class="text-2xl md:text-4xl font-bold text-[#722F37] mb-2">Domingo, 15 de Marzo de 2026</p>
                 <p class="text-xl md:text-2xl font-bold text-gray-700 mb-8 px-4 italic">"Queremos compartir la alegría de unir nuestras vidas contigo."</p>
+                
                 <nav class="mt-4">
                     <a href="#recepcion-mapa-section" class="uppercase bg-[#903b46] py-3 px-6 rounded-full shadow-lg hover:bg-[#722F37]">Ubicación</a>
                     <button id="openRsvpModal" class="uppercase bg-[#903b46] py-3 px-6 rounded-full shadow-lg hover:bg-[#722F37]">Confirma Asistencia</button>
                     <a href="#etiqueta-section" class="uppercase bg-[#903b46] py-3 px-6 rounded-full shadow-lg hover:bg-[#722F37]">Etiqueta</a>
                 </nav>
             </div>
+            
             <div class="scroll-indicator">
                 <p class="scroll-text">Desliza</p>
                 <i class="fas fa-chevron-down text-[#722F37] text-2xl"></i>
@@ -201,17 +210,6 @@
                 </button>
             </div>
             <button id="closeThankYouModal" class="text-gray-500 underline text-sm mt-2">Cerrar</button>
-        </div>
-    </div>
-
-    <div id="ticket-template" style="position: absolute; left: -9999px; top: 0; width: 600px; height: 850px; overflow: hidden;">
-        <img src="plantilla-boleto.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
-        <div style="position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <div style="margin-top: 200px; text-align: center;"> 
-                <h1 id="ticket-guest-name" style="font-family: 'Times New Roman', serif; font-style: italic; font-size: 50px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin: 0;">Nombre Invitado</h1>
-                <p id="ticket-guest-count" style="font-family: 'Arial', sans-serif; font-weight: bold; font-size: 70px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-top: 10px;">3</p>
-            </div>
-            <img id="ticket-qr" src="" style="position: absolute; bottom: 40px; right: 40px; width: 120px; height: 120px; background: white; padding: 5px; border-radius: 5px;">
         </div>
     </div>
 
@@ -370,28 +368,43 @@
                     closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
 
                 } catch (err) { console.error("Error:", err); alert("Hubo un error."); } 
-                finally { }
+                finally { 
+                }
             });
         }
 
         window.generateAndDownloadTicket = function(guestName, guestCount, guestId) {
-            document.getElementById('ticket-guest-name').innerText = guestName;
-            document.getElementById('ticket-guest-count').innerText = guestCount;
+            // Configuración PDF Vertical
+            const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
             
-            // Generar QR
+            // 1. Imagen de Fondo (IMPORTANTE: pase_boletos.jpg)
+            doc.addImage("pase_boletos.jpg", "JPEG", 0, 0, 600, 850);
+
+            // 2. Configuración de Texto Blanco
+            doc.setTextColor(255, 255, 255); 
+
+            // 3. Nombre (Más arriba Y=480)
+            doc.setFont("times", "italic"); doc.setFontSize(30); 
+            doc.text(guestName, 300, 480, { align: "center" }); 
+
+            // 4. Cantidad (Más arriba Y=530 y a la derecha X=430)
+            doc.setFont("helvetica", "bold"); doc.setFontSize(24); 
+            doc.text(`${guestCount}`, 430, 530, { align: "center" }); 
+
+            // 5. Generar QR (ID Único)
             const qr = qrcode(0, 'L');
-            // El contenido del QR ahora incluye el ID único para que lo puedas escanear en la entrada
             const qrContent = `ID: ${guestId}\nNombre: ${guestName}\nBoletos: ${guestCount}`;
             qr.addData(qrContent);
             qr.make();
-            document.getElementById('ticket-qr').src = qr.createDataURL(4);
+            const qrCodeImage = qr.createDataURL(4);
 
-            html2canvas(document.getElementById('ticket-template'), { scale: 4, useCORS: true }).then(canvas => {
-                const imgData = canvas.toDataURL('image/jpeg', 1.0);
-                const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
-                doc.addImage(imgData, 'JPEG', 0, 0, 600, 850);
-                doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
-            });
+            // 6. Pegar QR (Esquina Inferior Derecha)
+            // Dibujamos fondo blanco detrás del QR para que se vea bien
+            doc.setFillColor(255, 255, 255);
+            doc.rect(465, 715, 110, 110, 'F');
+            doc.addImage(qrCodeImage, "PNG", 470, 720, 100, 100); 
+
+            doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
         }
     </script>
 </body>
