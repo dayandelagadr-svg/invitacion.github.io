@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel y Pamela</title>
+    <title>Nuestra Boda - Daniel y Pamela</title>
     
     <meta property="og:title" content="Daniel & Pamela" />
     <meta property="og:description" content="Queremos compartir la alegría de unir nuestras vidas contigo. Entra para ver los detalles y confirmar tu asistencia." />
@@ -19,6 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
    <style>
@@ -54,6 +55,7 @@
     .countdown-label { font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: #5d5d5d; font-weight: 700; }
     @media (min-width: 768px) { .countdown-label { font-size: .9rem; } }
     
+    /* Sobre */
     #envelope-container { position: fixed; inset: 0; background-color: #FAF7F5; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E"); z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease-in-out; cursor: pointer; }
     .envelope-wrapper-simple { position: relative; width: 90vw; max-width: 500px; aspect-ratio: 1.5 / 1; pointer-events: none; }
     .envelope-image { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15)); transition: transform 1s ease; }
@@ -77,7 +79,7 @@
     <div id="envelope-container" onclick="openEnvelopeAction()">
         <div class="envelope-wrapper-simple">
             <img src="beige.png" class="envelope-image" alt="Sobre de invitación">
-            <img src="burdeos.png" class="envelope-seal-simple" alt="Sello de apertura">
+            <img src="burdeos.png" class="envelope-seal-simple" id="seal" alt="Sello de apertura">
         </div>
     </div>
 
@@ -94,13 +96,14 @@
             <div class="relative z-10 w-full">
                 <h1 class="font-script text-7xl md:text-9xl text-[#722F37] mb-6 drop-shadow-sm mt-12">Daniel & Pamela</h1>
                 <div class="my-8 text-center px-2 md:px-12">
-                    <p class="text-lg md:text-2xl italic text-[#6A5A5A] leading-relaxed">"Ponme como un sello sobre tu corazón, como un sello sobre tu brazo, 
-                        porque el amor es tan fuerte como la muerte, y la devoción total, tan exigente como la tumba. 
-                        Sus llamas son un fuego ardiente, la llama de Jah"</p>
+                    <p class="text-lg md:text-2xl italic text-[#6A5A5A] leading-relaxed">
+                        "Ponme como un sello sobre tu corazón, como un sello sobre tu brazo,<br class="hidden md:block">
+                        porque el amor es tan fuerte como la muerte..."
+                    </p>
                     <p class="text-sm mt-3 text-gray-500 font-bold">Cantar de los Cantares 8:6</p>
                 </div>
                 <p class="text-2xl md:text-4xl font-bold text-[#722F37] mb-2">Domingo, 15 de Marzo de 2026</p>
-                <p class="text-xl md:text-2xl font-bold text-gray-700 mb-8 px-4 italic">"El mejor regalo es compartir nuestra felicidad contigo en este día tan especial"</p>
+                <p class="text-xl md:text-2xl font-bold text-gray-700 mb-8 px-4 italic">"Queremos compartir la alegría de unir nuestras vidas contigo."</p>
                 <nav class="mt-4">
                     <a href="#recepcion-mapa-section" class="uppercase bg-[#903b46] py-3 px-6 rounded-full shadow-lg hover:bg-[#722F37]">Ubicación</a>
                     <button id="openRsvpModal" class="uppercase bg-[#903b46] py-3 px-6 rounded-full shadow-lg hover:bg-[#722F37]">Confirma Asistencia</button>
@@ -122,7 +125,7 @@
         <div id="itinerary-section" class="w-full mt-8 text-center secondary-box reveal">
             <h2 class="font-script text-4xl md:text-5xl text-[#7A2E39] mb-12">Programa</h2>
             <div class="space-y-10 px-2 md:px-6">
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">2:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Discurso</p><p class="text-sm md:text-lg text-gray-700">Salón de fiestas "El Jardín"</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-book-open fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">2:15 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Discurso</p><p class="text-sm md:text-lg text-gray-700">Salón de fiestas "El Jardín"</p></div></div>
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-heart fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">3:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Felicitaciones</p></div></div>
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-utensils fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">3:30 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Comida</p></div></div>
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-music fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">4:30 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Inicio de Baile</p><p class="text-sm md:text-lg text-gray-700">Baile de los Novios</p></div></div>
@@ -135,9 +138,9 @@
         <div id="etiqueta-section" class="w-full mt-12 text-center secondary-box reveal">
             <h2 class="font-script text-4xl md:text-5xl text-[#7A2E39] mb-12">Detalles Adicionales</h2>
             <div class="space-y-10 px-2 md:px-6">
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-user-tie fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Código de Vestimenta</p><p class="text-sm md:text-lg text-gray-700">Tu elegancia dará brillo a nuestra celebración. <br><strong>Atuendo Formal.</strong></p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-smoking-ban fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Espacio Libre de Humo</p><p class="text-sm md:text-lg text-gray-700">Queremos un ambiente fresco para todos. El evento es <strong>libre de humo</strong>.</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-parking fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Estacionamiento</p><p class="text-sm md:text-lg text-gray-700">Disfruta sin preocupaciones, contamos con <strong>estacionamiento gratuito</strong>.</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-user-tie fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Código de Vestimenta</p><p class="text-sm md:text-lg text-gray-700">Agradecemos su presencia con atuendo **formal**.</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-smoking-ban fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Espacio Libre de Humo</p><p class="text-sm md:text-lg text-gray-700">Para la comodidad de todos, el evento es **libre de humo**.</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-parking fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Estacionamiento</p><p class="text-sm md:text-lg text-gray-700">Contamos con **estacionamiento gratuito** dentro del establecimiento.</p></div></div>
             </div>
         </div>
         
@@ -147,7 +150,7 @@
                 <div>
                     <i class="fab fa-instagram text-5xl text-[#903b46] mb-4"></i>
                     <p class="text-lg text-gray-600 mb-2">Sube tus fotos usando nuestro hashtag:</p>
-                    <p class="text-3xl font-bold text-[#5d5d5d] my-4 font-serif tracking-wide">#elsidedaniypame</p>
+                    <p class="text-3xl font-bold text-[#5d5d5d] my-4 font-serif tracking-wide">#pameydani</p>
                     <a href="https://www.instagram.com/explore/tags/pameydani/" target="_blank" class="inline-block uppercase bg-[#903b46] text-white py-2 px-6 rounded-full shadow-md hover:bg-[#722F37] transition-all text-sm">Ver en Instagram</a>
                 </div>
                 <div class="border-t border-[#e0d0d5] pt-8">
@@ -348,30 +351,47 @@
                     const guestRef = doc(db, "lista_invitados", guestId);
                     await updateDoc(guestRef, { confirmado: true });
                     
-                    const nombreParaPDF = guestData.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
-                    generateAndDownloadTicket(nombreParaPDF, confirmedCount, guestId); 
+                    submitRsvpBtn.innerText = "Espera la descarga para agregar a tu agenda...";
                     
-                    closeModal(rsvpModal); openModal(thankYouModal); rsvpForm.reset();
+                    const nombreParaPDF = guestData.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+                    
+                    // Aseguramos cargar la imagen antes de generar el PDF
+                    const img = new Image();
+                    img.src = "pase_boletos.jpg";
+                    img.onload = function() {
+                         generateAndDownloadTicket(nombreParaPDF, confirmedCount, guestId, img);
+                         closeModal(rsvpModal); 
+                         openModal(thankYouModal); 
+                         rsvpForm.reset();
+                    };
+                    // Fallback si la imagen ya está en caché
+                    if (img.complete) img.onload();
 
                 } catch (err) { console.error("Error:", err); alert("Hubo un error."); } 
-                finally { if(submitRsvpBtn) { if (submitRsvpBtn.innerText !== "Buscando invitación...") { submitRsvpBtn.disabled = false; submitRsvpBtn.innerText = "Buscar mi Invitación"; } } }
+                finally { 
+                }
             });
         }
 
-        window.generateAndDownloadTicket = function(guestName, guestCount, guestId) {
+        // PDF GENERATION CON CARGA SEGURA DE IMAGEN
+        window.generateAndDownloadTicket = function(guestName, guestCount, guestId, imgElement) {
             const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
             
-            doc.addImage("pase_boletos.jpg", "JPEG", 0, 0, 600, 850);
+            // Usamos el elemento de imagen ya cargado
+            doc.addImage(imgElement, "JPEG", 0, 0, 600, 850);
+
             doc.setTextColor(255, 255, 255); 
             doc.setFont("times", "italic"); doc.setFontSize(30); 
             doc.text(guestName, 300, 640, { align: "center" }); 
-            doc.setFont("helvetica", "bold"); doc.setFontSize(24); 
+
+            doc.setFont("helvetica", "bold"); doc.setFontSize(20); // Reducido 30% de 28
             doc.text(`${guestCount}`, 335, 685, { align: "center" }); 
 
             const canvas = document.createElement("canvas");
             const barcodeValue = guestId ? guestId.substring(0, 8).toUpperCase() : "BODA2026";
             JsBarcode(canvas, barcodeValue, { 
-                format: "CODE128", displayValue: true, lineColor: "#000", width: 1.5, height: 30, margin: 5, fontSize: 10, background: "#ffffff" 
+                format: "CODE128", displayValue: true, lineColor: "#000", 
+                width: 1.5, height: 30, margin: 5, fontSize: 10, background: "#ffffff" 
             });
             const barcodeImg = canvas.toDataURL("image/png");
             doc.addImage(barcodeImg, "PNG", 30, 760, 130, 50); 
@@ -381,4 +401,3 @@
     </script>
 </body>
 </html>
-
