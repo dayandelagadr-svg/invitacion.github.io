@@ -424,24 +424,46 @@
             });
         }
 
+        // --- FUNCIÓN PDF CON POSICIONES EXACTAS ---
         window.generateAndDownloadTicket = function(guestName, guestCount, guestId) {
-            document.getElementById('ticket-guest-name').innerText = guestName;
-            document.getElementById('ticket-guest-count').innerText = guestCount;
+            const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
             
-            const canvas = document.createElement("canvas");
-            const barcodeValue = guestId.substring(0, 8).toUpperCase();
-            JsBarcode(canvas, barcodeValue, { 
-                format: "CODE128", displayValue: true, lineColor: "#000", width: 2, height: 50, margin: 0, fontSize: 14, background: "#ffffff"
-            });
-            document.getElementById('ticket-barcode').src = canvas.toDataURL("image/png");
+            // 1. Imagen de Fondo
+            doc.addImage("pase_boletos.jpg", "JPEG", 0, 0, 600, 850);
 
-            html2canvas(document.getElementById('ticket-template'), { scale: 4, useCORS: true }).then(canvas => {
-                const imgData = canvas.toDataURL('image/jpeg', 1.0);
-                const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
-                doc.addImage(imgData, 'JPEG', 0, 0, 600, 850);
-                doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
+            // 2. Configuración de Texto (Color Dorado/Crema para que resalte elegante)
+            // Si prefieres blanco puro usa: doc.setTextColor(255, 255, 255);
+            doc.setTextColor(255, 253, 208); 
+
+            // 3. NOMBRE (Sobre la línea de "Familia:")
+            doc.setFont("times", "italic"); 
+            doc.setFontSize(28); // Letra un poco más pequeña y elegante
+            // Coordenada Y=640 baja el texto para que quede sobre la línea punteada
+            doc.text(guestName, 300, 640, { align: "center" }); 
+
+            // 4. CANTIDAD (Dentro de los corchetes [ ])
+            doc.setFont("helvetica", "bold"); 
+            doc.setFontSize(20); // Número más pequeño
+            // Coordenada X=445 (A la derecha, dentro de los corchetes)
+            // Coordenada Y=690 (A la altura de la línea de abajo)
+            doc.text(`${guestCount}`, 445, 690, { align: "center" }); 
+
+            // 5. CÓDIGO DE BARRAS (Esquina Inferior Izquierda)
+            const canvas = document.createElement("canvas");
+            const barcodeValue = guestId ? guestId.substring(0, 8).toUpperCase() : "BODA2026";
+            
+            JsBarcode(canvas, barcodeValue, { 
+                format: "CODE128", displayValue: true, lineColor: "#000", 
+                width: 1.5, height: 30, margin: 5, fontSize: 10, background: "#ffffff" 
             });
+            const barcodeImg = canvas.toDataURL("image/png");
+
+            // Pegar Código de Barras (X=30, Y=750)
+            doc.addImage(barcodeImg, "PNG", 30, 750, 130, 50); 
+
+            doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
         }
     </script>
 </body>
 </html>
+
