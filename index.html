@@ -18,24 +18,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
    <style>
-    /* Estilos generales - TU DISEÑO ORIGINAL */
+    /* Estilos generales */
     body { font-family: 'Cormorant Garamond', serif; background-color: #FAF7F5; color: #5d5d5d; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 2rem; padding-bottom: 2rem; padding-left: 0; padding-right: 0; position: relative; overflow-x: hidden; overflow-y: hidden; 
     background-image: radial-gradient(#e8dada 1px, transparent 0); background-size: 40px 40px; }
     
+    /* PÉTALOS */
     #petals-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; overflow: hidden; }
     .petal { position: absolute; top: -10%; background-color: #722F37; opacity: 0.6; border-radius: 10% 70%; animation: fall linear infinite; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     @keyframes fall { 0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; } }
 
+    /* FLECHA DESLIZA */
+    .scroll-indicator { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 20; animation: bounce 2s infinite; cursor: pointer; }
+    .scroll-text { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: #722F37; margin-bottom: 5px; font-weight: bold; }
+    @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
+
+    /* Contenedor */
     .main-container { position: relative; z-index: 10; width: 100%; max-width: 1200px; text-align: center; opacity: 0; transition: opacity 1s ease-in-out 1.5s; pointer-events: none; padding: 0 1rem; border: 2px solid #dcd0c0; outline: 1px solid #dcd0c0; outline-offset: 5px; margin: 20px; padding: 20px; background-color: rgba(255, 255, 255, 0.3); border-radius: 5px; }
     @media (max-width: 767px) { body { padding-top: 4rem; padding-bottom: 4rem; } .main-container { padding: 10px; margin: 10px; outline: none; } }
     body.invitation-visible .main-container { opacity: 1; pointer-events: auto; }
     body.invitation-visible { overflow-y: auto; }
 
-    main.content-box { border: 1px solid #e0d0d5; padding: 3rem 1rem; background-color: #FFFFFF; box-shadow: 0 15px 35px rgba(114, 47, 55, 0.1); position: relative; z-index: 10; overflow: hidden; border-radius: 8px; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-    @media (min-width: 768px) { main.content-box { padding: 4rem 4rem; min-height: 70vh; } }
+    /* Cajón Principal */
+    main.content-box { border: 1px solid #e0d0d5; padding: 3rem 1rem; background-color: #FFFFFF; box-shadow: 0 15px 35px rgba(114, 47, 55, 0.1); position: relative; z-index: 10; overflow: hidden; border-radius: 8px; min-height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    @media (min-width: 768px) { main.content-box { padding: 4rem 4rem; min-height: 90vh; } }
 
     .hero-image-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; z-index: 0; pointer-events: none; filter: brightness(0.9) sepia(0.1); }
 
@@ -53,7 +62,7 @@
     .countdown-label { font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: #5d5d5d; font-weight: 700; }
     @media (min-width: 768px) { .countdown-label { font-size: .9rem; } }
     
-    /* TU CSS ORIGINAL DEL SOBRE */
+    /* Sobre */
     #envelope-container { position: fixed; inset: 0; background-color: #FAF7F5; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E"); z-index: 100; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease-in-out; cursor: pointer; }
     .envelope-wrapper-simple { position: relative; width: 90vw; max-width: 500px; aspect-ratio: 1.5 / 1; pointer-events: none; }
     .envelope-image { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15)); transition: transform 1s ease; }
@@ -76,8 +85,8 @@
 <body>
     <div id="envelope-container" onclick="openEnvelopeAction()">
         <div class="envelope-wrapper-simple">
-            <img src="beige.png" class="envelope-image" alt="Sobre de invitación">
-            <img src="burdeos.png" class="envelope-seal-simple" alt="Sello de apertura">
+            <img src="sobre-con-sello.jpg" class="envelope-image" alt="Sobre de invitación">
+            <img src="sello.png" class="envelope-seal-simple" alt="Sello de apertura">
         </div>
     </div>
 
@@ -91,19 +100,31 @@
         <header></header>
         <main class="content-box reveal">
             <img src="novios.jpeg" alt="Novios Daniel y Pamela" class="hero-image-overlay">
+            
             <div class="relative z-10 w-full">
                 <h1 class="font-script text-7xl md:text-9xl text-[#722F37] mb-6 drop-shadow-sm mt-12">Daniel & Pamela</h1>
+                
                 <div class="my-8 text-center px-2 md:px-12">
-                    <p class="text-lg md:text-2xl italic text-[#6A5A5A] leading-relaxed">"Ponme como un sello sobre tu corazón..."</p>
+                    <p class="text-lg md:text-2xl italic text-[#6A5A5A] leading-relaxed">
+                        "Ponme como un sello sobre tu corazón, como un sello sobre tu brazo,<br class="hidden md:block">
+                        porque el amor es tan fuerte como la muerte..."
+                    </p>
                     <p class="text-sm mt-3 text-gray-500 font-bold">Cantar de los Cantares 8:6</p>
                 </div>
+                
                 <p class="text-2xl md:text-4xl font-bold text-[#722F37] mb-2">Domingo, 15 de Marzo de 2026</p>
                 <p class="text-xl md:text-2xl font-bold text-gray-700 mb-8 px-4 italic">"El mejor regalo es compartir nuestra felicidad contigo en este día tan soñado."</p>
+                
                 <nav class="mt-4">
                     <a href="#recepcion-mapa-section" class="uppercase bg-[#903b46] py-3 px-6 rounded-full shadow-lg hover:bg-[#722F37]">Ubicación</a>
                     <button id="openRsvpModal" class="uppercase bg-[#903b46] py-3 px-6 rounded-full shadow-lg hover:bg-[#722F37]">Confirma Asistencia</button>
                     <a href="#etiqueta-section" class="uppercase bg-[#903b46] py-3 px-6 rounded-full shadow-lg hover:bg-[#722F37]">Etiqueta</a>
                 </nav>
+            </div>
+            
+            <div class="scroll-indicator">
+                <p class="scroll-text">Desliza</p>
+                <i class="fas fa-chevron-down text-[#722F37] text-2xl"></i>
             </div>
         </main>
 
@@ -124,13 +145,13 @@
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-heart fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">3:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Felicitaciones</p></div></div>
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-utensils fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">3:30 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Comida</p></div></div>
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-music fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">4:30 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Inicio de Baile</p><p class="text-sm md:text-lg text-gray-700">Baile de los Novios</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-birthday-cake fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">8:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Pastel</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-ring fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">8:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Pastel</p></div></div>
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-glass-cheers fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">8:15 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Continuación de Baile</p></div></div>
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-moon fa-2x md:fa-3x"></i></div><div class="text-left"><p class="font-bold text-xl md:text-3xl text-[#722F37]">10:00 pm</p><p class="text-lg md:text-2xl font-bold text-gray-800">Fin</p></div></div>
             </div>
         </div>
 
-        <div id="etiqueta-section" class="w-full mt-8 text-center secondary-box reveal">
+        <div id="etiqueta-section" class="w-full mt-12 text-center secondary-box reveal">
             <h2 class="font-script text-4xl md:text-5xl text-[#7A2E39] mb-12">Detalles Adicionales</h2>
             <div class="space-y-10 px-2 md:px-6">
                 <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-user-tie fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Código de Vestimenta</p><p class="text-sm md:text-lg text-gray-700">Agradecemos su presencia con atuendo **formal**.</p></div></div>
@@ -139,8 +160,8 @@
             </div>
         </div>
         
-        <div id="social-section" class="w-full mt-8 text-center secondary-box reveal relative overflow-hidden">
-            <h2 class="font-script text-5xl md:text-6xl text-[#7A2E39] mb-8">Captura el Momento</h2>
+        <div id="social-section" class="w-full mt-12 text-center secondary-box reveal relative overflow-hidden">
+            <h2 class="font-script text-5xl md:text-6xl text-[#7A2E39] mb-12 relative z-10">Comparte el Amor</h2>
             <div class="space-y-8 relative z-10">
                 <div>
                     <i class="fab fa-instagram text-5xl text-[#903b46] mb-4"></i>
@@ -156,7 +177,7 @@
             </div>
         </div>
 
-        <div id="recepcion-mapa-section" class="w-full mt-8 text-center secondary-box reveal">
+        <div id="recepcion-mapa-section" class="w-full mt-12 text-center secondary-box reveal">
              <h2 class="font-script text-4xl md:text-5xl text-[#7A2E39] mb-8">Ubicación</h2>
              <p class="text-lg font-bold">Salón "El Jardín"</p>
              <p class="text-md text-gray-600">Prol. José Ma. Morelos 1, Centro, 56530 Ixtapaluca, Méx., México</p><p class="text-md font-bold mt-2">2:15 pm</p>
@@ -196,6 +217,16 @@
             </div>
             <button id="closeThankYouModal" class="text-gray-500 underline text-sm mt-2">Cerrar</button>
         </div>
+    </div>
+
+    <div id="ticket-template" style="position: absolute; left: -9999px; top: 0; width: 600px; height: 850px; overflow: hidden;">
+        <img src="pase_boletos.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+        <div style="position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div style="margin-top: 250px; text-align: center;"> 
+                <h1 id="ticket-guest-name" style="font-family: 'Times New Roman', serif; font-style: italic; font-size: 50px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin: 0;">Nombre Invitado</h1>
+                <p id="ticket-guest-count" style="font-family: 'Arial', sans-serif; font-weight: bold; font-size: 70px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-top: 10px;">3</p>
+            </div>
+            </div>
     </div>
 
     <script>
@@ -359,38 +390,32 @@
         }
 
         window.generateAndDownloadTicket = function(guestName, guestCount, guestId) {
-            // 1. Configuración PDF (Vertical)
-            const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
+            document.getElementById('ticket-guest-name').innerText = guestName;
+            document.getElementById('ticket-guest-count').innerText = guestCount;
             
-            // 2. Imagen de Fondo (Asegúrate que se llame 'plantilla-boleto.png' y sea .png)
-            // Si tu imagen en GitHub es .jpg, cambia abajo "PNG" por "JPEG" y el nombre del archivo.
-            doc.addImage("plantilla-boleto.png", "PNG", 0, 0, 600, 850);
+            // Usamos html2canvas para capturar la plantilla con las fuentes bonitas
+            html2canvas(document.getElementById('ticket-template'), { scale: 4, useCORS: true }).then(canvas => {
+                const imgData = canvas.toDataURL('image/jpeg', 1.0);
+                // Formato vertical 600x850
+                const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
+                
+                // 1. Poner la imagen capturada del template como fondo
+                doc.addImage(imgData, 'JPEG', 0, 0, 600, 850);
+                
+                // 3. Solo faltaría el texto y el número (si no se capturaron bien en el canvas,
+                //    podríamos redibujarlos aquí, pero html2canvas debería capturarlos)
+                
+                // *IMPORTANTE*: Si el texto no se ve bien, descomenta estas líneas para forzarlo:
+                /*
+                doc.setTextColor(255, 255, 255);
+                doc.setFont("times", "italic"); doc.setFontSize(32);
+                doc.text(guestName, 300, 480, { align: "center" });
+                doc.setFont("helvetica", "bold"); doc.setFontSize(28);
+                doc.text(`${guestCount}`, 370, 530, { align: "center" });
+                */
 
-            // 3. Configuración de Texto (Color Blanco)
-            doc.setTextColor(255, 255, 255); 
-
-            // 4. NOMBRE (Y=550)
-            doc.setFont("times", "italic"); doc.setFontSize(32); 
-            doc.text(guestName, 300, 550, { align: "center" }); 
-
-            // 5. CANTIDAD (Solo el número, X=370, Y=560)
-            doc.setFont("helvetica", "bold"); doc.setFontSize(40); 
-            doc.text(`${guestCount}`, 370, 560, { align: "center" }); 
-
-            // 6. Código de Barras (Pequeño, Izquierda Abajo)
-            const canvas = document.createElement("canvas");
-            const barcodeValue = guestId ? guestId.substring(0, 8).toUpperCase() : "BODA2026";
-            
-            JsBarcode(canvas, barcodeValue, { 
-                format: "CODE128", displayValue: true, lineColor: "#000", 
-                width: 2, height: 40, margin: 5, fontSize: 12, background: "#ffffff" 
+                doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
             });
-            const barcodeImg = canvas.toDataURL("image/png");
-
-            // Pegar (X=40, Y=730)
-            doc.addImage(barcodeImg, "PNG", 40, 730, 150, 60); 
-
-            doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
         }
     </script>
 </body>
