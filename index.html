@@ -97,7 +97,11 @@
             <div class="relative z-10 w-full">
                 <h1 class="font-script text-7xl md:text-9xl text-[#722F37] mb-6 drop-shadow-sm mt-12">Daniel & Pamela</h1>
                 <div class="my-8 text-center px-2 md:px-12">
-                    <p class="text-lg md:text-2xl italic text-[#6A5A5A] leading-relaxed">"Ponme como un sello sobre tu corazón..."</p>
+                    <p class="text-lg md:text-2xl italic text-[#6A5A5A] leading-relaxed">"Ponme como un sello sobre tu corazón
+                    como un sello sobre tu brazo,
+                    porque el amor es tan fuerte como la muerte,
+                    y la devoción total, tan exigente como la Tumba.
+                    Sus llamas son un fuego ardiente, la llama de Jah.</p>
                     <p class="text-sm mt-3 text-gray-500 font-bold">Cantar de los Cantares 8:6</p>
                 </div>
                 <p class="text-2xl md:text-4xl font-bold text-[#722F37] mb-2">Domingo, 15 de Marzo de 2026</p>
@@ -140,9 +144,9 @@
         <div id="etiqueta-section" class="w-full mt-12 text-center secondary-box reveal">
             <h2 class="font-script text-4xl md:text-5xl text-[#7A2E39] mb-12">Detalles Adicionales</h2>
             <div class="space-y-10 px-2 md:px-6">
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-user-tie fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Código de Vestimenta</p><p class="text-sm md:text-lg text-gray-700">Agradecemos su presencia con atuendo **formal**.</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-smoking-ban fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Espacio Libre de Humo</p><p class="text-sm md:text-lg text-gray-700">Para la comodidad de todos, el evento es **libre de humo**.</p></div></div>
-                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-parking fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Estacionamiento</p><p class="text-sm md:text-lg text-gray-700">Contamos con **estacionamiento gratuito** dentro del establecimiento.</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-user-tie fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Código de Vestimenta</p><p class="text-sm md:text-lg text-gray-700">Nos encantaría verte lucir increíble en nuestro gran día. Código de vestimenta: Formal.".</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-smoking-ban fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Espacio Libre de Humo</p><p class="text-sm md:text-lg text-gray-700">Para el disfrute y bienestar de todos nuestros invitados, agradecemos mantener este evento libre de humo.</p></div></div>
+                <div class="flex items-center space-x-4 md:space-x-6"><div class="flex-shrink-0 bg-[#903b46] rounded-full w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-white shadow-md"><i class="fas fa-parking fa-2x md:fa-3x"></i></div><div class="text-left"><p class="text-lg md:text-2xl font-bold text-gray-800">Estacionamiento</p><p class="text-sm md:text-lg text-gray-700">Para tu comodidad y tranquilidad, el lugar cuenta con estacionamiento privado y gratuito.</p></div></div>
             </div>
         </div>
         
@@ -152,7 +156,7 @@
                 <div>
                     <i class="fab fa-instagram text-5xl text-[#903b46] mb-4"></i>
                     <p class="text-lg text-gray-600 mb-2">Sube tus fotos usando nuestro hashtag:</p>
-                    <p class="text-3xl font-bold text-[#5d5d5d] my-4 font-serif tracking-wide">#pameydani</p>
+                    <p class="text-3xl font-bold text-[#5d5d5d] my-4 font-serif tracking-wide">#elsidepameydani</p>
                     <a href="https://www.instagram.com/explore/tags/pameydani/" target="_blank" class="inline-block uppercase bg-[#903b46] text-white py-2 px-6 rounded-full shadow-md hover:bg-[#722F37] transition-all text-sm">Ver en Instagram</a>
                 </div>
                 <div class="border-t border-[#e0d0d5] pt-8">
@@ -412,6 +416,13 @@
                 doc.addImage(qrCodeImage, "PNG", 470, 720, 100, 100); 
 
                 doc.save(`Pase_Boda_Daniel_y_Pamela_${guestName.replace(/ /g, "_")}.pdf`);
+               
+                // Pegar QR (Más grande y ajustado a la esquina)
+                // X=435, Y=700, Tamaño 130x130 para tapar el anterior
+                doc.setFillColor(255, 255, 255);
+                doc.rect(435, 700, 130, 130, 'F'); // Fondo blanco
+                doc.addImage(qrCodeImage, "PNG", 440, 705, 120, 120); // QR encima
+            
             };
 
             img.onerror = function() {
@@ -421,3 +432,4 @@
     </script>
 </body>
 </html>
+
