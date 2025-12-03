@@ -429,7 +429,7 @@
             const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "px", format: [600, 850] });
             
             // 1. Imagen de Fondo
-            doc.addImage("pase_boletos.jpg", "JPEG", 0, 0, 600, 850);
+            doc.addImage("pase_boletos.png", "PNG", 0, 0, 600, 850);
 
             // 2. Configuración de Texto (Color Dorado/Crema para que resalte elegante)
             // Si prefieres blanco puro usa: doc.setTextColor(255, 255, 255);
@@ -466,4 +466,5 @@
     </script>
 </body>
 </html>
+
 
